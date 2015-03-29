@@ -88,6 +88,7 @@ class NetworkRequestExampleWithForbind {
 ```
 
 Problems solved with this:
+
 • You define all your logic before you do any error handling.
 
 • You are forced to handle all errors.
