@@ -107,8 +107,20 @@ There are some conventions that are changed from the usual way of writing code:
 
 # I’m intrigued. How do I learn more?
 
-The whole library is in the files bind.swift, combine.swift and dataStructures.swift. Each file has comments explaining how it works in more detail.
+For more examples, open the Xcode project and run the ForbindDemo iOS app. It has a few practical examples. Or you can just see the sources files for the [animation demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/ChainedAnimationsDemoViewController.swift) and the [network request demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/NetworkRequestDemoViewController.swift)
+
+The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Bind.swift), [combine.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Combine.swift) and [dataStructures.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/DataStructures.swift). Each file has comments explaining how it works in more detail.
 
 # What is the state of the project?
 
 It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at @ulrikdamm on Twitter.
+
+Things that still needs to be considered:
+
+• General direction of the project (are there some fundamental flaws?)
+
+• Promise cancellation (support for cancelling an async operation if a promise is deallocated)
+
+• Handling of dispatch queues (currently promise callbacks are run on the same queue as the operation finished on)
+
+• More extensions for common UIKit/AppKit/Foundation methods to use Promise and Result instead of NSErrorPointer and completion blocks.
