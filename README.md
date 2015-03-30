@@ -20,6 +20,24 @@ Forbind is a library to introduce functional chaining of expressions into your S
 
 When you put these features together, you can begin to write your code in a whole new way. No if-lets, no code littered with error handling, no many-times indented code.
 
+The idea is that you can write your code as a series of expressions, which produce a final result. All error handling is left until the end, when you unpack the result. And it works even for async operations. No more if-lets, no more NSErrorPointer checking, no more completion blocks. Your code changes from something like this:
+
+```swift
+if let data = readFile("file") {
+	if let result = parseJson(data, error: nil) as? NSDictionary {
+		if let thingy = parseData(result) {
+			handleResult(thingy)
+		}
+	}
+}
+```
+
+To something like this:
+
+```swift
+readFile("file") => parseJson => parseData => handleResult
+```
+
 # Show me an example of it
 
 Let’s try to do a simple network request with NSURLConnection. Here’s how it probably will look today:
