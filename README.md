@@ -1,8 +1,8 @@
 # Forbind
 
-Functional chaining in Swift
+Functional chaining and promises in Swift
 
-Note: still in an experimental state. Everything could change. I would love some feedback on this. Write to @ulrikdamm on Twitter.
+Note: still in an experimental state. Everything could change. I would love some feedback on this. Write to [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
 
 # What is it
 
@@ -19,6 +19,24 @@ Forbind is a library to introduce functional chaining of expressions into your S
 • Some extensions for Foundation and UIKit which introduces Forbind concepts in common classes.
 
 When you put these features together, you can begin to write your code in a whole new way. No if-lets, no code littered with error handling, no many-times indented code.
+
+The idea is that you can write your code as a series of expressions, which produce a final result. All error handling is left until the end, when you unpack the result. And it works even for async operations. No more if-lets, no more NSErrorPointer checking, no more completion blocks. Your code changes from something like this:
+
+```swift
+if let data = readFile("file") {
+	if let result = parseJson(data, error: nil) as? NSDictionary {
+		if let thingy = parseData(result) {
+			handleResult(thingy)
+		}
+	}
+}
+```
+
+To something like this:
+
+```swift
+readFile("file") => parseJson => parseData => handleResult
+```
 
 # Show me an example of it
 
@@ -111,9 +129,11 @@ For more examples, open the Xcode project and run the ForbindDemo iOS app. It ha
 
 The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Bind.swift), [combine.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Combine.swift) and [dataStructures.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/DataStructures.swift). Each file has comments explaining how it works in more detail.
 
+If you want to learn more about the concept behind the bind operator, you can read my [blog post](http://ulrikdamm.logdown.com/posts/247219) about it.
+
 # What is the state of the project?
 
-It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at @ulrikdamm on Twitter.
+It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
 
 Things that still needs to be considered:
 
