@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IQ6-AG-3a9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7528.3" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IQ6-AG-3a9">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7518.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -71,6 +71,42 @@
             </objects>
             <point key="canvasLocation" x="532" y="593"/>
         </scene>
+        <!--IP demo-->
+        <scene sceneID="iDN-g1-NaE">
+            <objects>
+                <viewController id="BEd-s8-nlU" customClass="PrintIPDemoViewController" customModule="ForbindDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M10-xB-g6i"/>
+                        <viewControllerLayoutGuide type="bottom" id="QOB-wK-VEm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NaQ-cw-awk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRb-VP-AzU">
+                                <rect key="frame" x="262" y="289" width="77" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="zRb-VP-AzU" secondAttribute="centerY" id="8Mc-4g-11n"/>
+                            <constraint firstAttribute="centerX" secondItem="zRb-VP-AzU" secondAttribute="centerX" id="DOo-N3-pEz"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zRb-VP-AzU" secondAttribute="trailing" id="iVz-ux-xU9"/>
+                            <constraint firstItem="zRb-VP-AzU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NaQ-cw-awk" secondAttribute="leadingMargin" id="lK2-x7-KVc"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="IP demo" id="DNf-1f-IkL"/>
+                    <connections>
+                        <outlet property="label" destination="zRb-VP-AzU" id="WrK-Te-Aeu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sts-89-4Cq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="532" y="1344"/>
+        </scene>
         <!--Animations Demo-->
         <scene sceneID="qtb-0w-o13">
             <objects>
@@ -125,6 +161,7 @@
                     <connections>
                         <segue destination="Yyv-jQ-neW" kind="relationship" relationship="viewControllers" id="o65-Bk-d77"/>
                         <segue destination="gdn-aB-Qch" kind="relationship" relationship="viewControllers" id="lJP-O5-6St"/>
+                        <segue destination="BEd-s8-nlU" kind="relationship" relationship="viewControllers" id="kec-4h-huz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gQ-m7-kx4" userLabel="First Responder" sceneMemberID="firstResponder"/>

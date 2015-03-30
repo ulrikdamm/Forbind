@@ -30,6 +30,7 @@
 		FF0A42311AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FF0A42321AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FF14D4C81AC97CBB0077303F /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
+		FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */; };
 		FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB7F1AC847FD0033992B /* AppDelegate.swift */; };
 		FF19EB851AC847FD0033992B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB831AC847FD0033992B /* Main.storyboard */; };
 		FF19EB871AC847FD0033992B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB861AC847FD0033992B /* Images.xcassets */; };
@@ -78,6 +79,7 @@
 		FF0A42291AC82E43009B1757 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dispatchExtensions.swift; sourceTree = "<group>"; };
 		FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSJSONSerializationExtensions.swift; sourceTree = "<group>"; };
+		FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintIPDemoViewController.swift; sourceTree = "<group>"; };
 		FF19EB7B1AC847FD0033992B /* ForbindDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForbindDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF19EB7E1AC847FD0033992B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF19EB7F1AC847FD0033992B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				FF19EB7F1AC847FD0033992B /* AppDelegate.swift */,
 				FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */,
 				FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */,
+				FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */,
 				FF19EBA21AC855400033992B /* Resources */,
 				FF19EB7D1AC847FD0033992B /* Supporting Files */,
 			);
@@ -504,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */,
 				FF19EB9E1AC8483D0033992B /* NetworkRequestDemoViewController.swift in Sources */,
 				FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */,
 				FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */,

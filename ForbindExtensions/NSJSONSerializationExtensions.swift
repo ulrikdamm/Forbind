@@ -10,7 +10,7 @@ import Foundation
 import Forbind
 
 extension NSJSONSerialization {
-	class func toData(obj : AnyObject, options : NSJSONWritingOptions = nil) -> Result<NSData> {
+	public class func toData(options : NSJSONWritingOptions = nil)(obj : AnyObject) -> Result<NSData> {
 		var error : NSError?
 		let result = dataWithJSONObject(obj, options: options, error: &error)
 		
@@ -21,7 +21,7 @@ extension NSJSONSerialization {
 		}
 	}
 	
-	class func toJSON(data : NSData, options : NSJSONReadingOptions = nil) -> Result<AnyObject> {
+	public class func toJSON(options : NSJSONReadingOptions = nil)(data : NSData) -> Result<AnyObject> {
 		var error : NSError?
 		let result : AnyObject? = JSONObjectWithData(data, options: options, error: &error)
 		
