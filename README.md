@@ -111,6 +111,8 @@ For more examples, open the Xcode project and run the ForbindDemo iOS app. It ha
 
 The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Bind.swift), [combine.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Combine.swift) and [dataStructures.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/DataStructures.swift). Each file has comments explaining how it works in more detail.
 
+If you want to learn more about the concept behind the bind operator, you can read my [blog post](http://ulrikdamm.logdown.com/posts/247219) about it.
+
 # What is the state of the project?
 
 It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
