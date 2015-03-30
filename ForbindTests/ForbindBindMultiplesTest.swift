@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import ForbindExtensions
 
 /// Tests binding (=>) multiple expressions together, and quitting early if
 /// something fails.
