@@ -125,7 +125,7 @@ There are some conventions that are changed from the usual way of writing code:
 
 # I’m intrigued. How do I learn more?
 
-For more examples, open the Xcode project and run the ForbindDemo iOS app. It has a few practical examples. Or you can just see the sources files for the [animation demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/ChainedAnimationsDemoViewController.swift) and the [network request demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/NetworkRequestDemoViewController.swift)
+For more examples, open the Xcode project and run the ForbindDemo iOS app. It has a few practical examples. Or you can just see the sources files for the [animation demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/ChainedAnimationsDemoViewController.swift), the [network request demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/NetworkRequestDemoViewController.swift) and the [print IP demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/PrintIPDemoViewController.swift)
 
 The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Bind.swift), [combine.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Combine.swift) and [dataStructures.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/DataStructures.swift). Each file has comments explaining how it works in more detail.
 
