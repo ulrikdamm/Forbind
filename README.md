@@ -144,3 +144,5 @@ Things that still needs to be considered:
 • Handling of dispatch queues (currently promise callbacks are run on the same queue as the operation finished on)
 
 • More extensions for common UIKit/AppKit/Foundation methods to use Promise and Result instead of NSErrorPointer and completion blocks.
+
+• "Expression was too complex to be solved in reasonable time" for big expressions.
