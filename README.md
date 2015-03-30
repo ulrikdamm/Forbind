@@ -1,8 +1,8 @@
 # Forbind
 
-Functional chaining in Swift
+Functional chaining and promises in Swift
 
-Note: still in an experimental state. Everything could change. I would love some feedback on this. Write to @ulrikdamm on Twitter.
+Note: still in an experimental state. Everything could change. I would love some feedback on this. Write to [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
 
 # What is it
 
@@ -113,7 +113,7 @@ The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forb
 
 # What is the state of the project?
 
-It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at @ulrikdamm on Twitter.
+It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
 
 Things that still needs to be considered:
 
