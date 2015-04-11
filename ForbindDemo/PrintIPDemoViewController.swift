@@ -21,7 +21,9 @@ class PrintIPDemoViewController : UIViewController {
 	}
 	
 	func sendRequest(request : NSURLRequest) -> ResultPromise<NSData> {
-		return (request ++ NSOperationQueue.mainQueue()) => NSURLConnection.sendAsynchronousRequest => { response, data in data! }
+		return request
+			=> NSURLConnection.sendRequest(NSOperationQueue.mainQueue())
+			=> { response, data in data }
 	}
 	
 	func parseJson(data : NSData) -> Result<String> {

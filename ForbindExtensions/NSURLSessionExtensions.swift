@@ -15,6 +15,13 @@ import Forbind
 // let request = NSURLRequest(URL: url) => NSURLSession().dataTask
 // request => { task, _ in task } => handleTask
 // request => { $1 } => handleResponse
+//
+// Alternatively, use the convenience method startTaskAndGetResult like this:
+//
+// let result = NSURLRequest(URL: url)
+//     => NSURLSession().dataTask
+//     => NSURLSession.startTaskAndGetResult
+//     => handleResponse
 
 // Some methods return a Void promise. This is the same as an async method
 // returning Void. Chain it together with something else to make it run serially,
@@ -144,5 +151,10 @@ extension NSURLSession {
 		}
 		
 		return (task, promise)
+	}
+	
+	public class func startTaskAndGetResult<T>(task : NSURLSessionTask, result : ResultPromise<(T, NSURLResponse)>) -> ResultPromise<(T, NSURLResponse)> {
+		task.resume()
+		return result
 	}
 }

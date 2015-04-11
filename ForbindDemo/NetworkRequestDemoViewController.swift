@@ -27,13 +27,16 @@ class NetworkRequestDemoViewController : UIViewController {
 		spinner?.startAnimating()
 		input?.resignFirstResponder()
 		
+		let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+		
 		let request = input?.text
 			=> { NSURL(string: $0) }
 			=> { NSURLRequest(URL: $0) }
 		
-		let result = (request ++ NSOperationQueue.mainQueue())
-			=> NSURLConnection.sendAsynchronousRequest
-			=> { response, data in NSString(data: data, encoding: NSUTF8StringEncoding) as? String }
+		let result = request
+			=> session.dataTask
+			=> NSURLSession.startTaskAndGetResult
+			=> { data, response in NSString(data: data, encoding: NSUTF8StringEncoding) as? String }
 		
 		result.getValue { [weak self] value in
 			self?.spinner?.stopAnimating()

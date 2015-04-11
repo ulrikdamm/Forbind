@@ -10,8 +10,12 @@ import Foundation
 import Forbind
 
 extension NSURLConnection {
-	public class func sendAsynchronousRequest(request: NSURLRequest, queue: NSOperationQueue!) -> ResultPromise<(NSURLResponse!, NSData!)> {
-		let promise = ResultPromise<(NSURLResponse!, NSData!)>()
+	public class func sendRequest(queue: NSOperationQueue)(request: NSURLRequest) -> ResultPromise<(NSURLResponse, NSData)> {
+		return sendRequest(request, queue: queue)
+	}
+	
+	public class func sendRequest(request: NSURLRequest, queue: NSOperationQueue) -> ResultPromise<(NSURLResponse, NSData)> {
+		let promise = ResultPromise<(NSURLResponse, NSData)>()
 		
 		sendAsynchronousRequest(request, queue: queue, completionHandler: { response, data, error in
 			dispatch_async(dispatch_get_main_queue()) {
@@ -19,7 +23,7 @@ extension NSURLConnection {
 					promise.setError(error)
 				} else {
 					let value = (response, data)
-					promise.setOkValue(response, data)
+					promise.setOkValue(response!, data!)
 				}
 			}
 		})
