@@ -131,6 +131,30 @@ The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forb
 
 If you want to learn more about the concept behind the bind operator, you can read my [blog post](http://ulrikdamm.logdown.com/posts/247219) about it.
 
+# Get started
+
+You can add Forbind to your project using [Cocoapods][https://cocoapods.org]. Just add it to your Podfile:
+
+```ruby
+use_frameworks!
+
+pod 'Forbind', :git => 'git@github.com:ulrikdamm/Forbind.git'
+```
+
+(You need the ```use_frameworks!``` since that feature of Cocoapods is still in beta. This currently only includes Forbind, not ForbindExtensions)
+
+Or you can add it using [Carthage](https://github.com/Carthage/Carthage) by adding this to your cartfile:
+
+```
+github "ulrikdamm/Forbind" ~> 1.0
+```
+
+This will add both Forbind.framework and ForbindExtensions.framework, which you can drag into your Xcode project.
+
+The Forbind library is the bind operator (```=>```) and the combine operator (```++```), along with the Result enum and Promise classes.
+
+ForbindExtensions are extensions to Foundation and UIKit for working better with Forbind, by, for example, returning a promise instead of using a completion block. The ForbindExtensions are still a work in progress, so you might want to make your own extensions instead. In this case, just only include the Forbind framework.
+
 # What is the state of the project?
 
 It’s still very experimental, so I would love some feedback on it. I wouldn’t recommend relying on this for product code yet. If you have a good idea, or just questions, submit a pull request or contact me at [@ulrikdamm](https://twitter.com/ulrikdamm) on Twitter.
