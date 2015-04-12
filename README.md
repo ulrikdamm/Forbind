@@ -133,7 +133,7 @@ If you want to learn more about the concept behind the bind operator, you can re
 
 # Get started
 
-You can add Forbind to your project using [Cocoapods][https://cocoapods.org]. Just add it to your Podfile:
+You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Just add it to your Podfile:
 
 ```ruby
 use_frameworks!
