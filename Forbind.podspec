@@ -8,8 +8,6 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => 'https://github.com/ulrikdamm/Forbind.git', :tag => '0.1' }
   spec.source_files = 'Forbind/*.swift'
   spec.framework    = 'Foundation'
-  
-  spec.subspec 'ForbindExtensions' do |subspec|
-    subspec.source_files = 'ForbindExtensions/*.swift'
-  end
+  spec.ios.deployment_target = '8.0'
+  spec.osx.deployment_target = '10.10'
 end
