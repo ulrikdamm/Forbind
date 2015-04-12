@@ -138,7 +138,7 @@ You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Ju
 ```ruby
 use_frameworks!
 
-pod 'Forbind', :git => 'git@github.com:ulrikdamm/Forbind.git'
+pod 'Forbind', '~> 1.0'
 ```
 
 (You need the ```use_frameworks!``` since that feature of Cocoapods is still in beta. This currently only includes Forbind, not ForbindExtensions)
