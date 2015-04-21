@@ -139,9 +139,10 @@ You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Ju
 use_frameworks!
 
 pod 'Forbind', '~> 1.0'
+pod 'ForbindExtensions', :git => 'https://github.com/ulrikdamm/Forbind'
 ```
 
-(You need the ```use_frameworks!``` since that feature of Cocoapods is still in beta. This currently only includes Forbind, not ForbindExtensions)
+(You need the ```use_frameworks!``` since that feature of Cocoapods is still in beta. ForbindExtensions are optional)
 
 Or you can add it using [Carthage](https://github.com/Carthage/Carthage) by adding this to your cartfile:
 
@@ -150,6 +151,13 @@ github "ulrikdamm/Forbind" ~> 1.0
 ```
 
 This will add both Forbind.framework and ForbindExtensions.framework, which you can drag into your Xcode project.
+
+Then in your files just import Forbind and optionally ForbindExtensions
+
+```
+import Forbind
+import ForbindExtensions
+```
 
 The Forbind library is the bind operator (```=>```) and the combine operator (```++```), along with the Result enum and Promise classes.
 
