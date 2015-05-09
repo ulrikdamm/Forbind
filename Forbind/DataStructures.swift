@@ -239,6 +239,15 @@ public class ResultPromise<T> {
 			}
 		}
 	}
+	
+	public func onOk(callback : T -> Void) {
+		getValue { result in
+			switch result {
+			case .Ok(let box): callback(box.value)
+			case _: break
+			}
+		}
+	}
 }
 
 public func ==<T : Equatable>(lhs : ResultPromise<T>, rhs : ResultPromise<T>) -> ResultPromise<Bool> {
