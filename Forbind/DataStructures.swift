@@ -84,6 +84,10 @@ public class Promise<T> {
 	}
 }
 
+public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Bool> {
+	return (lhs ++ rhs) => { $0 == $1 }
+}
+
 
 public class OptionalPromise<T> {
 	public init() {
@@ -129,6 +133,10 @@ public class OptionalPromise<T> {
 		
 		listeners = []
 	}
+}
+
+public func ==<T : Equatable>(lhs : OptionalPromise<T>, rhs : OptionalPromise<T>) -> OptionalPromise<Bool> {
+	return (lhs ++ rhs) => { $0 == $1 }
 }
 
 public class ResultPromise<T> {
@@ -184,4 +192,8 @@ public class ResultPromise<T> {
 			}
 		}
 	}
+}
+
+public func ==<T : Equatable>(lhs : ResultPromise<T>, rhs : ResultPromise<T>) -> ResultPromise<Bool> {
+	return (lhs ++ rhs) => { $0 == $1 }
 }
