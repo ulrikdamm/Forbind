@@ -37,6 +37,7 @@
 		FF19EB8A1AC847FD0033992B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB881AC847FD0033992B /* LaunchScreen.xib */; };
 		FF19EB9E1AC8483D0033992B /* NetworkRequestDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */; };
 		FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */; };
+		FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		FF19EB891AC847FD0033992B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestDemoViewController.swift; sourceTree = "<group>"; };
 		FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainedAnimationsDemoViewController.swift; sourceTree = "<group>"; };
+		FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindPromiseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				FF0A42001AC82A55009B1757 /* ForbindBindTests.swift */,
 				FF0A42011AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift */,
 				FF0A42021AC82A55009B1757 /* ForbindCombineValueTests.swift */,
+				FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */,
 				FF0A42031AC82A55009B1757 /* ForbindTests.swift */,
 				FF0A41EC1AC82A2C009B1757 /* Supporting Files */,
 			);
@@ -474,6 +477,7 @@
 				FF0A42061AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift in Sources */,
 				FF0A42081AC82A55009B1757 /* ForbindTests.swift in Sources */,
 				FF0A42041AC82A55009B1757 /* ForbindBindMultiplesTest.swift in Sources */,
+				FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */,
 				FF0A41FE1AC82A49009B1757 /* DataStructures.swift in Sources */,
 				FF0A41FA1AC82A49009B1757 /* Bind.swift in Sources */,
 			);
@@ -604,7 +608,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Forbind/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -655,7 +659,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Forbind/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
