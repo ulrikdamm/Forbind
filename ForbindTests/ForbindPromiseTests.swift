@@ -392,4 +392,33 @@ class ForbindResultPromiseTests : XCTestCase {
 		
 		XCTAssert(gotValue)
 	}
+	
+	func testOnError() {
+		let promise = ResultPromise<Int>()
+		
+		var gotValue = false
+		
+		promise.onError { error in
+			XCTAssert(error == genericError)
+			gotValue = true
+		}
+		
+		promise.setError(genericError)
+		
+		XCTAssert(gotValue)
+	}
+	
+	func testOnErrorNoError() {
+		let promise = ResultPromise<Int>()
+		
+		var gotValue = false
+		
+		promise.onError { error in
+			gotValue = true
+		}
+		
+		promise.setOkValue(1)
+		
+		XCTAssert(gotValue == false)
+	}
 }
