@@ -168,4 +168,13 @@ public class ResultPromise<T> {
 		
 		self.listeners = []
 	}
+	
+	public func onError(callback : NSError -> Void) {
+		getValue { result in
+			switch result {
+			case .Error(let error): callback(error)
+			case _: break
+			}
+		}
+	}
 }
