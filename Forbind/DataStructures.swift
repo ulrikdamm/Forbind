@@ -164,7 +164,7 @@ extension OptionalPromise : Printable {
 		if let value = value {
 			return "OptionalPromise(\(value))"
 		} else {
-			return "OptionalPromise(\(value.self))"
+			return "OptionalPromise(\(T.self))"
 		}
 	}
 }
@@ -232,9 +232,9 @@ public func ==<T : Equatable>(lhs : ResultPromise<T>, rhs : ResultPromise<T>) ->
 extension ResultPromise : Printable {
 	public var description : String {
 		if let value = value {
-			return "OptionalPromise(\(value))"
+			return "ResultPromise(\(value))"
 		} else {
-			return "OptionalPromise(\(value.self))"
+			return "ResultPromise(\(T.self))"
 		}
 	}
 }
