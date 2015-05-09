@@ -38,6 +38,13 @@ public enum Result<T> {
 	}
 }
 
+public func ==<T : Equatable>(lhs : Result<T>, rhs : Result<T>) -> Bool {
+	switch (lhs, rhs) {
+	case (.Ok(let l), .Ok(let r)) where l.value == r.value: return true
+	case _: return false
+	}
+}
+
 
 public class Promise<T> {
 	public init() {
