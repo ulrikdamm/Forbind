@@ -45,6 +45,15 @@ public func ==<T : Equatable>(lhs : Result<T>, rhs : Result<T>) -> Bool {
 	}
 }
 
+extension Result : Printable {
+	public var description : String {
+		switch self {
+		case .Ok(let box): return "Result.Ok(\(box.value))"
+		case .Error(let error): return "Result.Error(\(error))"
+		}
+	}
+}
+
 
 public class Promise<T> {
 	public init() {
@@ -86,6 +95,16 @@ public class Promise<T> {
 
 public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Bool> {
 	return (lhs ++ rhs) => { $0 == $1 }
+}
+
+extension Promise : Printable {
+	public var description : String {
+		if let value = _value {
+			return "Promise(\(value))"
+		} else {
+			return "Promise(\(_value.dynamicType))"
+		}
+	}
 }
 
 
@@ -138,6 +157,17 @@ public class OptionalPromise<T> {
 public func ==<T : Equatable>(lhs : OptionalPromise<T>, rhs : OptionalPromise<T>) -> OptionalPromise<Bool> {
 	return (lhs ++ rhs) => { $0 == $1 }
 }
+
+extension OptionalPromise : Printable {
+	public var description : String {
+		if let value = value {
+			return "OptionalPromise(\(value))"
+		} else {
+			return "OptionalPromise(\(value.dynamicType))"
+		}
+	}
+}
+
 
 public class ResultPromise<T> {
 	public init() {
@@ -196,4 +226,14 @@ public class ResultPromise<T> {
 
 public func ==<T : Equatable>(lhs : ResultPromise<T>, rhs : ResultPromise<T>) -> ResultPromise<Bool> {
 	return (lhs ++ rhs) => { $0 == $1 }
+}
+
+extension ResultPromise : Printable {
+	public var description : String {
+		if let value = value {
+			return "OptionalPromise(\(value))"
+		} else {
+			return "OptionalPromise(\(value.dynamicType))"
+		}
+	}
 }
