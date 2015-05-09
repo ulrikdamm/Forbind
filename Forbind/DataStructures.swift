@@ -146,6 +146,22 @@ public class OptionalPromise<T> {
 		}
 	}
 	
+	public func onSome(callback : T -> Void) {
+		getValue { value in
+			if let value = value {
+				callback(value)
+			}
+		}
+	}
+	
+	public func onNil(callback : Void -> Void) {
+		getValue { value in
+			if value == nil {
+				callback()
+			}
+		}
+	}
+	
 	private func notifyListeners() {
 		for callback in listeners {
 			callback(value!)

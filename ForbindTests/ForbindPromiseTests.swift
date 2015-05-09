@@ -251,6 +251,55 @@ class ForbindOptionalPromiseTests : XCTestCase {
 		
 		XCTAssert(gotValue)
 	}
+	
+	func testOnSome() {
+		let promise = OptionalPromise(value: 1)
+		
+		var gotValue = false
+		
+		promise.onSome() { value in
+			XCTAssert(value == 1)
+			gotValue = true
+		}
+		
+		XCTAssert(gotValue)
+	}
+	
+	func testOnSomeNoValue() {
+		let promise = OptionalPromise<Int>(value: nil)
+		
+		var gotValue = false
+		
+		promise.onSome() { value in
+			gotValue = true
+		}
+		
+		XCTAssert(gotValue == false)
+	}
+	
+	func testOnNil() {
+		let promise = OptionalPromise<Int>(value: nil)
+		
+		var gotValue = false
+		
+		promise.onNil() {
+			gotValue = true
+		}
+		
+		XCTAssert(gotValue)
+	}
+	
+	func testOnNilNoNil() {
+		let promise = OptionalPromise(value: 1)
+		
+		var gotValue = false
+		
+		promise.onNil() {
+			gotValue = true
+		}
+		
+		XCTAssert(gotValue == false)
+	}
 }
 
 class ForbindResultPromiseTests : XCTestCase {
