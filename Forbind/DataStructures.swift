@@ -61,14 +61,14 @@ public class Promise<T> {
 	}
 	
 	public init(value : T) {
-		self._value = value
+		self.value = value
 	}
 	
 	public func setValue(value : T) {
-		_value = value
+		self.value = value
 	}
 	
-	private(set) var _value : T? {
+	private(set) var value : T? {
 		didSet {
 			notifyListeners()
 		}
@@ -77,7 +77,7 @@ public class Promise<T> {
 	private var listeners : [T -> Void] = []
 	
 	public func getValue(callback : T -> Void) {
-		if let value = _value {
+		if let value = value {
 			callback(value)
 		} else {
 			listeners.append(callback)
@@ -86,7 +86,7 @@ public class Promise<T> {
 	
 	private func notifyListeners() {
 		for callback in listeners {
-			callback(_value!)
+			callback(value!)
 		}
 		
 		listeners = []
@@ -99,10 +99,10 @@ public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Boo
 
 extension Promise : Printable {
 	public var description : String {
-		if let value = _value {
+		if let value = value {
 			return "Promise(\(value))"
 		} else {
-			return "Promise(\(_value.dynamicType))"
+			return "Promise(\(value.dynamicType))"
 		}
 	}
 }
