@@ -103,7 +103,7 @@ extension Promise : Printable {
 		if let value = value {
 			return "Promise(\(value))"
 		} else {
-			return "Promise(\(value.dynamicType))"
+			return "Promise(\(T.self))"
 		}
 	}
 }
@@ -164,7 +164,7 @@ extension OptionalPromise : Printable {
 		if let value = value {
 			return "OptionalPromise(\(value))"
 		} else {
-			return "OptionalPromise(\(value.dynamicType))"
+			return "OptionalPromise(\(value.self))"
 		}
 	}
 }
@@ -234,7 +234,7 @@ extension ResultPromise : Printable {
 		if let value = value {
 			return "OptionalPromise(\(value))"
 		} else {
-			return "OptionalPromise(\(value.dynamicType))"
+			return "OptionalPromise(\(value.self))"
 		}
 	}
 }
