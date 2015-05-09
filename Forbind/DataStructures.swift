@@ -41,6 +41,7 @@ public enum Result<T> {
 public func ==<T : Equatable>(lhs : Result<T>, rhs : Result<T>) -> Bool {
 	switch (lhs, rhs) {
 	case (.Ok(let l), .Ok(let r)) where l.value == r.value: return true
+	case (.Error(let el), .Error(let er)) where el == er: return true
 	case _: return false
 	}
 }
