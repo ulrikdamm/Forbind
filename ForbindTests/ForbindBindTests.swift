@@ -13,6 +13,13 @@ import XCTest
 /// called if and when the value is valid. If the value is invalid, the
 /// binding will quit early, eventually returning an error.
 class ForbindBindTests : XCTestCase {
+	func doBindWhatever() {
+		let a : Int? = nil
+		let promise = Promise(value: a)
+		
+		let b = promise => { lol in "\(lol)" }
+	}
+	
 	func testBindValue() {
 		let a = 1
 		
@@ -77,7 +84,7 @@ class ForbindBindTests : XCTestCase {
 	}
 	
 	func testBindOptionalPromiseSome() {
-		let a = OptionalPromise<Int>()
+		let a = Promise<Int?>()
 		
 		let b = (a => increment)
 		
@@ -94,7 +101,7 @@ class ForbindBindTests : XCTestCase {
 	}
 	
 	func testBindOptionalPromiseNone() {
-		let a = OptionalPromise<Int>()
+		let a = Promise<Int?>()
 		
 		let b = (a => increment)
 		
@@ -110,7 +117,7 @@ class ForbindBindTests : XCTestCase {
 	}
 	
 	func testBindResultPromiseOk() {
-		let a = ResultPromise<Int>()
+		let a = Promise<Result<Int>>()
 		
 		let b = (a => increment)
 		
@@ -125,12 +132,12 @@ class ForbindBindTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		a.setOkValue(1)
+		a.setValue(.Ok(Box(1)))
 		XCTAssert(callbackCalled)
 	}
 	
 	func testBindResultPromiseError() {
-		let a = ResultPromise<Int>()
+		let a = Promise<Result<Int>>()
 		
 		let b = (a => increment)
 		
@@ -145,7 +152,7 @@ class ForbindBindTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		a.setError(genericError)
+		a.setValue(.Error(genericError))
 		XCTAssert(callbackCalled)
 	}
 }

@@ -116,7 +116,7 @@ class ForbindPromiseTests : XCTestCase {
 
 class ForbindOptionalPromiseTests : XCTestCase {
 	func testGetValue() {
-		let promise = OptionalPromise<Int>()
+		let promise = Promise<Int?>()
 		
 		var gotValue = false
 		
@@ -125,17 +125,17 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise.setSomeValue(1)
+		promise.setValue(1)
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testGetValueAfterCompletion() {
-		let promise = OptionalPromise<Int>()
+		let promise = Promise<Int?>()
 		
 		var gotValue = false
 		
-		promise.setSomeValue(1)
+		promise.setValue(1)
 		
 		promise.getValue { value in
 			XCTAssert(value == 1)
@@ -146,7 +146,7 @@ class ForbindOptionalPromiseTests : XCTestCase {
 	}
 	
 	func testInitialValue() {
-		let promise = OptionalPromise(value: 1)
+		let promise : Promise<Int?> = Promise(value: 1)
 		
 		var gotValue = false
 		
@@ -159,7 +159,7 @@ class ForbindOptionalPromiseTests : XCTestCase {
 	}
 	
 	func testMultipleListeners() {
-		let promise = OptionalPromise<Int>()
+		let promise = Promise<Int?>()
 		
 		var gotValue1 = false
 		var gotValue2 = false
@@ -174,14 +174,14 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue2 = true
 		}
 		
-		promise.setSomeValue(1)
+		promise.setValue(1)
 		
 		XCTAssert(gotValue1)
 		XCTAssert(gotValue2)
 	}
 	
 	func testGetNil() {
-		let promise = OptionalPromise<Int>()
+		let promise = Promise<Int?>()
 		
 		var gotValue = false
 		
@@ -190,14 +190,14 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise.setNil()
+		promise.setValue(nil)
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEquals() {
-		let promise1 = OptionalPromise<Int>()
-		let promise2 = OptionalPromise<Int>()
+		let promise1 = Promise<Int?>()
+		let promise2 = Promise<Int?>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -208,15 +208,15 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise1.setSomeValue(1)
-		promise2.setSomeValue(1)
+		promise1.setValue(1)
+		promise2.setValue(1)
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEqualsNil() {
-		let promise1 = OptionalPromise<Int>()
-		let promise2 = OptionalPromise<Int>()
+		let promise1 = Promise<Int?>()
+		let promise2 = Promise<Int?>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -227,15 +227,15 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise1.setSomeValue(1)
-		promise2.setNil()
+		promise1.setValue(1)
+		promise2.setValue(nil)
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEqualsFalse() {
-		let promise1 = OptionalPromise<Int>()
-		let promise2 = OptionalPromise<Int>()
+		let promise1 = Promise<Int?>()
+		let promise2 = Promise<Int?>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -246,65 +246,65 @@ class ForbindOptionalPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise1.setSomeValue(1)
-		promise2.setSomeValue(2)
+		promise1.setValue(1)
+		promise2.setValue(2)
 		
 		XCTAssert(gotValue)
 	}
 	
-	func testOnSome() {
-		let promise = OptionalPromise(value: 1)
-		
-		var gotValue = false
-		
-		promise.onSome() { value in
-			XCTAssert(value == 1)
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue)
-	}
-	
-	func testOnSomeNoValue() {
-		let promise = OptionalPromise<Int>(value: nil)
-		
-		var gotValue = false
-		
-		promise.onSome() { value in
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue == false)
-	}
-	
-	func testOnNil() {
-		let promise = OptionalPromise<Int>(value: nil)
-		
-		var gotValue = false
-		
-		promise.onNil() {
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue)
-	}
-	
-	func testOnNilNoNil() {
-		let promise = OptionalPromise(value: 1)
-		
-		var gotValue = false
-		
-		promise.onNil() {
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue == false)
-	}
+//	func testOnSome() {
+//		let promise : Promise<Int?> = Promise(value: 1)
+//		
+//		var gotValue = false
+//		
+//		promise.onSome() { value in
+//			XCTAssert(value == 1)
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue)
+//	}
+//	
+//	func testOnSomeNoValue() {
+//		let promise = OptionalPromise<Int>(value: nil)
+//		
+//		var gotValue = false
+//		
+//		promise.onSome() { value in
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue == false)
+//	}
+//	
+//	func testOnNil() {
+//		let promise = OptionalPromise<Int>(value: nil)
+//		
+//		var gotValue = false
+//		
+//		promise.onNil() {
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue)
+//	}
+//	
+//	func testOnNilNoNil() {
+//		let promise = OptionalPromise(value: 1)
+//		
+//		var gotValue = false
+//		
+//		promise.onNil() {
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue == false)
+//	}
 }
 
 class ForbindResultPromiseTests : XCTestCase {
 	func testGetValue() {
-		let promise = ResultPromise<Int>()
+		let promise = Promise<Result<Int>>()
 		
 		var gotValue = false
 		
@@ -313,17 +313,17 @@ class ForbindResultPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise.setOkValue(1)
+		promise.setValue(.Ok(Box(1)))
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testGetValueAfterCompletion() {
-		let promise = ResultPromise<Int>()
+		let promise = Promise<Result<Int>>()
 		
 		var gotValue = false
 		
-		promise.setOkValue(1)
+		promise.setValue(.Ok(Box(1)))
 		
 		promise.getValue { value in
 			XCTAssert(value == .Ok(Box(1)))
@@ -334,7 +334,7 @@ class ForbindResultPromiseTests : XCTestCase {
 	}
 	
 	func testInitialValue() {
-		let promise = ResultPromise(value: .Ok(Box(1)))
+		let promise = Promise(value: Result.Ok(Box(1)))
 		
 		var gotValue = false
 		
@@ -347,7 +347,7 @@ class ForbindResultPromiseTests : XCTestCase {
 	}
 	
 	func testMultipleListeners() {
-		let promise = ResultPromise<Int>()
+		let promise = Promise<Result<Int>>()
 		
 		var gotValue1 = false
 		var gotValue2 = false
@@ -362,14 +362,14 @@ class ForbindResultPromiseTests : XCTestCase {
 			gotValue2 = true
 		}
 		
-		promise.setOkValue(1)
+		promise.setValue(.Ok(Box(1)))
 		
 		XCTAssert(gotValue1)
 		XCTAssert(gotValue2)
 	}
 	
 	func testGetError() {
-		let promise = ResultPromise<Int>()
+		let promise = Promise<Result<Int>>()
 		
 		var gotValue = false
 		
@@ -378,14 +378,14 @@ class ForbindResultPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise.setError(genericError)
+		promise.setValue(.Error(genericError))
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEquals() {
-		let promise1 = ResultPromise<Int>()
-		let promise2 = ResultPromise<Int>()
+		let promise1 = Promise<Result<Int>>()
+		let promise2 = Promise<Result<Int>>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -396,15 +396,15 @@ class ForbindResultPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise1.setOkValue(1)
-		promise2.setOkValue(1)
+		promise1.setValue(.Ok(Box(1)))
+		promise2.setValue(.Ok(Box(1)))
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEqualsError() {
-		let promise1 = ResultPromise<Int>()
-		let promise2 = ResultPromise<Int>()
+		let promise1 = Promise<Result<Int>>()
+		let promise2 = Promise<Result<Int>>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -417,15 +417,15 @@ class ForbindResultPromiseTests : XCTestCase {
 			}
 		}
 		
-		promise1.setOkValue(1)
-		promise2.setError(genericError)
+		promise1.setValue(.Ok(Box(1)))
+		promise2.setValue(.Error(genericError))
 		
 		XCTAssert(gotValue)
 	}
 	
 	func testEqualsFalse() {
-		let promise1 = ResultPromise<Int>()
-		let promise2 = ResultPromise<Int>()
+		let promise1 = Promise<Result<Int>>()
+		let promise2 = Promise<Result<Int>>()
 		
 		let equals = (promise1 == promise2)
 		
@@ -436,63 +436,63 @@ class ForbindResultPromiseTests : XCTestCase {
 			gotValue = true
 		}
 		
-		promise1.setOkValue(1)
-		promise2.setOkValue(2)
+		promise1.setValue(.Ok(Box(1)))
+		promise2.setValue(.Ok(Box(2)))
 		
 		XCTAssert(gotValue)
 	}
 	
-	func testOnError() {
-		let promise = ResultPromise<Int>()
-		
-		var gotValue = false
-		
-		promise.onError() { error in
-			XCTAssert(error == genericError)
-			gotValue = true
-		}
-		
-		promise.setError(genericError)
-		
-		XCTAssert(gotValue)
-	}
-	
-	func testOnErrorNoError() {
-		let promise = ResultPromise<Int>()
-		
-		var gotValue = false
-		
-		promise.onError() { error in
-			gotValue = true
-		}
-		
-		promise.setOkValue(1)
-		
-		XCTAssert(gotValue == false)
-	}
-	
-	func testOnSome() {
-		let promise = ResultPromise(value: .Ok(Box(1)))
-		
-		var gotValue = false
-		
-		promise.onOk() { value in
-			XCTAssert(value == 1)
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue)
-	}
-	
-	func testOnSomeNoValue() {
-		let promise = ResultPromise<Int>(value: .Error(genericError))
-		
-		var gotValue = false
-		
-		promise.onOk() { value in
-			gotValue = true
-		}
-		
-		XCTAssert(gotValue == false)
-	}
+//	func testOnError() {
+//		let promise = Promise<Result<Int>>()
+//		
+//		var gotValue = false
+//		
+//		promise.onError() { error in
+//			XCTAssert(error == genericError)
+//			gotValue = true
+//		}
+//		
+//		promise.setError(genericError)
+//		
+//		XCTAssert(gotValue)
+//	}
+//	
+//	func testOnErrorNoError() {
+//		let promise = Promise<Result<Int>>()
+//		
+//		var gotValue = false
+//		
+//		promise.onError() { error in
+//			gotValue = true
+//		}
+//		
+//		promise.setValue(.Ok(Box(1)))
+//		
+//		XCTAssert(gotValue == false)
+//	}
+//	
+//	func testOnSome() {
+//		let promise = ResultPromise(value: .Ok(Box(1)))
+//		
+//		var gotValue = false
+//		
+//		promise.onOk() { value in
+//			XCTAssert(value == 1)
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue)
+//	}
+//	
+//	func testOnSomeNoValue() {
+//		let promise = ResultPromise<Int>(value: .Error(genericError))
+//		
+//		var gotValue = false
+//		
+//		promise.onOk() { value in
+//			gotValue = true
+//		}
+//		
+//		XCTAssert(gotValue == false)
+//	}
 }

@@ -56,22 +56,29 @@ extension Result : Printable {
 }
 
 
+private enum PromiseState<T> {
+	case NoValue
+	case Value(Box<T>)
+}
+
 public class Promise<T> {
-	public init() {
-		
+	public init(value : T? = nil) {
+		value => setValue
 	}
 	
-	public init(value : T) {
-		self.value = value
+	private var _value : PromiseState<T> = .NoValue
+	
+	func setValue(value : T) {
+		_value = PromiseState.Value(Box(value))
+		notifyListeners()
 	}
 	
-	public func setValue(value : T) {
-		self.value = value
-	}
-	
-	private(set) var value : T? {
-		didSet {
-			notifyListeners()
+	public var value : T? {
+		get {
+			switch _value {
+			case .NoValue: return nil
+			case .Value(let box): return box.value
+			}
 		}
 	}
 	
@@ -86,8 +93,12 @@ public class Promise<T> {
 	}
 	
 	private func notifyListeners() {
-		for callback in listeners {
-			callback(value!)
+		switch _value {
+		case .NoValue: break
+		case .Value(let box): 
+			for callback in listeners {
+				callback(box.value)
+			}
 		}
 		
 		listeners = []
@@ -98,168 +109,20 @@ public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Boo
 	return (lhs ++ rhs) => { $0 == $1 }
 }
 
+public func ==<T : Equatable>(lhs : Promise<T?>, rhs : Promise<T?>) -> Promise<Bool?> {
+	return (lhs ++ rhs) => { $0 == $1 }
+}
+
+public func ==<T : Equatable>(lhs : Promise<Result<T>>, rhs : Promise<Result<T>>) -> Promise<Result<Bool>> {
+	return (lhs ++ rhs) => { $0 == $1 }
+}
+
 extension Promise : Printable {
 	public var description : String {
 		if let value = value {
 			return "Promise(\(value))"
 		} else {
 			return "Promise(\(T.self))"
-		}
-	}
-}
-
-
-public class OptionalPromise<T> {
-	public init() {
-		
-	}
-	
-	public init(value : T?) {
-		self.value = value
-	}
-	
-	public func setValue(value : T?) {
-		self.value = value
-	}
-	
-	public func setSomeValue(value : T) {
-		self.value = value
-	}
-	
-	public func setNil() {
-		self.value = .Some(nil)
-	}
-	
-	private(set) var value : T?? {
-		didSet {
-			notifyListeners()
-		}
-	}
-	
-	private var listeners : [T? -> Void] = []
-	
-	public func getValue(callback : T? -> Void) {
-		if let value = value {
-			callback(value)
-		} else {
-			listeners.append(callback)
-		}
-	}
-	
-	public func onSome(callback : T -> Void) {
-		getValue { value in
-			if let value = value {
-				callback(value)
-			}
-		}
-	}
-	
-	public func onNil(callback : Void -> Void) {
-		getValue { value in
-			if value == nil {
-				callback()
-			}
-		}
-	}
-	
-	private func notifyListeners() {
-		for callback in listeners {
-			callback(value!)
-		}
-		
-		listeners = []
-	}
-}
-
-public func ==<T : Equatable>(lhs : OptionalPromise<T>, rhs : OptionalPromise<T>) -> OptionalPromise<Bool> {
-	return (lhs ++ rhs) => { $0 == $1 }
-}
-
-extension OptionalPromise : Printable {
-	public var description : String {
-		if let value = value {
-			return "OptionalPromise(\(value))"
-		} else {
-			return "OptionalPromise(\(T.self))"
-		}
-	}
-}
-
-
-public class ResultPromise<T> {
-	public init() {
-		
-	}
-	
-	public init(value : Result<T>) {
-		self.value = value
-	}
-	
-	public func setValue(value : Result<T>) {
-		self.value = value
-	}
-	
-	public func setOkValue(value : T) {
-		setValue(.Ok(Box(value)))
-	}
-	
-	public func setError(error : NSError) {
-		setValue(.Error(error))
-	}
-	
-	private(set) var value : Result<T>? {
-		didSet {
-			notifyListeners()
-		}
-	}
-	
-	private var listeners : [Result<T> -> Void] = []
-	
-	public func getValue(callback : Result<T> -> Void) {
-		if let value = value {
-			callback(value)
-		} else {
-			listeners.append(callback)
-		}
-	}
-	
-	private func notifyListeners() {
-		for callback in self.listeners {
-			callback(self.value!)
-		}
-		
-		self.listeners = []
-	}
-	
-	public func onError(callback : NSError -> Void) {
-		getValue { result in
-			switch result {
-			case .Error(let error): callback(error)
-			case _: break
-			}
-		}
-	}
-	
-	public func onOk(callback : T -> Void) {
-		getValue { result in
-			switch result {
-			case .Ok(let box): callback(box.value)
-			case _: break
-			}
-		}
-	}
-}
-
-public func ==<T : Equatable>(lhs : ResultPromise<T>, rhs : ResultPromise<T>) -> ResultPromise<Bool> {
-	return (lhs ++ rhs) => { $0 == $1 }
-}
-
-extension ResultPromise : Printable {
-	public var description : String {
-		if let value = value {
-			return "ResultPromise(\(value))"
-		} else {
-			return "ResultPromise(\(T.self))"
 		}
 	}
 }

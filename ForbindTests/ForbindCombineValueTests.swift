@@ -81,7 +81,7 @@ class ForbindCombineValueTests : XCTestCase {
 	}
 	
 	func testCombineValueOptionalPromiseSome() {
-		let p = OptionalPromise<Int>()
+		let p = Promise<Int?>()
 		let a = 1 ++ p
 		
 		var callbackCalled = false
@@ -101,7 +101,7 @@ class ForbindCombineValueTests : XCTestCase {
 	}
 	
 	func testCombineValueOptionalPromiseNone() {
-		let p = OptionalPromise<Int>()
+		let p = Promise<Int?>()
 		let a = 1 ++ p
 		
 		var callbackCalled = false
@@ -117,7 +117,7 @@ class ForbindCombineValueTests : XCTestCase {
 	}
 	
 	func testCombineValueResultPromiseOk() {
-		let p = ResultPromise<Int>()
+		let p = Promise<Result<Int>>()
 		let a = 1 ++ p
 		
 		var callbackCalled = false
@@ -135,13 +135,13 @@ class ForbindCombineValueTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		p.setOkValue(1)
+		p.setValue(.Ok(Box(1)))
 		
 		XCTAssert(callbackCalled)
 	}
 	
 	func testCombineValueResultPromiseError() {
-		let p = ResultPromise<Int>()
+		let p = Promise<Result<Int>>()
 		let a = 1 ++ p
 		
 		var callbackCalled = false
@@ -155,7 +155,7 @@ class ForbindCombineValueTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		p.setError(genericError)
+		p.setValue(.Error(genericError))
 		
 		XCTAssert(callbackCalled)
 	}
