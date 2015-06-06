@@ -20,7 +20,7 @@ public class Promise<T> {
 	
 	private var _value : PromiseState<T> = .NoValue
 	
-	func setValue(value : T) {
+	public func setValue(value : T) {
 		_value = PromiseState.Value(Box(value))
 		notifyListeners()
 	}
