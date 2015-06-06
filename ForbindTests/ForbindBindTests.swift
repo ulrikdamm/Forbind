@@ -155,4 +155,18 @@ class ForbindBindTests : XCTestCase {
 		a.setValue(.Error(genericError))
 		XCTAssert(callbackCalled)
 	}
+	
+	func testBindOptionalToOptional() {
+		let promise = Promise<Int?>(value: 1)
+		let result = promise => { (v : Int?) in "\(v)" }
+		
+		var gotValue = false
+		
+		result.getValue { result in
+			gotValue = true
+			XCTAssert(result == "Optional(1)")
+		}
+		
+		XCTAssert(gotValue)
+	}
 }
