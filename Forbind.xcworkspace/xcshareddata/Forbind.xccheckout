@@ -14,11 +14,11 @@
 		<string>github.com:Ulrikdamm/Forbind.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Forbind.xcodeproj</string>
+	<string>Forbind.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8009808C112559A0D7A55E0CF37EEE034999CB0B</key>
-		<string>../..</string>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:Ulrikdamm/Forbind.git</string>

@@ -12,8 +12,8 @@
 		FF0A41FA1AC82A49009B1757 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FF0A41FB1AC82A49009B1757 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
 		FF0A41FC1AC82A49009B1757 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
-		FF0A41FD1AC82A49009B1757 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* DataStructures.swift */; };
-		FF0A41FE1AC82A49009B1757 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* DataStructures.swift */; };
+		FF0A41FD1AC82A49009B1757 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* Result.swift */; };
+		FF0A41FE1AC82A49009B1757 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* Result.swift */; };
 		FF0A42041AC82A55009B1757 /* ForbindBindMultiplesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41FF1AC82A55009B1757 /* ForbindBindMultiplesTest.swift */; };
 		FF0A42051AC82A55009B1757 /* ForbindBindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42001AC82A55009B1757 /* ForbindBindTests.swift */; };
 		FF0A42061AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42011AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift */; };
@@ -38,6 +38,8 @@
 		FF19EB9E1AC8483D0033992B /* NetworkRequestDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */; };
 		FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */; };
 		FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */; };
+		FFEBF9681B23837500C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
+		FFEBF9691B23842B00C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +66,7 @@
 		FF0A41ED1AC82A2C009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0A41F61AC82A49009B1757 /* Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bind.swift; sourceTree = "<group>"; };
 		FF0A41F71AC82A49009B1757 /* Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
-		FF0A41F81AC82A49009B1757 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		FF0A41F81AC82A49009B1757 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		FF0A41FF1AC82A55009B1757 /* ForbindBindMultiplesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindBindMultiplesTest.swift; sourceTree = "<group>"; };
 		FF0A42001AC82A55009B1757 /* ForbindBindTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindBindTests.swift; sourceTree = "<group>"; };
 		FF0A42011AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindCombineFunctionCallTests.swift; sourceTree = "<group>"; };
@@ -90,6 +92,8 @@
 		FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestDemoViewController.swift; sourceTree = "<group>"; };
 		FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainedAnimationsDemoViewController.swift; sourceTree = "<group>"; };
 		FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindPromiseTests.swift; sourceTree = "<group>"; };
+		FFBC22A11B223D3800EF900B /* PlayAround.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PlayAround.playground; sourceTree = "<group>"; };
+		FFEBF9671B23837500C56952 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,7 @@
 		FF0A41D01AC82A1E009B1757 = {
 			isa = PBXGroup;
 			children = (
+				FFBC22A11B223D3800EF900B /* PlayAround.playground */,
 				FF0A41DE1AC82A2C009B1757 /* Forbind */,
 				FF0A41EB1AC82A2C009B1757 /* ForbindTests */,
 				FF0A420F1AC82E37009B1757 /* ForbindExtensions */,
@@ -162,7 +167,8 @@
 			children = (
 				FF0A41F61AC82A49009B1757 /* Bind.swift */,
 				FF0A41F71AC82A49009B1757 /* Combine.swift */,
-				FF0A41F81AC82A49009B1757 /* DataStructures.swift */,
+				FF0A41F81AC82A49009B1757 /* Result.swift */,
+				FFEBF9671B23837500C56952 /* Promise.swift */,
 				FF0A41DF1AC82A2C009B1757 /* Supporting Files */,
 			);
 			path = Forbind;
@@ -461,9 +467,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A41FD1AC82A49009B1757 /* DataStructures.swift in Sources */,
+				FF0A41FD1AC82A49009B1757 /* Result.swift in Sources */,
 				FF0A41F91AC82A49009B1757 /* Bind.swift in Sources */,
 				FF0A41FB1AC82A49009B1757 /* Combine.swift in Sources */,
+				FFEBF9681B23837500C56952 /* Promise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,8 +485,9 @@
 				FF0A42081AC82A55009B1757 /* ForbindTests.swift in Sources */,
 				FF0A42041AC82A55009B1757 /* ForbindBindMultiplesTest.swift in Sources */,
 				FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */,
-				FF0A41FE1AC82A49009B1757 /* DataStructures.swift in Sources */,
+				FF0A41FE1AC82A49009B1757 /* Result.swift in Sources */,
 				FF0A41FA1AC82A49009B1757 /* Bind.swift in Sources */,
+				FFEBF9691B23842B00C56952 /* Promise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
