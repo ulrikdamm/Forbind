@@ -29,12 +29,26 @@ public enum Result<T> {
 	case Ok(Box<T>)
 	case Error(NSError)
 	
-	init(_ value : T) {
+	public init(_ value : T) {
 		self = .Ok(Box(value))
 	}
 	
-	init(_ error : NSError) {
+	public init(_ error : NSError) {
 		self = .Error(error)
+	}
+	
+	public var errorValue : NSError? {
+		switch self {
+		case .Error(let e): return e
+		case _: return nil
+		}
+	}
+	
+	public var okValue : T? {
+		switch self {
+		case .Ok(let box): return box.value
+		case _: return nil
+		}
 	}
 }
 

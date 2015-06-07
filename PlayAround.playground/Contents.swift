@@ -2,6 +2,7 @@
 
 import UIKit
 import Forbind
+import ForbindExtensions
 
 // Play around with Forbind here
 
@@ -11,38 +12,45 @@ promiseStr.getValue(println)
 
 promiseStr.setValue("Hello from the future!")
 
-extension NSURLConnection {
-	public class func sendRequest(queue : NSOperationQueue)(url : NSURL) -> Promise<Result<(NSURLResponse, NSData)>> {
-		return Promise<Result<(NSURLResponse, NSData)>>(value: .Error(NSError(domain: "", code: 0, userInfo: nil)))
-	}
-}
 
-extension NSJSONSerialization {
-	public class func toJSON(options : NSJSONReadingOptions = nil)(data : NSData) -> Result<AnyObject> {
-		return .Error(NSError(domain: "", code: 0, userInfo: nil))
-	}
-}
-
-struct User {
+struct User : Printable {
 	let name : String
 	
-	static func parse(data : NSData) -> User {
-		return User(name: "\(data)")
+	static func parse(data : NSDictionary) -> User? {
+		return (data["name"] as? String) => { User(name: $0) }
+	}
+	
+	var description : String {
+		return "User: \(name)"
 	}
 }
 
 let urls : [NSURL] = []
 
 func loadUsers(ids : [String]) -> [Promise<Result<User>>] {
-	return urls
-		=> { id in NSURL(string: "http://startup.io/users/\(id)") }
-		=> NSURLConnection.sendRequest(.mainQueue())
+	let data = ids
+		=> { v in NSURL(string: "http://echo.jsontest.com/name/\(v)") }
+		=> NSURLConnection.sendURLRequest(.mainQueue())
 		=> { response, data in data }
+	
+	return data
+		=> NSJSONSerialization.toJSON(options: nil)
+		=> { $0.dictionaryValue }
 		=> User.parse
 }
 
-for user in loadUsers(["ulrikdamm", "simonbs", "ksmandersen"]) {
+let users = loadUsers(["ulrikdamm", "simonbs", "ksmandersen"])
+
+for user in users {
 	user.getValue { user in
 		println("Loaded user: \(user)")
 	}
 }
+
+let userCount = filterp(users) { $0.okValue != nil } => count
+
+userCount.getValue { userCount in
+	println("Loaded \(userCount) users")
+}
+
+NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(5))
