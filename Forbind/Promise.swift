@@ -83,10 +83,54 @@ public func filterp<T>(source : [Promise<T>], includeElement : T -> Bool) -> Pro
 	return reducep(source, []) { all, this in includeElement(this) ? all + [this] : all }
 }
 
-public func mapp<T, U>(source : [Promise<T>], mapping : T -> U) -> [Promise<U>] {
-	return map(source) { $0 => mapping }
-}
-
 public func reducep<T, U>(source : [Promise<T>], initial : U, combine : (U, T) -> U) -> Promise<U> {
 	return reduce(source, Promise(value: initial)) { $0 ++ $1 => combine }
 }
+
+//public func mapp<T, U>(source : [T], mapping : T -> U) -> [U] {
+//	return map(source, mapping)
+//}
+//
+//public func =><T, U>(source : [T], mapping : T -> U) -> [U] {
+//	return mapp(source, mapping)
+//}
+//
+//public func mapp<T, U>(source : [T?], mapping : T -> U) -> [U?] {
+//	return map(source) { $0 => mapping }
+//}
+//
+//public func =><T, U>(source : [T?], mapping : T -> U) -> [U?] {
+//	return mapp(source, mapping)
+//}
+//
+//public func mapp<T, U>(source : [Result<T>], mapping : T -> U) -> [Result<U>] {
+//	return map(source) { $0 => mapping }
+//}
+//
+//public func =><T, U>(source : [Result<T>], mapping : T -> U) -> [Result<U>] {
+//	return mapp(source, mapping)
+//}
+//
+//public func mapp<T, U>(source : [Promise<T>], mapping : T -> U) -> [Promise<U>] {
+//	return map(source) { $0 => mapping }
+//}
+//
+//public func =><T, U>(source : [Promise<T>], mapping : T -> U) -> [Promise<U>] {
+//	return mapp(source, mapping)
+//}
+//
+//public func mapp<T, U>(source : [Promise<T?>], mapping : T -> U) -> [Promise<U?>] {
+//	return map(source) { $0 => mapping }
+//}
+//
+//public func =><T, U>(source : [Promise<T?>], mapping : T -> U) -> [Promise<U?>] {
+//	return mapp(source, mapping)
+//}
+//
+//public func mapp<T, U>(source : [Promise<Result<T>>], mapping : T -> U) -> [Promise<Result<U>>] {
+//	return map(source) { $0 => mapping }
+//}
+//
+//public func =><T, U>(source : [Promise<Result<T>>], mapping : T -> U) -> [Promise<Result<U>>] {
+//	return mapp(source, mapping)
+//}

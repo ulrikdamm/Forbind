@@ -120,7 +120,7 @@ class ForbindPromiseMapTests : XCTestCase {
 		let promise2 = Promise<Int>()
 		let promises = [promise1, promise2]
 		
-		let results = mapp(promises) { $0 + 1 }
+		let results = promises => { $0 + 1 }
 		
 		var gotValue1 = false
 		var gotValue2 = false
@@ -147,7 +147,7 @@ class ForbindPromiseMapTests : XCTestCase {
 		let promise2 = Promise<Int?>()
 		let promises = [promise1, promise2]
 		
-		let results = mapp(promises) { $0 ?? 0 }
+		let results = promises => { $0 ?? 0 }
 		
 		var gotValue1 = false
 		var gotValue2 = false
@@ -174,7 +174,7 @@ class ForbindPromiseMapTests : XCTestCase {
 		let promise2 = Promise<Result<Int>>()
 		let promises = [promise1, promise2]
 		
-		let results = mapp(promises) { v -> Int? in
+		let results = promises => { (v : Result<Int>) -> Int? in
 			switch v {
 			case .Error(_): return nil
 			case .Ok(let box): return box.value
