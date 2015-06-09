@@ -17,20 +17,12 @@ enum bindErrors : Int {
 
 let resultNilError = NSError(domain: bindErrorDomain, code: bindErrors.NilError.rawValue, userInfo: [NSLocalizedDescriptionKey: "Nil result"])
 
-public class Box<T> {
-	public let value : T
-	
-	public init(_ value : T) {
-		self.value = value
-	}
-}
-
 public enum Result<T> {
-	case Ok(Box<T>)
+	case Ok(T)
 	case Error(NSError)
 	
 	public init(_ value : T) {
-		self = .Ok(Box(value))
+		self = .Ok(value)
 	}
 	
 	public init(_ error : NSError) {
@@ -46,7 +38,7 @@ public enum Result<T> {
 	
 	public var okValue : T? {
 		switch self {
-		case .Ok(let box): return box.value
+		case .Ok(let value): return value
 		case _: return nil
 		}
 	}
@@ -54,7 +46,7 @@ public enum Result<T> {
 
 public func ==<T : Equatable>(lhs : Result<T>, rhs : Result<T>) -> Bool {
 	switch (lhs, rhs) {
-	case (.Ok(let l), .Ok(let r)) where l.value == r.value: return true
+	case (.Ok(let l), .Ok(let r)) where l == r: return true
 	case (.Error(let el), .Error(let er)) where el == er: return true
 	case _: return false
 	}
@@ -64,10 +56,10 @@ public func !=<T : Equatable>(lhs : Result<T>, rhs : Result<T>) -> Bool {
 	return !(lhs == rhs)
 }
 
-extension Result : Printable {
+extension Result : CustomStringConvertible {
 	public var description : String {
 		switch self {
-		case .Ok(let box): return "Result.Ok(\(box.value))"
+		case .Ok(let value): return "Result.Ok(\(value))"
 		case .Error(let error): return "Result.Error(\(error))"
 		}
 	}

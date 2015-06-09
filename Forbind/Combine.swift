@@ -66,24 +66,24 @@ public func combine<T, U>(t : T, u : U) -> (T, U) {
 	return (t, u)
 }
 
-public func ++<T, U>(t : T, u : U) -> (T, U) { return combine(t, u) }
+public func ++<T, U>(t : T, u : U) -> (T, U) { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T, u : U?) -> (T, U)? {
 	return u => { (t, $0) }
 }
 
-public func ++<T, U>(t : T, u : U?) -> (T, U)? { return combine(t, u) }
+public func ++<T, U>(t : T, u : U?) -> (T, U)? { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T, u : Result<U>) -> Result<(T, U)> {
 	switch u {
-	case .Ok(let box): return .Ok(Box((t, box.value)))
+	case .Ok(let value): return .Ok((t, value))
 	case .Error(let error): return .Error(error)
 	}
 }
 
-public func ++<T, U>(t : T, u : Result<U>) -> Result<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : T, u : Result<U>) -> Result<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T, u : Promise<U>) -> Promise<(T, U)> {
@@ -96,7 +96,7 @@ public func combine<T, U>(t : T, u : Promise<U>) -> Promise<(T, U)> {
 	return promise
 }
 
-public func ++<T, U>(t : T, u : Promise<U>) -> Promise<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : T, u : Promise<U>) -> Promise<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T, u : Promise<U?>) -> Promise<(T, U)?> {
@@ -105,7 +105,7 @@ public func combine<T, U>(t : T, u : Promise<U?>) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : T, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : T, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -114,7 +114,7 @@ public func combine<T, U>(t : T, u : Promise<Result<U>>) -> Promise<Result<(T, U
 	return promise
 }
 
-public func ++<T, U>(t : T, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : T, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 /// Combine for T?
@@ -124,14 +124,14 @@ public func combine<T, U>(t : T?, u : U) -> (T, U)? {
 	return t => { t in (t, u) }
 }
 
-public func ++<T, U>(t : T?, u : U) -> (T, U)? { return combine(t, u) }
+public func ++<T, U>(t : T?, u : U) -> (T, U)? { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T?, u : U?) -> (T, U)? {
 	return u => { u in t => { t in (t, u) } }
 }
 
-public func ++<T, U>(t : T?, u : U?) -> (T, U)? { return combine(t, u) }
+public func ++<T, U>(t : T?, u : U?) -> (T, U)? { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T?, u : Result<U>) -> Result<(T, U)> {
@@ -139,12 +139,12 @@ public func combine<T, U>(t : T?, u : Result<U>) -> Result<(T, U)> {
 	case (.Error(let e1), nil): return .Error(.combinedError(e1, error2: resultNilError))
 	case (.Error(let e1), _): return .Error(e1)
 	case (_, nil): return .Error(resultNilError)
-	case (.Ok(let box1), .Some(let value)): return .Ok(Box(value, box1.value))
+	case (.Ok(let value1), .Some(let value)): return .Ok(value, value1)
 	case _: fatalError("Not gonna happen")
 	}
 }
 
-public func ++<T, U>(t : T?, u : Result<U>) -> Result<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : T?, u : Result<U>) -> Result<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T?, u : Promise<U>) -> Promise<(T, U)?> {
@@ -162,7 +162,7 @@ public func combine<T, U>(t : T?, u : Promise<U>) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : T?, u : Promise<U>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : T?, u : Promise<U>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T?, u : Promise<U?>) -> Promise<(T, U)?> {
@@ -177,7 +177,7 @@ public func combine<T, U>(t : T?, u : Promise<U?>) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : T?, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : T?, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -186,7 +186,7 @@ public func combine<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, 
 	return promise
 }
 
-public func ++<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 /// Combine for Result<T>
@@ -195,11 +195,11 @@ public func ++<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> 
 public func combine<T, U>(t : Result<T>, u : U) -> Result<(T, U)> {
 	switch (t, u) {
 	case (.Error(let e1), _): return .Error(e1)
-	case (.Ok(let box1), let value): return .Ok(Box(box1.value, value))
+	case (.Ok(let value1), let value): return .Ok(value1, value)
 	}
 }
 
-public func ++<T, U>(t : Result<T>, u : U) -> Result<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : U) -> Result<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> {
@@ -207,12 +207,12 @@ public func combine<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> {
 	case (.Error(let e1), nil): return .Error(.combinedError(e1, error2: resultNilError))
 	case (.Error(let e1), _): return .Error(e1)
 	case (_, nil): return .Error(resultNilError)
-	case (.Ok(let box1), .Some(let value)): return .Ok(Box(box1.value, value))
+	case (.Ok(let value1), .Some(let value)): return .Ok(value1, value)
 	case _: fatalError("Not gonna happen")
 	}
 }
 
-public func ++<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Result<T>, u : Result<U>) -> Result<(T, U)> {
@@ -220,12 +220,12 @@ public func combine<T, U>(t : Result<T>, u : Result<U>) -> Result<(T, U)> {
 	case (.Error(let e1), .Error(let e2)): return .Error(.combinedError(e1, error2: e2))
 	case (.Error(let e1), _): return .Error(e1)
 	case (_, .Error(let e2)): return .Error(e2)
-	case (.Ok(let box1), .Ok(let box2)): return .Ok(Box(box1.value, box2.value))
+	case (.Ok(let value1), .Ok(let value2)): return .Ok(value1, value2)
 	case _: fatalError("Not gonna happen")
 	}
 }
 
-public func ++<T, U>(t : Result<T>, u : Result<U>) -> Result<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : Result<U>) -> Result<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Result<T>, u : Promise<U>) -> Promise<Result<(T, U)>> {
@@ -234,17 +234,17 @@ public func combine<T, U>(t : Result<T>, u : Promise<U>) -> Promise<Result<(T, U
 	switch t {
 	case .Error(let error):
 		promise.setValue(.Error(error))
-	case .Ok(let box): 
-		u.getValue { value in
-			let v = (box.value, value)
-			promise.setValue(.Ok(Box(v)))
+	case .Ok(let value1): 
+		u.getValue { value2 in
+			let v = (value1, value2)
+			promise.setValue(.Ok(v))
 		}
 	}
 	
 	return promise
 }
 
-public func ++<T, U>(t : Result<T>, u : Promise<U>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : Promise<U>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Result<T>, u : Promise<U?>) -> Promise<Result<(T, U)>> {
@@ -253,7 +253,7 @@ public func combine<T, U>(t : Result<T>, u : Promise<U?>) -> Promise<Result<(T, 
 	return promise
 }
 
-public func ++<T, U>(t : Result<T>, u : Promise<U?>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : Promise<U?>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Result<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -262,7 +262,7 @@ public func combine<T, U>(t : Result<T>, u : Promise<Result<U>>) -> Promise<Resu
 	return promise
 }
 
-public func ++<T, U>(t : Result<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Result<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 /// Combine for Promise<T>
@@ -279,7 +279,7 @@ public func combine<T, U>(t : Promise<T>, u : U) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : U) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : U) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T>, u : U?) -> Promise<(T, U)?> {
@@ -297,7 +297,7 @@ public func combine<T, U>(t : Promise<T>, u : U?) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : U?) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : U?) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T>, u : Result<U>) -> Promise<Result<(T, U)>> {
@@ -305,13 +305,13 @@ public func combine<T, U>(t : Promise<T>, u : Result<U>) -> Promise<Result<(T, U
 	
 	switch u {
 	case .Error(let error): promise.setValue(.Error(error))
-	case .Ok(let box): t.getValue { let v = ($0, box.value); promise.setValue(.Ok(Box(v))) }
+	case .Ok(let value): t.getValue { let v = ($0, value); promise.setValue(.Ok(v)) }
 	}
 	
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T>, u : Promise<U>) -> Promise<(T, U)> {
@@ -327,7 +327,7 @@ public func combine<T, U>(t : Promise<T>, u : Promise<U>) -> Promise<(T, U)> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : Promise<U>) -> Promise<(T, U)> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : Promise<U>) -> Promise<(T, U)> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T>, u : Promise<U?>) -> Promise<(T, U)?> {
@@ -345,7 +345,7 @@ public func combine<T, U>(t : Promise<T>, u : Promise<U?>) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -355,10 +355,10 @@ public func combine<T, U>(t : Promise<T>, u : Promise<Result<U>>) -> Promise<Res
 		switch u {
 		case .Error(let error):
 			promise.setValue(.Error(error))
-		case .Ok(let box):
+		case .Ok(let value):
 			t.getValue { t in
-				let v = (t, box.value)
-				promise.setValue(.Ok(Box(v)))
+				let v = (t, value)
+				promise.setValue(.Ok(v))
 			}
 		}
 	}
@@ -366,7 +366,7 @@ public func combine<T, U>(t : Promise<T>, u : Promise<Result<U>>) -> Promise<Res
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 /// Combine for Promise<T?>
@@ -387,7 +387,7 @@ public func combine<T, U>(t : Promise<T?>, u : U) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : U) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : U) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T?>, u : U?) -> Promise<(T, U)?> {
@@ -402,7 +402,7 @@ public func combine<T, U>(t : Promise<T?>, u : U?) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : U?) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : U?) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, U)>> {
@@ -411,11 +411,11 @@ public func combine<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, 
 	switch u {
 	case .Error(let error):
 		promise.setValue(.Error(error))
-	case .Ok(let box):
+	case .Ok(let value):
 		t.getValue { t in
 			if let t = t {
-				let v = (t, box.value)
-				promise.setValue(.Ok(Box(v)))
+				let v = (t, value)
+				promise.setValue(.Ok(v))
 			} else {
 				promise.setValue(.Error(resultNilError))
 			}
@@ -425,7 +425,7 @@ public func combine<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, 
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T?>, u : Promise<U>) -> Promise<(T, U)?> {
@@ -440,7 +440,7 @@ public func combine<T, U>(t : Promise<T?>, u : Promise<U>) -> Promise<(T, U)?> {
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : Promise<U>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : Promise<U>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T?>, u : Promise<U?>) -> Promise<(T, U)?> {
@@ -457,7 +457,7 @@ public func combine<T, U>(t : Promise<T?>, u : Promise<U?>) -> Promise<(T, U)?> 
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : Promise<U?>) -> Promise<(T, U)?> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -467,11 +467,11 @@ public func combine<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Re
 		switch u {
 		case .Error(let error):
 			promise.setValue(.Error(error))
-		case .Ok(let box):
+		case .Ok(let value):
 			t.getValue { t in
 				if let t = t {
-					let v = (t, box.value)
-					promise.setValue(.Ok(Box(v)))
+					let v = (t, value)
+					promise.setValue(.Ok(v))
 				} else {
 					promise.setValue(.Error(resultNilError))
 				}
@@ -482,7 +482,7 @@ public func combine<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Re
 	return promise
 }
 
-public func ++<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 /// Combine for Promise<Result<T>>
@@ -494,7 +494,7 @@ public func combine<T, U>(t : Promise<Result<T>>, u : U) -> Promise<Result<(T, U
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : U) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : U) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<Result<T>>, u : U?) -> Promise<Result<(T, U)>> {
@@ -509,7 +509,7 @@ public func combine<T, U>(t : Promise<Result<T>>, u : U?) -> Promise<Result<(T, 
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : U?) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : U?) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<Result<T>>, u : Result<U>) -> Promise<Result<(T, U)>> {
@@ -517,13 +517,13 @@ public func combine<T, U>(t : Promise<Result<T>>, u : Result<U>) -> Promise<Resu
 	
 	switch u {
 	case .Error(let error): promise.setValue(.Error(error))
-	case .Ok(let box): t.getValue { t in promise.setValue(t ++ u) }
+	case .Ok(_): t.getValue { t in promise.setValue(t ++ u) }
 	}
 	
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : Result<U>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<Result<T>>, u : Promise<U>) -> Promise<Result<(T, U)>> {
@@ -538,7 +538,7 @@ public func combine<T, U>(t : Promise<Result<T>>, u : Promise<U>) -> Promise<Res
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : Promise<U>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : Promise<U>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<Result<T>>, u : Promise<U?>) -> Promise<Result<(T, U)>> {
@@ -553,7 +553,7 @@ public func combine<T, U>(t : Promise<Result<T>>, u : Promise<U?>) -> Promise<Re
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : Promise<U?>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : Promise<U?>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 
 
 public func combine<T, U>(t : Promise<Result<T>>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> {
@@ -568,5 +568,5 @@ public func combine<T, U>(t : Promise<Result<T>>, u : Promise<Result<U>>) -> Pro
 	return promise
 }
 
-public func ++<T, U>(t : Promise<Result<T>>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u) }
+public func ++<T, U>(t : Promise<Result<T>>, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> { return combine(t, u: u) }
 

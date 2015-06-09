@@ -30,11 +30,11 @@ class ForbindCombineFunctionCallTests : XCTestCase {
 	}
 	
 	func testCombineFunctionCallResultOk() {
-		let r = Result<Int>.Ok(Box(1))
+		let r = Result<Int>.Ok(1)
 		let a = (1 ++ r) => (+)
 		
 		switch a {
-		case .Ok(let box): XCTAssert(box.value == 2)
+		case .Ok(let value): XCTAssert(value == 2)
 		case .Error(_): XCTAssert(false)
 		}
 	}

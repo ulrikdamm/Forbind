@@ -42,8 +42,8 @@ class ForbindCombineValueTests : XCTestCase {
 		let a = 1 ++ Result<Int>(1)
 		
 		switch a {
-		case .Ok(let box):
-			switch box.value {
+		case .Ok(let value):
+			switch value {
 			case (1, 1): XCTAssert(true)
 			case _: XCTAssert(false)
 			}
@@ -124,8 +124,8 @@ class ForbindCombineValueTests : XCTestCase {
 		
 		a.getValue { value in
 			switch value {
-			case .Ok(let box):
-				switch box.value {
+			case .Ok(let value):
+				switch value {
 				case (1, 1): XCTAssert(true)
 				case _: XCTAssert(false)
 				}
@@ -135,7 +135,7 @@ class ForbindCombineValueTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		p.setValue(.Ok(Box(1)))
+		p.setValue(.Ok(1))
 		
 		XCTAssert(callbackCalled)
 	}

@@ -9,20 +9,20 @@
 import UIKit
 import Forbind
 
-extension UIView {
-	public class func animate(duration : NSTimeInterval, delay : NSTimeInterval = 0, options : UIViewAnimationOptions = nil, animations: Void -> Void) -> Promise<Void> {
-		let promise = Promise<Void>()
-		animateWithDuration(duration, delay: delay, options: options, animations: animations) { finished in
-			promise.setValue(Void())
-		}
-		return promise
-	}
-	
-	public class func animate(duration : NSTimeInterval, delay : NSTimeInterval = 0, usingSpringWithDamping dampingRatio : CGFloat, initialSpringVelocity velocity : CGFloat, options : UIViewAnimationOptions = nil, animations: Void -> Void) -> Promise<Void> {
-		let promise = Promise<Void>()
-		animateWithDuration(duration, delay: delay, usingSpringWithDamping: dampingRatio, initialSpringVelocity: velocity, options: options, animations: animations) { finished in
-			promise.setValue(Void())
-		}
-		return promise
-	}
-}
+//extension UIView {
+//	public class func animate(duration : NSTimeInterval, delay : NSTimeInterval = 0, options : UIViewAnimationOptions = nil, animations: Void -> Void) -> Promise<Void> {
+//		let promise = Promise<Void>()
+//		animateWithDuration(duration, delay: delay, options: options, animations: animations) { finished in
+//			promise.setValue(Void())
+//		}
+//		return promise
+//	}
+//	
+//	public class func animate(duration : NSTimeInterval, delay : NSTimeInterval = 0, usingSpringWithDamping dampingRatio : CGFloat, initialSpringVelocity velocity : CGFloat, options : UIViewAnimationOptions = nil, animations: Void -> Void) -> Promise<Void> {
+//		let promise = Promise<Void>()
+//		animateWithDuration(duration, delay: delay, usingSpringWithDamping: dampingRatio, initialSpringVelocity: velocity, options: options, animations: animations) { finished in
+//			promise.setValue(Void())
+//		}
+//		return promise
+//	}
+//}

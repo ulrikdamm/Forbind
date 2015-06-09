@@ -45,7 +45,7 @@ public func bind<T, U>(from : T, to : T -> U) -> U {
 }
 
 public func =><T, U>(lhs : T, rhs : T -> U) -> U {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -58,21 +58,21 @@ public func bind<T, U>(from : T?, to : T -> U) -> U? {
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> U) -> U? {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
 public func bind<T, U>(from : Result<T>, to : T -> U) -> Result<U> {
 	switch from {
-	case .Ok(let box):
-		return .Ok(Box(to(box.value)))
+	case .Ok(let value):
+		return .Ok(to(value))
 	case .Error(let error):
 		return .Error(error)
 	}
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> U) -> Result<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -87,7 +87,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> U) -> Promise<U> {
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> U) -> Promise<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -106,7 +106,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> U) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> U) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -115,8 +115,8 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> U) -> Promise<Result
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			promise.setValue(.Ok(Box(to(box.value))))
+		case .Ok(let value):
+			promise.setValue(.Ok(to(value)))
 		case .Error(let error):
 			promise.setValue(.Error(error))
 		}
@@ -126,7 +126,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> U) -> Promise<Result
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -138,7 +138,7 @@ public func bind<T, U>(from : T, to : T -> U?) -> U? {
 }
 
 public func =><T, U>(lhs : T, rhs : T -> U?) -> U? {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -151,15 +151,15 @@ public func bind<T, U>(from : T?, to : T -> U?) -> U? {
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> U?) -> U? {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
 public func bind<T, U>(from : Result<T>, to : T -> U?) -> Result<U> {
 	switch from {
-	case .Ok(let box):
-		if let v = to(box.value) {
-			return .Ok(Box(v))
+	case .Ok(let value):
+		if let v = to(value) {
+			return .Ok(v)
 		} else {
 			return .Error(resultNilError)
 		}
@@ -169,7 +169,7 @@ public func bind<T, U>(from : Result<T>, to : T -> U?) -> Result<U> {
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> U?) -> Result<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -184,7 +184,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> U?) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> U?) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -203,7 +203,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> U?) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> U?) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -212,9 +212,9 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> U?) -> Promise<Resul
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			if let v = to(box.value) {
-				promise.setValue(.Ok(Box(v)))
+		case .Ok(let value):
+			if let v = to(value) {
+				promise.setValue(.Ok(v))
 			} else {
 				promise.setValue(.Error(resultNilError))
 			}
@@ -227,7 +227,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> U?) -> Promise<Resul
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U?) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -239,7 +239,7 @@ public func bind<T, U>(from : T, to : T -> Result<U>) -> Result<U> {
 }
 
 public func =><T, U>(lhs : T, rhs : T -> Result<U>) -> Result<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -252,21 +252,21 @@ public func bind<T, U>(from : T?, to : T -> Result<U>) -> Result<U> {
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> Result<U>) -> Result<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
 public func bind<T, U>(from : Result<T>, to : T -> Result<U>) -> Result<U> {
 	switch from {
-	case .Ok(let box):
-		return to(box.value)
+	case .Ok(let value):
+		return to(value)
 	case .Error(let error):
 		return .Error(error)
 	}
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> Result<U>) -> Result<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -281,7 +281,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> Result<U>) -> Promise<Result
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> Result<U>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -300,7 +300,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Result<U>) -> Promise<Resul
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> Result<U>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -309,8 +309,8 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Result<U>) -> Promis
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			promise.setValue(to(box.value))
+		case .Ok(let value):
+			promise.setValue(to(value))
 		case .Error(let error):
 			promise.setValue(.Error(error))
 		}
@@ -320,7 +320,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Result<U>) -> Promis
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Result<U>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -351,7 +351,7 @@ public func bind<T, U>(from : T?, to : T -> Promise<U>) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> Promise<U>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -359,9 +359,9 @@ public func bind<T, U>(from : Result<T>, to : T -> Promise<U>) -> Promise<Result
 	let promise = Promise<Result<U>>()
 	
 	switch from {
-	case .Ok(let box):
-		to(box.value).getValue { value in
-			promise.setValue(.Ok(Box(value)))
+	case .Ok(let value):
+		to(value).getValue { value in
+			promise.setValue(.Ok(value))
 		}
 	case .Error(let error):
 		promise.setValue(.Error(error))
@@ -371,7 +371,7 @@ public func bind<T, U>(from : Result<T>, to : T -> Promise<U>) -> Promise<Result
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -388,7 +388,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<U>) -> Promise<U> {
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U>) -> Promise<U> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -410,7 +410,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U>) -> Promise<U?> 
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -419,9 +419,9 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U>) -> Promi
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			to(box.value).getValue { value in
-				promise.setValue(.Ok(Box(value)))
+		case .Ok(let value):
+			to(value).getValue { value in
+				promise.setValue(.Ok(value))
 			}
 		case .Error(let error):
 			promise.setValue(.Error(error))
@@ -432,7 +432,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U>) -> Promi
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -444,7 +444,7 @@ public func bind<T, U>(from : T, to : T -> Promise<U?>) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : T, rhs : T -> Promise<U?>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -457,21 +457,21 @@ public func bind<T, U>(from : T?, to : T -> Promise<U?>) -> Promise<U?> {
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> Promise<U?>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
 public func bind<T, U>(from : Result<T>, to : T -> Promise<U?>) -> Promise<U?> {
 	switch from {
-	case .Ok(let box):
-		return to(box.value)
+	case .Ok(let value):
+		return to(value)
 	case .Error(_):
 		return Promise(value: nil)
 	}
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 public func bind<T, U>(from : Promise<T>, to : T -> Promise<U?>) -> Promise<U?> {
@@ -487,7 +487,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<U?>) -> Promise<U?> 
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -508,7 +508,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U?>) -> Promise<U?>
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U?>) -> Promise<U?> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -517,10 +517,10 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U?>) -> Prom
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			to(box.value).getValue { value in
+		case .Ok(let value):
+			to(value).getValue { value in
 				if let value = value {
-					promise.setValue(.Ok(Box(value)))
+					promise.setValue(.Ok(value))
 				} else {
 					promise.setValue(.Error(resultNilError))
 				}
@@ -534,7 +534,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U?>) -> Prom
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U?>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -546,7 +546,7 @@ public func bind<T, U>(from : T, to : T -> Promise<Result<U>>) -> Promise<Result
 }
 
 public func =><T, U>(lhs : T, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -559,21 +559,21 @@ public func bind<T, U>(from : T?, to : T -> Promise<Result<U>>) -> Promise<Resul
 }
 
 public func =><T, U>(lhs : T?, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
 public func bind<T, U>(from : Result<T>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
 	switch from {
-	case .Ok(let box):
-		return to(box.value)
+	case .Ok(let value):
+		return to(value)
 	case .Error(let error):
 		return Promise(value: .Error(error))
 	}
 }
 
 public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -590,7 +590,7 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<Result<U>>) -> Promi
 }
 
 public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -611,7 +611,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<Result<U>>) -> Prom
 }
 
 public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }
 
 
@@ -620,8 +620,8 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<Result<U>>) 
 	
 	from.getValue { value in
 		switch value {
-		case .Ok(let box):
-			to(box.value).getValue { value in
+		case .Ok(let value):
+			to(value).getValue { value in
 				promise.setValue(value)
 			}
 		case .Error(let error):
@@ -633,5 +633,5 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<Result<U>>) 
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
-	return bind(lhs, rhs)
+	return bind(lhs, to: rhs)
 }

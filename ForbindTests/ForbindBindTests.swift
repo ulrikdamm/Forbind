@@ -13,13 +13,6 @@ import XCTest
 /// called if and when the value is valid. If the value is invalid, the
 /// binding will quit early, eventually returning an error.
 class ForbindBindTests : XCTestCase {
-	func doBindWhatever() {
-		let a : Int? = nil
-		let promise = Promise(value: a)
-		
-		let b = promise => { lol in "\(lol)" }
-	}
-	
 	func testBindValue() {
 		let a = 1
 		
@@ -51,8 +44,8 @@ class ForbindBindTests : XCTestCase {
 		let b = (a => increment)
 		
 		switch b {
-		case .Ok(let box): XCTAssert(box.value == 2)
-		case .Error(let error): XCTAssert(false)
+		case .Ok(let value): XCTAssert(value == 2)
+		case .Error(_): XCTAssert(false)
 		}
 	}
 	
@@ -62,7 +55,7 @@ class ForbindBindTests : XCTestCase {
 		let b = (a => increment)
 		
 		switch b {
-		case .Ok(let box): XCTAssert(false)
+		case .Ok(_): XCTAssert(false)
 		case .Error(let error): XCTAssert(error == genericError)
 		}
 	}
@@ -125,14 +118,14 @@ class ForbindBindTests : XCTestCase {
 		
 		b.getValue { value in
 			switch value {
-			case .Ok(let box): XCTAssert(box.value == 2)
-			case .Error(let error): XCTAssert(false)
+			case .Ok(let value): XCTAssert(value == 2)
+			case .Error(_): XCTAssert(false)
 			}
 			
 			callbackCalled = true
 		}
 		
-		a.setValue(.Ok(Box(1)))
+		a.setValue(.Ok(1))
 		XCTAssert(callbackCalled)
 	}
 	
@@ -145,7 +138,7 @@ class ForbindBindTests : XCTestCase {
 		
 		b.getValue { value in
 			switch value {
-			case .Ok(let box): XCTAssert(false)
+			case .Ok(_): XCTAssert(false)
 			case .Error(let error): XCTAssert(error == genericError)
 			}
 			

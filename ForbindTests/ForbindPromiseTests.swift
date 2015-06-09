@@ -177,7 +177,7 @@ class ForbindPromiseMapTests : XCTestCase {
 		let results = promises => { (v : Result<Int>) -> Int? in
 			switch v {
 			case .Error(_): return nil
-			case .Ok(let box): return box.value
+			case .Ok(let value): return value
 			}
 		}
 		
@@ -194,7 +194,7 @@ class ForbindPromiseMapTests : XCTestCase {
 			gotValue2 = true
 		}
 		
-		promise1.setValue(.Ok(Box(1)))
+		promise1.setValue(.Ok(1))
 		promise2.setValue(.Error(genericError))
 		
 		XCTAssert(gotValue1)
@@ -253,13 +253,13 @@ class ForbindPromiseFilterTests : XCTestCase {
 		results.getValue { results in
 			gotValue = true
 			XCTAssert(results.count == 2)
-			XCTAssert(results[0] == .Ok(Box(1)))
-			XCTAssert(results[1] == .Ok(Box(3)))
+			XCTAssert(results[0] == .Ok(1))
+			XCTAssert(results[1] == .Ok(3))
 		}
 		
-		promises[0].setValue(.Ok(Box(1)))
+		promises[0].setValue(.Ok(1))
 		promises[1].setValue(.Error(genericError))
-		promises[2].setValue(.Ok(Box(3)))
+		promises[2].setValue(.Ok(3))
 		
 		XCTAssert(gotValue)
 	}
@@ -269,7 +269,7 @@ class ForbindPromiseReduceTests : XCTestCase {
 	func testReducePromise() {
 		let promises = [Promise<Int>(), Promise<Int>(), Promise<Int>()]
 		
-		let result = reducep(promises, 0, +)
+		let result = reducep(promises, initial: 0, combine: +)
 		
 		var gotValue = false
 		
@@ -288,7 +288,7 @@ class ForbindPromiseReduceTests : XCTestCase {
 	func testReduceOptionalPromise() {
 		let promises = [Promise<Int?>(), Promise<Int?>(), Promise<Int?>()]
 		
-		let result = reducep(promises, 0) { $0 + ($1 ?? 0) }
+		let result = reducep(promises, initial: 0) { $0 + ($1 ?? 0) }
 		
 		var gotValue = false
 		
@@ -307,10 +307,10 @@ class ForbindPromiseReduceTests : XCTestCase {
 	func testReduceResultPromise() {
 		let promises = [Promise<Result<Int>>(), Promise<Result<Int>>(), Promise<Result<Int>>()]
 		
-		let result = reducep(promises, 0) { a, v in
+		let result = reducep(promises, initial: 0) { a, v in
 			switch v {
 			case .Error(_): return a
-			case .Ok(let box): return a + box.value
+			case .Ok(let value): return a + value
 			}
 		}
 		
@@ -321,9 +321,9 @@ class ForbindPromiseReduceTests : XCTestCase {
 			XCTAssert(result == 4)
 		}
 		
-		promises[0].setValue(.Ok(Box(1)))
+		promises[0].setValue(.Ok(1))
 		promises[1].setValue(.Error(genericError))
-		promises[2].setValue(.Ok(Box(3)))
+		promises[2].setValue(.Ok(3))
 		
 		XCTAssert(gotValue)
 	}
@@ -475,11 +475,11 @@ class ForbindResultPromiseTests : XCTestCase {
 		var gotValue = false
 		
 		promise.getValue { value in
-			XCTAssert(value == .Ok(Box(1)))
+			XCTAssert(value == .Ok(1))
 			gotValue = true
 		}
 		
-		promise.setValue(.Ok(Box(1)))
+		promise.setValue(.Ok(1))
 		
 		XCTAssert(gotValue)
 	}
@@ -489,10 +489,10 @@ class ForbindResultPromiseTests : XCTestCase {
 		
 		var gotValue = false
 		
-		promise.setValue(.Ok(Box(1)))
+		promise.setValue(.Ok(1))
 		
 		promise.getValue { value in
-			XCTAssert(value == .Ok(Box(1)))
+			XCTAssert(value == .Ok(1))
 			gotValue = true
 		}
 		
@@ -500,12 +500,12 @@ class ForbindResultPromiseTests : XCTestCase {
 	}
 	
 	func testInitialValue() {
-		let promise = Promise(value: Result.Ok(Box(1)))
+		let promise = Promise(value: Result.Ok(1))
 		
 		var gotValue = false
 		
 		promise.getValue { value in
-			XCTAssert(value == .Ok(Box(1)))
+			XCTAssert(value == .Ok(1))
 			gotValue = true
 		}
 		
@@ -519,16 +519,16 @@ class ForbindResultPromiseTests : XCTestCase {
 		var gotValue2 = false
 		
 		promise.getValue { value in
-			XCTAssert(value == .Ok(Box(1)))
+			XCTAssert(value == .Ok(1))
 			gotValue1 = true
 		}
 		
 		promise.getValue { value in
-			XCTAssert(value == .Ok(Box(1)))
+			XCTAssert(value == .Ok(1))
 			gotValue2 = true
 		}
 		
-		promise.setValue(.Ok(Box(1)))
+		promise.setValue(.Ok(1))
 		
 		XCTAssert(gotValue1)
 		XCTAssert(gotValue2)
@@ -558,12 +558,12 @@ class ForbindResultPromiseTests : XCTestCase {
 		var gotValue = false
 		
 		equals.getValue { value in
-			XCTAssert(value == .Ok(Box(true)))
+			XCTAssert(value == .Ok(true))
 			gotValue = true
 		}
 		
-		promise1.setValue(.Ok(Box(1)))
-		promise2.setValue(.Ok(Box(1)))
+		promise1.setValue(.Ok(1))
+		promise2.setValue(.Ok(1))
 		
 		XCTAssert(gotValue)
 	}
@@ -578,12 +578,12 @@ class ForbindResultPromiseTests : XCTestCase {
 		
 		equals.getValue { value in
 			switch value {
-			case .Error(let e): gotValue = true
+			case .Error(_): gotValue = true
 			case _: XCTAssert(false)
 			}
 		}
 		
-		promise1.setValue(.Ok(Box(1)))
+		promise1.setValue(.Ok(1))
 		promise2.setValue(.Error(genericError))
 		
 		XCTAssert(gotValue)
@@ -598,12 +598,12 @@ class ForbindResultPromiseTests : XCTestCase {
 		var gotValue = false
 		
 		equals.getValue { value in
-			XCTAssert(value == .Ok(Box(false)))
+			XCTAssert(value == .Ok(false))
 			gotValue = true
 		}
 		
-		promise1.setValue(.Ok(Box(1)))
-		promise2.setValue(.Ok(Box(2)))
+		promise1.setValue(.Ok(1))
+		promise2.setValue(.Ok(2))
 		
 		XCTAssert(gotValue)
 	}

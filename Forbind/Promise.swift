@@ -10,7 +10,7 @@ import Foundation
 
 private enum PromiseState<T> {
 	case NoValue
-	case Value(Box<T>)
+	case Value(T)
 }
 
 public class Promise<T> {
@@ -21,7 +21,7 @@ public class Promise<T> {
 	private var _value : PromiseState<T> = .NoValue
 	
 	public func setValue(value : T) {
-		_value = PromiseState.Value(Box(value))
+		_value = PromiseState.Value(value)
 		notifyListeners()
 	}
 	
@@ -29,7 +29,7 @@ public class Promise<T> {
 		get {
 			switch _value {
 			case .NoValue: return nil
-			case .Value(let box): return box.value
+			case .Value(let value): return value
 			}
 		}
 	}
@@ -47,9 +47,9 @@ public class Promise<T> {
 	private func notifyListeners() {
 		switch _value {
 		case .NoValue: break
-		case .Value(let box):
+		case .Value(let value):
 			for callback in listeners {
-				callback(box.value)
+				callback(value)
 			}
 		}
 		
@@ -69,7 +69,7 @@ public func ==<T : Equatable>(lhs : Promise<Result<T>>, rhs : Promise<Result<T>>
 	return (lhs ++ rhs) => { $0 == $1 }
 }
 
-extension Promise : Printable {
+extension Promise : CustomStringConvertible {
 	public var description : String {
 		if let value = value {
 			return "Promise(\(value))"
@@ -80,11 +80,11 @@ extension Promise : Printable {
 }
 
 public func filterp<T>(source : [Promise<T>], includeElement : T -> Bool) -> Promise<[T]> {
-	return reducep(source, []) { all, this in includeElement(this) ? all + [this] : all }
+	return reducep(source, initial: []) { all, this in includeElement(this) ? all + [this] : all }
 }
 
 public func reducep<T, U>(source : [Promise<T>], initial : U, combine : (U, T) -> U) -> Promise<U> {
-	return reduce(source, Promise(value: initial)) { $0 ++ $1 => combine }
+	return source.reduce(Promise(value: initial)) { $0 ++ $1 => combine }
 }
 
 //public func mapp<T, U>(source : [T], mapping : T -> U) -> [U] {

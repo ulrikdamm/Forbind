@@ -13,7 +13,7 @@ promiseStr.getValue(println)
 promiseStr.setValue("Hello from the future!")
 
 
-struct User : Printable {
+struct User : CustomStringConvertible {
 	let name : String
 	
 	static func parse(data : NSDictionary) -> User? {
@@ -53,4 +53,4 @@ userCount.getValue { userCount in
 	println("Loaded \(userCount) users")
 }
 
-NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(5))
+NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTim
