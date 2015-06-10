@@ -34,6 +34,25 @@ func getUser(id : String) -> Promise<Result<User>> {
 
 For more details, read my [Blog post](http://ufd.dk/blog/Binds-and-promises-with-Forbind).
 
+## New in 1.1
+
+• ResultPromise and OptionalPromise has been replaced with Promise<Result<T>> and Promise<T?>. Still works the same.
+
+• You can use the bind operator to map over lists of promises!
+
+```swift
+let user = User(name: "Ulrik")
+let names = user.loadFriends() => { $0.name } // [Promise<String>]
+```
+
+• And you can also filter and reduce with filterp and reducep:
+
+```swift
+let someNames = filterp(names) { $0 != "Peter" } // Promise<[String]>
+```
+
+• The NSJSONSerialization extension now returns a JSONResult, which is either a Dictionary or Array.
+
 # Get started
 
 You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Just add it to your Podfile:
