@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FF0A41E81AC82A2C009B1757 /* Forbind iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A41DC1AC82A2C009B1757 /* Forbind iOS.framework */; };
+		FF0A41E81AC82A2C009B1757 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A41DC1AC82A2C009B1757 /* Forbind.framework */; };
 		FF0A41F91AC82A49009B1757 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FF0A41FA1AC82A49009B1757 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FF0A41FB1AC82A49009B1757 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
@@ -91,7 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FF0A41DC1AC82A2C009B1757 /* Forbind iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Forbind iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0A41DC1AC82A2C009B1757 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A41E01AC82A2C009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0A41E71AC82A2C009B1757 /* ForbindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForbindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A41ED1AC82A2C009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A41E81AC82A2C009B1757 /* Forbind iOS.framework in Frameworks */,
+				FF0A41E81AC82A2C009B1757 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 		FF0A41DD1AC82A2C009B1757 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF0A41DC1AC82A2C009B1757 /* Forbind iOS.framework */,
+				FF0A41DC1AC82A2C009B1757 /* Forbind.framework */,
 				FF0A41E71AC82A2C009B1757 /* ForbindTests.xctest */,
 				FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */,
 				FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */,
@@ -372,7 +372,7 @@
 			);
 			name = "Forbind iOS";
 			productName = Forbind;
-			productReference = FF0A41DC1AC82A2C009B1757 /* Forbind iOS.framework */;
+			productReference = FF0A41DC1AC82A2C009B1757 /* Forbind.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FF0A41E61AC82A2C009B1757 /* ForbindTests */ = {
@@ -741,7 +741,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Forbind;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -791,7 +791,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Forbind;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
