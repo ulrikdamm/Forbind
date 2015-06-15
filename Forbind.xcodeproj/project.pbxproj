@@ -29,6 +29,7 @@
 		FF0A42301AC82E43009B1757 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42291AC82E43009B1757 /* UIViewExtensions.swift */; };
 		FF0A42311AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FF0A42321AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
+		FF0AA3921B2B33C7002A4B4D /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A41DC1AC82A2C009B1757 /* Forbind.framework */; };
 		FF14D4C81AC97CBB0077303F /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
 		FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */; };
 		FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB7F1AC847FD0033992B /* AppDelegate.swift */; };
@@ -119,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0AA3921B2B33C7002A4B4D /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

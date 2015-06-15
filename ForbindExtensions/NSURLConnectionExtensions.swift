@@ -26,7 +26,7 @@ extension NSURLConnection {
 				if let error = error {
 					promise.setValue(.Error(error))
 				} else {
-					promise.setValue(.Ok(Box(response!, data!)))
+					promise.setValue(.Ok(response!, data!))
 				}
 			}
 		})

@@ -56,7 +56,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -71,7 +71,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -86,7 +86,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -101,7 +101,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -116,7 +116,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -131,7 +131,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
@@ -146,7 +146,7 @@ extension NSURLSession {
 				promise.setValue(.Error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(Box(value)))
+				promise.setValue(.Ok(value))
 			}
 		}
 		
