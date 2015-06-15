@@ -146,8 +146,6 @@
 		FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE14AF71B2EF82F006C5F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForbindExtensions Mac.h"; sourceTree = "<group>"; };
-		FFE14B061B2EF82F006C5F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFE14B071B2EF82F006C5F70 /* ForbindExtensions_MacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForbindExtensions_MacTests.swift; sourceTree = "<group>"; };
 		FFEBF9671B23837500C56952 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		FFEBF96A1B23A8D700C56952 /* ListBind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,7 +219,6 @@
 				FF19EB7C1AC847FD0033992B /* ForbindDemo */,
 				FFBE76761B2EEA0C00426D40 /* Forbind Mac */,
 				FFE14AF51B2EF82F006C5F70 /* ForbindExtensions Mac */,
-				FFE14B041B2EF82F006C5F70 /* ForbindExtensions MacTests */,
 				FF0A41DD1AC82A2C009B1757 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -382,23 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				FFE14AF71B2EF82F006C5F70 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FFE14B041B2EF82F006C5F70 /* ForbindExtensions MacTests */ = {
-			isa = PBXGroup;
-			children = (
-				FFE14B071B2EF82F006C5F70 /* ForbindExtensions_MacTests.swift */,
-				FFE14B051B2EF82F006C5F70 /* Supporting Files */,
-			);
-			path = "ForbindExtensions MacTests";
-			sourceTree = "<group>";
-		};
-		FFE14B051B2EF82F006C5F70 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FFE14B061B2EF82F006C5F70 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1059,7 +1039,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ForbindExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1110,7 +1090,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ForbindExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
