@@ -9,26 +9,26 @@
 import Foundation
 import Forbind
 
-extension NSJSONSerialization {
-	public enum JSONResult {
-		case Array(NSArray)
-		case Dictionary(NSDictionary)
-		
-		public var arrayValue : NSArray? {
-			switch self {
-			case .Array(let a): return a
-			case _: return nil
-			}
-		}
-		
-		public var dictionaryValue : NSDictionary? {
-			switch self {
-			case .Dictionary(let d): return d
-			case _: return nil
-			}
+public enum JSONSerializationResult {
+	case Array(NSArray)
+	case Dictionary(NSDictionary)
+	
+	public var arrayValue : NSArray? {
+		switch self {
+		case .Array(let a): return a
+		case _: return nil
 		}
 	}
 	
+	public var dictionaryValue : NSDictionary? {
+		switch self {
+		case .Dictionary(let d): return d
+		case _: return nil
+		}
+	}
+}
+
+extension NSJSONSerialization {
 	public class func toData(options : NSJSONWritingOptions = nil)(obj : AnyObject) -> Result<NSData> {
 		var error : NSError?
 		let result = dataWithJSONObject(obj, options: options, error: &error)
@@ -42,7 +42,7 @@ extension NSJSONSerialization {
 		}
 	}
 	
-	public class func toJSON(options : NSJSONReadingOptions = nil)(data : NSData) -> Result<JSONResult> {
+	public class func toJSON(options : NSJSONReadingOptions = nil)(data : NSData) -> Result<JSONSerializationResult> {
 		var error : NSError?
 		let result : AnyObject? = JSONObjectWithData(data, options: options, error: &error)
 		
