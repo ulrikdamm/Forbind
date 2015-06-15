@@ -46,6 +46,14 @@
 		FFBE76971B2EEA5400426D40 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
 		FFBE76981B2EEA5700426D40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* Result.swift */; };
 		FFBE76991B2EEA5900426D40 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
+		FFE14AF91B2EF82F006C5F70 /* ForbindExtensions Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; };
+		FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFE14B131B2EF84D006C5F70 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
+		FFE14B141B2EF84F006C5F70 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
+		FFE14B151B2EF851006C5F70 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
+		FFE14B161B2EF853006C5F70 /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
+		FFE14B171B2EF85C006C5F70 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; };
 		FFEBF9681B23837500C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFEBF9691B23842B00C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFEBF96B1B23A8D700C56952 /* ListBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF96A1B23A8D700C56952 /* ListBind.swift */; };
@@ -74,6 +82,13 @@
 			remoteGlobalIDString = FFBE76741B2EEA0C00426D40;
 			remoteInfo = "Forbind Mac";
 		};
+		FFE14B091B2EF82F006C5F70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFE14AF31B2EF82F006C5F70;
+			remoteInfo = "ForbindExtensions Mac";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +98,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */,
 				FFBE768D1B2EEA0C00426D40 /* Forbind.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -127,6 +143,11 @@
 		FFBE76751B2EEA0C00426D40 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFBE76781B2EEA0C00426D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFBE76791B2EEA0C00426D40 /* Forbind Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Forbind Mac.h"; sourceTree = "<group>"; };
+		FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE14AF71B2EF82F006C5F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForbindExtensions Mac.h"; sourceTree = "<group>"; };
+		FFE14B061B2EF82F006C5F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE14B071B2EF82F006C5F70 /* ForbindExtensions_MacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForbindExtensions_MacTests.swift; sourceTree = "<group>"; };
 		FFEBF9671B23837500C56952 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		FFEBF96A1B23A8D700C56952 /* ListBind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */,
 				FFBE768C1B2EEA0C00426D40 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +196,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE14AF01B2EF82F006C5F70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE14B171B2EF85C006C5F70 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +220,8 @@
 				FF0A421C1AC82E38009B1757 /* ForbindExtensionsTests */,
 				FF19EB7C1AC847FD0033992B /* ForbindDemo */,
 				FFBE76761B2EEA0C00426D40 /* Forbind Mac */,
+				FFE14AF51B2EF82F006C5F70 /* ForbindExtensions Mac */,
+				FFE14B041B2EF82F006C5F70 /* ForbindExtensions MacTests */,
 				FF0A41DD1AC82A2C009B1757 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,6 +235,7 @@
 				FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */,
 				FF19EB7B1AC847FD0033992B /* ForbindDemo.app */,
 				FFBE76751B2EEA0C00426D40 /* Forbind.framework */,
+				FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,6 +369,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FFE14AF51B2EF82F006C5F70 /* ForbindExtensions Mac */ = {
+			isa = PBXGroup;
+			children = (
+				FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */,
+				FFE14AF61B2EF82F006C5F70 /* Supporting Files */,
+			);
+			path = "ForbindExtensions Mac";
+			sourceTree = "<group>";
+		};
+		FFE14AF61B2EF82F006C5F70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFE14AF71B2EF82F006C5F70 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFE14B041B2EF82F006C5F70 /* ForbindExtensions MacTests */ = {
+			isa = PBXGroup;
+			children = (
+				FFE14B071B2EF82F006C5F70 /* ForbindExtensions_MacTests.swift */,
+				FFE14B051B2EF82F006C5F70 /* Supporting Files */,
+			);
+			path = "ForbindExtensions MacTests";
+			sourceTree = "<group>";
+		};
+		FFE14B051B2EF82F006C5F70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFE14B061B2EF82F006C5F70 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -351,6 +418,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFBE767A1B2EEA0C00426D40 /* Forbind Mac.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE14AF11B2EF82F006C5F70 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE14AF91B2EF82F006C5F70 /* ForbindExtensions Mac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +516,7 @@
 			);
 			dependencies = (
 				FFBE768B1B2EEA0C00426D40 /* PBXTargetDependency */,
+				FFE14B0A1B2EF82F006C5F70 /* PBXTargetDependency */,
 			);
 			name = ForbindDemo;
 			productName = ForbindDemo;
@@ -463,6 +539,24 @@
 			name = "Forbind Mac";
 			productName = "Forbind Mac";
 			productReference = FFBE76751B2EEA0C00426D40 /* Forbind.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFE14B111B2EF82F006C5F70 /* Build configuration list for PBXNativeTarget "ForbindExtensions Mac" */;
+			buildPhases = (
+				FFE14AEF1B2EF82F006C5F70 /* Sources */,
+				FFE14AF01B2EF82F006C5F70 /* Frameworks */,
+				FFE14AF11B2EF82F006C5F70 /* Headers */,
+				FFE14AF21B2EF82F006C5F70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ForbindExtensions Mac";
+			productName = "ForbindExtensions Mac";
+			productReference = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -491,6 +585,9 @@
 					FFBE76741B2EEA0C00426D40 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
+					FFE14AF31B2EF82F006C5F70 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 				};
 			};
 			buildConfigurationList = FF0A41D41AC82A1E009B1757 /* Build configuration list for PBXProject "Forbind" */;
@@ -507,11 +604,12 @@
 			projectRoot = "";
 			targets = (
 				FF0A41DB1AC82A2C009B1757 /* Forbind iOS */,
+				FFBE76741B2EEA0C00426D40 /* Forbind Mac */,
 				FF0A41E61AC82A2C009B1757 /* ForbindTests */,
 				FF0A420D1AC82E37009B1757 /* ForbindExtensions */,
+				FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */,
 				FF0A42171AC82E38009B1757 /* ForbindExtensionsTests */,
 				FF19EB7A1AC847FD0033992B /* ForbindDemo */,
-				FFBE76741B2EEA0C00426D40 /* Forbind Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -556,6 +654,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FFBE76731B2EEA0C00426D40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFE14AF21B2EF82F006C5F70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -642,6 +747,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FFE14AEF1B2EF82F006C5F70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE14B131B2EF84D006C5F70 /* NSURLConnectionExtensions.swift in Sources */,
+				FFE14B141B2EF84F006C5F70 /* NSURLSessionExtensions.swift in Sources */,
+				FFE14B151B2EF851006C5F70 /* dispatchExtensions.swift in Sources */,
+				FFE14B161B2EF853006C5F70 /* NSJSONSerializationExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -659,6 +775,11 @@
 			isa = PBXTargetDependency;
 			target = FFBE76741B2EEA0C00426D40 /* Forbind Mac */;
 			targetProxy = FFBE768A1B2EEA0C00426D40 /* PBXContainerItemProxy */;
+		};
+		FFE14B0A1B2EF82F006C5F70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */;
+			targetProxy = FFE14B091B2EF82F006C5F70 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1293,6 +1414,112 @@
 			};
 			name = Release;
 		};
+		FFE14B0D1B2EF82F006C5F70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ForbindExtensions Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = ForbindExtensions;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FFE14B0E1B2EF82F006C5F70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ForbindExtensions Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ForbindExtensions;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1355,6 +1582,15 @@
 			buildConfigurations = (
 				FFBE768E1B2EEA0C00426D40 /* Debug */,
 				FFBE768F1B2EEA0C00426D40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFE14B111B2EF82F006C5F70 /* Build configuration list for PBXNativeTarget "ForbindExtensions Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE14B0D1B2EF82F006C5F70 /* Debug */,
+				FFE14B0E1B2EF82F006C5F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
