@@ -19,6 +19,7 @@ public class Promise<T> {
 	}
 	
 	private var _value : PromiseState<T> = .NoValue
+	var previousPromise : AnyObject?
 	
 	public func setValue(value : T) {
 		_value = PromiseState.Value(Box(value))

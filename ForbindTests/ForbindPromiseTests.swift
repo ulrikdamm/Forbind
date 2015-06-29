@@ -112,6 +112,43 @@ class ForbindPromiseTests : XCTestCase {
 		
 		XCTAssert(gotValue)
 	}
+	
+	func testDereferenceDealloc() {
+		var promise : Promise? = Promise<Int>()
+		weak var weakPromise : Promise<Int>? = promise
+		
+		var result : Promise? = promise! => { $0 + 1 }
+		
+		XCTAssert(weakPromise != nil)
+		
+		promise = nil
+		XCTAssert(weakPromise != nil)
+		
+		result = nil
+		XCTAssert(weakPromise == nil)
+	}
+	
+	func testMultipleBindDereferenceDealloc() {
+		var promise : Promise? = Promise<Int>()
+		weak var weakPromise = promise
+		
+		var result1 : Promise? = promise! => { $0 + 1 }
+		var result2 : Promise? = result1! => { "\($0)" }
+		
+		weak var weakResult1 = result1
+		result1 = nil
+		
+		XCTAssert(weakPromise != nil)
+		XCTAssert(weakResult1 != nil)
+		
+		promise = nil
+		XCTAssert(weakPromise != nil)
+		XCTAssert(weakResult1 != nil)
+		
+		result2 = nil
+		XCTAssert(weakPromise == nil)
+		XCTAssert(weakResult1 == nil)
+	}
 }
 
 class ForbindPromiseMapTests : XCTestCase {

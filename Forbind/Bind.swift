@@ -78,9 +78,10 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> U) -> Result<U> {
 
 public func bind<T, U>(from : Promise<T>, to : T -> U) -> Promise<U> {
 	let promise = Promise<U>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
-		promise.setValue(to(value))
+	from.getValue { [weak promise] value in
+		promise?.setValue(to(value))
 	}
 	
 	return promise
@@ -93,12 +94,13 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> U) -> Promise<U> {
 
 public func bind<T, U>(from : Promise<T?>, to : T -> U) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		if let value = value {
-			promise.setValue(to(value))
+			promise?.setValue(to(value))
 		} else {
-			promise.setValue(nil)
+			promise?.setValue(nil)
 		}
 	}
 	
@@ -112,13 +114,14 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> U) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
-			promise.setValue(.Ok(Box(to(box.value))))
+			promise?.setValue(.Ok(Box(to(box.value))))
 		case .Error(let error):
-			promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
@@ -175,9 +178,10 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> U?) -> Result<U> {
 
 public func bind<T, U>(from : Promise<T>, to : T -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
-		promise.setValue(to(value))
+	from.getValue { [weak promise] value in
+		promise?.setValue(to(value))
 	}
 	
 	return promise
@@ -190,12 +194,13 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> U?) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<T?>, to : T -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		if let value = value {
-			promise.setValue(to(value))
+			promise?.setValue(to(value))
 		} else {
-			promise.setValue(nil)
+			promise?.setValue(nil)
 		}
 	}
 	
@@ -209,17 +214,18 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> U?) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> U?) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
 			if let v = to(box.value) {
-				promise.setValue(.Ok(Box(v)))
+				promise?.setValue(.Ok(Box(v)))
 			} else {
-				promise.setValue(.Error(resultNilError))
+				promise?.setValue(.Error(resultNilError))
 			}
 		case .Error(let error):
-			return promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
@@ -272,9 +278,10 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> Result<U>) -> Result<U> {
 
 public func bind<T, U>(from : Promise<T>, to : T -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
-		promise.setValue(to(value))
+	from.getValue { [weak promise] value in
+		promise?.setValue(to(value))
 	}
 	
 	return promise
@@ -287,12 +294,13 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> Result<U>) -> Promise<Result<U
 
 public func bind<T, U>(from : Promise<T?>, to : T -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		if let value = value {
-			promise.setValue(to(value))
+			promise?.setValue(to(value))
 		} else {
-			promise.setValue(.Error(resultNilError))
+			promise?.setValue(.Error(resultNilError))
 		}
 	}
 	
@@ -306,13 +314,14 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> Result<U>) -> Promise<Result<
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
-			promise.setValue(to(box.value))
+			promise?.setValue(to(box.value))
 		case .Error(let error):
-			promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
@@ -340,8 +349,11 @@ public func bind<T, U>(from : T?, to : T -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	
 	if let from = from {
-		to(from).getValue { value in
-			promise.setValue(value)
+		let p = to(from)
+		promise.previousPromise = p
+		
+		p.getValue { [weak promise] value in
+			promise?.setValue(value)
 		}
 	} else {
 		promise.setValue(nil)
@@ -360,8 +372,11 @@ public func bind<T, U>(from : Result<T>, to : T -> Promise<U>) -> Promise<Result
 	
 	switch from {
 	case .Ok(let box):
-		to(box.value).getValue { value in
-			promise.setValue(.Ok(Box(value)))
+		let p = to(box.value)
+		promise.previousPromise = p
+		
+		p.getValue { [weak promise] value in
+			promise?.setValue(.Ok(Box(value)))
 		}
 	case .Error(let error):
 		promise.setValue(.Error(error))
@@ -377,10 +392,11 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U>) -> Promise<Result<U
 
 public func bind<T, U>(from : Promise<T>, to : T -> Promise<U>) -> Promise<U> {
 	let promise = Promise<U>()
+	promise.previousPromise = from
 	
 	from.getValue { value in
-		to(value).getValue { value in
-			promise.setValue(value)
+		to(value).getValue { [weak promise] value in
+			promise?.setValue(value)
 		}
 	}
 	
@@ -394,15 +410,16 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U>) -> Promise<U> {
 
 public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Some(let v):
-			to(v).getValue { value in
-				promise.setValue(value)
+			to(v).getValue { [weak promise] value in
+				promise?.setValue(value)
 			}
 		case .None:
-			promise.setValue(nil)
+			promise?.setValue(nil)
 		}
 	}
 	
@@ -416,15 +433,16 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U>) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
-			to(box.value).getValue { value in
-				promise.setValue(.Ok(Box(value)))
+			to(box.value).getValue { [weak promise] value in
+				promise?.setValue(.Ok(Box(value)))
 			}
 		case .Error(let error):
-			promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
@@ -474,12 +492,14 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, rhs)
 }
 
+
 public func bind<T, U>(from : Promise<T>, to : T -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
 	from.getValue { value in
-		to(value).getValue { value in
-			promise.setValue(value)
+		to(value).getValue { [weak promise] value in
+			promise?.setValue(value)
 		}
 	}
 	
@@ -493,14 +513,15 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		if let v = value {
-			to(v).getValue { value in
-				promise.setValue(value)
+			to(v).getValue { [weak promise] value in
+				promise?.setValue(value)
 			}
 		} else {
-			promise.setValue(nil)
+			promise?.setValue(nil)
 		}
 	}
 	
@@ -514,19 +535,20 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U?>) -> Promise<U?> {
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U?>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
-			to(box.value).getValue { value in
+			to(box.value).getValue { [weak promise] value in
 				if let value = value {
-					promise.setValue(.Ok(Box(value)))
+					promise?.setValue(.Ok(Box(value)))
 				} else {
-					promise.setValue(.Error(resultNilError))
+					promise?.setValue(.Error(resultNilError))
 				}
 			}
 		case .Error(let error):
-			promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
@@ -579,10 +601,11 @@ public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<Result<U>>) -> Promise<
 
 public func bind<T, U>(from : Promise<T>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
 	from.getValue { value in
-		to(value).getValue { value in
-			promise.setValue(value)
+		to(value).getValue { [weak promise] value in
+			promise?.setValue(value)
 		}
 	}
 	
@@ -596,14 +619,15 @@ public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<Result<U>>) -> Promise
 
 public func bind<T, U>(from : Promise<T?>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		if let value = value {
-			to(value).getValue { value in
-				promise.setValue(value)
+			to(value).getValue { [weak promise] value in
+				promise?.setValue(value)
 			}
 		} else {
-			promise.setValue(.Error(resultNilError))
+			promise?.setValue(.Error(resultNilError))
 		}
 	}
 	
@@ -617,15 +641,16 @@ public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<Result<U>>) -> Promis
 
 public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
 	
-	from.getValue { value in
+	from.getValue { [weak promise] value in
 		switch value {
 		case .Ok(let box):
-			to(box.value).getValue { value in
-				promise.setValue(value)
+			to(box.value).getValue { [weak promise] value in
+				promise?.setValue(value)
 			}
 		case .Error(let error):
-			promise.setValue(.Error(error))
+			promise?.setValue(.Error(error))
 		}
 	}
 	
