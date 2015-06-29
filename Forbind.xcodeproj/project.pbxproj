@@ -22,13 +22,9 @@
 		FF0A42191AC82E38009B1757 /* ForbindExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */; };
 		FF0A42201AC82E38009B1757 /* ForbindExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A421F1AC82E38009B1757 /* ForbindExtensionsTests.swift */; };
 		FF0A422B1AC82E43009B1757 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
-		FF0A422C1AC82E43009B1757 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
 		FF0A422D1AC82E43009B1757 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
-		FF0A422E1AC82E43009B1757 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
 		FF0A422F1AC82E43009B1757 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42291AC82E43009B1757 /* UIViewExtensions.swift */; };
-		FF0A42301AC82E43009B1757 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42291AC82E43009B1757 /* UIViewExtensions.swift */; };
 		FF0A42311AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
-		FF0A42321AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FF14D4C81AC97CBB0077303F /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
 		FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */; };
 		FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB7F1AC847FD0033992B /* AppDelegate.swift */; };
@@ -696,10 +692,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A422E1AC82E43009B1757 /* NSURLSessionExtensions.swift in Sources */,
-				FF0A42321AC82E43009B1757 /* dispatchExtensions.swift in Sources */,
-				FF0A422C1AC82E43009B1757 /* NSURLConnectionExtensions.swift in Sources */,
-				FF0A42301AC82E43009B1757 /* UIViewExtensions.swift in Sources */,
 				FF0A42201AC82E38009B1757 /* ForbindExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1581,6 +1573,7 @@
 				FFE14B0E1B2EF82F006C5F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
