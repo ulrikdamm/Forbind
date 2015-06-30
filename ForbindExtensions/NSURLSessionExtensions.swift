@@ -62,10 +62,10 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func dataTask(request : NSURLRequest) -> Promise<Result<(NSData, NSURLResponse)>> {
-		let promise = Promise<Result<(NSData, NSURLResponse)>>()
+	public func dataTask(request : NSURLRequest) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
 		
-		let task = dataTaskWithRequest(request) { data, response, error in
+		promise.task = dataTaskWithRequest(request) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -73,6 +73,8 @@ extension NSURLSession {
 				promise.setValue(.Ok(Box(value)))
 			}
 		}
+		
+		promise.task?.resume()
 		
 		return promise
 	}
@@ -89,6 +91,8 @@ extension NSURLSession {
 			}
 		}
 		
+		promise.task?.resume()
+		
 		return promise
 	}
 	
@@ -103,6 +107,8 @@ extension NSURLSession {
 				promise.setValue(.Ok(Box(value)))
 			}
 		}
+		
+		promise.task?.resume()
 		
 		return promise
 	}
@@ -119,6 +125,8 @@ extension NSURLSession {
 			}
 		}
 		
+		promise.task?.resume()
+		
 		return promise
 	}
 	
@@ -133,6 +141,8 @@ extension NSURLSession {
 				promise.setValue(.Ok(Box(value)))
 			}
 		}
+		
+		promise.task?.resume()
 		
 		return promise
 	}
@@ -149,6 +159,8 @@ extension NSURLSession {
 			}
 		}
 		
+		promise.task?.resume()
+		
 		return promise
 	}
 	
@@ -163,6 +175,8 @@ extension NSURLSession {
 				promise.setValue(.Ok(Box(value)))
 			}
 		}
+		
+		promise.task?.resume()
 		
 		return promise
 	}
