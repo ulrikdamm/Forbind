@@ -9,20 +9,6 @@
 import Foundation
 import Forbind
 
-// NSURLSession calls are a bit tricky, since they return both a task and a completion handler
-// With Forbind, they return a task and a result promise, and you can unpack it like this:
-//
-// let request = NSURLRequest(URL: url) => NSURLSession().dataTask
-// request => { task, _ in task } => handleTask
-// request => { $1 } => handleResponse
-//
-// Alternatively, use the convenience method startTaskAndGetResult like this:
-//
-// let result = NSURLRequest(URL: url)
-//     => NSURLSession().dataTask
-//     => NSURLSession.startTaskAndGetResult
-//     => handleResponse
-
 // Some methods return a Void promise. This is the same as an async method
 // returning Void. Chain it together with something else to make it run serially,
 // but without any closures needed.
@@ -60,7 +46,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func dataTask(url : NSURL) -> (NSURLSessionDataTask, Promise<Result<(NSData, NSURLResponse)>>) {
@@ -75,7 +61,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func uploadTask(request : NSURLRequest, fromFile fileURL : NSURL) -> (NSURLSessionUploadTask, Promise<Result<(NSData, NSURLResponse)>>) {
@@ -90,7 +76,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func uploadTask(request : NSURLRequest, fromData bodyData: NSData?) -> (NSURLSessionUploadTask, Promise<Result<(NSData, NSURLResponse)>>) {
@@ -105,7 +91,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func downloadTask(request : NSURLRequest) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
@@ -120,7 +106,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func downloadTask(URL : NSURL) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
@@ -135,7 +121,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public func downloadTask(resumeData : NSData) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
@@ -150,7 +136,7 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task!, promise)
+		return (task, promise)
 	}
 	
 	public class func startTaskAndGetResult<T>(task : NSURLSessionTask, result : Promise<Result<(T, NSURLResponse)>>) -> Promise<Result<(T, NSURLResponse)>> {

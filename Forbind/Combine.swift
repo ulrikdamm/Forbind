@@ -90,7 +90,7 @@ public func combine<T, U>(t : T, u : Promise<U>) -> Promise<(T, U)> {
 	let promise = Promise<(T, U)>()
 	
 	u.getValue { value in
-		promise.setValue(t, value)
+		promise.setValue((t, value))
 	}
 	
 	return promise
