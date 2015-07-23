@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FF0A41E81AC82A2C009B1757 /* Forbind_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A41DC1AC82A2C009B1757 /* Forbind_iOS.framework */; };
+		FF0A41E81AC82A2C009B1757 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A41DC1AC82A2C009B1757 /* Forbind.framework */; };
 		FF0A41F91AC82A49009B1757 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FF0A41FA1AC82A49009B1757 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FF0A41FB1AC82A49009B1757 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
@@ -19,7 +19,7 @@
 		FF0A42061AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42011AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift */; };
 		FF0A42071AC82A55009B1757 /* ForbindCombineValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42021AC82A55009B1757 /* ForbindCombineValueTests.swift */; };
 		FF0A42081AC82A55009B1757 /* ForbindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42031AC82A55009B1757 /* ForbindTests.swift */; };
-		FF0A42191AC82E38009B1757 /* ForbindExtensions_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A420E1AC82E37009B1757 /* ForbindExtensions_iOS.framework */; };
+		FF0A42191AC82E38009B1757 /* ForbindExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */; };
 		FF0A42201AC82E38009B1757 /* ForbindExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A421F1AC82E38009B1757 /* ForbindExtensionsTests.swift */; };
 		FF0A422B1AC82E43009B1757 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
 		FF0A422D1AC82E43009B1757 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
@@ -35,21 +35,21 @@
 		FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */; };
 		FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */; };
 		FFBE767A1B2EEA0C00426D40 /* Forbind Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = FFBE76791B2EEA0C00426D40 /* Forbind Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFBE768C1B2EEA0C00426D40 /* Forbind_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */; };
-		FFBE768D1B2EEA0C00426D40 /* Forbind_Mac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFBE768C1B2EEA0C00426D40 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; };
+		FFBE768D1B2EEA0C00426D40 /* Forbind.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFBE76951B2EEA5000426D40 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FFBE76961B2EEA5200426D40 /* ListBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF96A1B23A8D700C56952 /* ListBind.swift */; };
 		FFBE76971B2EEA5400426D40 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
 		FFBE76981B2EEA5700426D40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* Result.swift */; };
 		FFBE76991B2EEA5900426D40 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFE14AF91B2EF82F006C5F70 /* ForbindExtensions Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions_Mac.framework */; };
-		FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions_Mac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions_Mac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; };
+		FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFE14B131B2EF84D006C5F70 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
 		FFE14B141B2EF84F006C5F70 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
 		FFE14B151B2EF851006C5F70 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FFE14B161B2EF853006C5F70 /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
-		FFE14B171B2EF85C006C5F70 /* Forbind_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */; };
+		FFE14B171B2EF85C006C5F70 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; };
 		FFEBF9681B23837500C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFEBF9691B23842B00C56952 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFEBF96B1B23A8D700C56952 /* ListBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF96A1B23A8D700C56952 /* ListBind.swift */; };
@@ -94,8 +94,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions_Mac.framework in Embed Frameworks */,
-				FFBE768D1B2EEA0C00426D40 /* Forbind_Mac.framework in Embed Frameworks */,
+				FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */,
+				FFBE768D1B2EEA0C00426D40 /* Forbind.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,7 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FF0A41DC1AC82A2C009B1757 /* Forbind_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0A41DC1AC82A2C009B1757 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A41E01AC82A2C009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0A41E71AC82A2C009B1757 /* ForbindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForbindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A41ED1AC82A2C009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		FF0A42011AC82A55009B1757 /* ForbindCombineFunctionCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindCombineFunctionCallTests.swift; sourceTree = "<group>"; };
 		FF0A42021AC82A55009B1757 /* ForbindCombineValueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindCombineValueTests.swift; sourceTree = "<group>"; };
 		FF0A42031AC82A55009B1757 /* ForbindTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindTests.swift; sourceTree = "<group>"; };
-		FF0A420E1AC82E37009B1757 /* ForbindExtensions_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A42111AC82E37009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForbindExtensionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A421E1AC82E38009B1757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,10 +136,10 @@
 		FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainedAnimationsDemoViewController.swift; sourceTree = "<group>"; };
 		FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindPromiseTests.swift; sourceTree = "<group>"; };
 		FFBC22A11B223D3800EF900B /* PlayAround.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PlayAround.playground; sourceTree = "<group>"; };
-		FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFBE76751B2EEA0C00426D40 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFBE76781B2EEA0C00426D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFBE76791B2EEA0C00426D40 /* Forbind Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Forbind Mac.h"; sourceTree = "<group>"; };
-		FFE14AF41B2EF82F006C5F70 /* ForbindExtensions_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForbindExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE14AF71B2EF82F006C5F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ForbindExtensions Mac.h"; sourceTree = "<group>"; };
 		FFEBF9671B23837500C56952 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A41E81AC82A2C009B1757 /* Forbind_iOS.framework in Frameworks */,
+				FF0A41E81AC82A2C009B1757 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0A42191AC82E38009B1757 /* ForbindExtensions_iOS.framework in Frameworks */,
+				FF0A42191AC82E38009B1757 /* ForbindExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +181,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions_Mac.framework in Frameworks */,
-				FFBE768C1B2EEA0C00426D40 /* Forbind_Mac.framework in Frameworks */,
+				FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */,
+				FFBE768C1B2EEA0C00426D40 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE14B171B2EF85C006C5F70 /* Forbind_Mac.framework in Frameworks */,
+				FFE14B171B2EF85C006C5F70 /* Forbind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,13 +222,13 @@
 		FF0A41DD1AC82A2C009B1757 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF0A41DC1AC82A2C009B1757 /* Forbind_iOS.framework */,
+				FF0A41DC1AC82A2C009B1757 /* Forbind.framework */,
 				FF0A41E71AC82A2C009B1757 /* ForbindTests.xctest */,
-				FF0A420E1AC82E37009B1757 /* ForbindExtensions_iOS.framework */,
+				FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */,
 				FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */,
 				FF19EB7B1AC847FD0033992B /* ForbindDemo.app */,
-				FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */,
-				FFE14AF41B2EF82F006C5F70 /* ForbindExtensions_Mac.framework */,
+				FFBE76751B2EEA0C00426D40 /* Forbind.framework */,
+				FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -423,7 +423,7 @@
 			);
 			name = "Forbind iOS";
 			productName = Forbind;
-			productReference = FF0A41DC1AC82A2C009B1757 /* Forbind_iOS.framework */;
+			productReference = FF0A41DC1AC82A2C009B1757 /* Forbind.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FF0A41E61AC82A2C009B1757 /* ForbindTests */ = {
@@ -458,7 +458,7 @@
 			);
 			name = ForbindExtensions;
 			productName = ForbindExtensions;
-			productReference = FF0A420E1AC82E37009B1757 /* ForbindExtensions_iOS.framework */;
+			productReference = FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FF0A42171AC82E38009B1757 /* ForbindExtensionsTests */ = {
@@ -514,7 +514,7 @@
 			);
 			name = "Forbind Mac";
 			productName = "Forbind Mac";
-			productReference = FFBE76751B2EEA0C00426D40 /* Forbind_Mac.framework */;
+			productReference = FFBE76751B2EEA0C00426D40 /* Forbind.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */ = {
@@ -532,7 +532,7 @@
 			);
 			name = "ForbindExtensions Mac";
 			productName = "ForbindExtensions Mac";
-			productReference = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions_Mac.framework */;
+			productReference = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -840,7 +840,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Forbind_iOS;
+				PRODUCT_NAME = Forbind;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -893,7 +893,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Forbind_iOS;
+				PRODUCT_NAME = Forbind;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1051,7 +1051,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = ForbindExtensions_iOS;
+				PRODUCT_NAME = ForbindExtensions;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1104,7 +1104,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = ForbindExtensions_iOS;
+				PRODUCT_NAME = ForbindExtensions;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1354,7 +1354,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = Forbind_Mac;
+				PRODUCT_NAME = Forbind;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1405,7 +1405,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Forbind_Mac;
+				PRODUCT_NAME = Forbind;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1462,7 +1462,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = ForbindExtensions_Mac;
+				PRODUCT_NAME = ForbindExtensions;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1513,7 +1513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ForbindExtensions_Mac;
+				PRODUCT_NAME = ForbindExtensions;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
