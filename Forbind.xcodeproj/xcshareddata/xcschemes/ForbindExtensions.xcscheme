@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF0A420D1AC82E37009B1757"
-               BuildableName = "ForbindExtensions_iOS.framework"
+               BuildableName = "ForbindExtensions.framework"
                BlueprintName = "ForbindExtensions"
                ReferencedContainer = "container:Forbind.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF0A420D1AC82E37009B1757"
-            BuildableName = "ForbindExtensions_iOS.framework"
+            BuildableName = "ForbindExtensions.framework"
             BlueprintName = "ForbindExtensions"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF0A420D1AC82E37009B1757"
-            BuildableName = "ForbindExtensions_iOS.framework"
+            BuildableName = "ForbindExtensions.framework"
             BlueprintName = "ForbindExtensions"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FF0A420D1AC82E37009B1757"
-            BuildableName = "ForbindExtensions_iOS.framework"
+            BuildableName = "ForbindExtensions.framework"
             BlueprintName = "ForbindExtensions"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>

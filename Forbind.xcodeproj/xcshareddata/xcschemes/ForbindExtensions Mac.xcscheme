@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FFE14AF31B2EF82F006C5F70"
-               BuildableName = "ForbindExtensions_Mac.framework"
+               BuildableName = "ForbindExtensions.framework"
                BlueprintName = "ForbindExtensions Mac"
                ReferencedContainer = "container:Forbind.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FFE14AF31B2EF82F006C5F70"
-            BuildableName = "ForbindExtensions_Mac.framework"
+            BuildableName = "ForbindExtensions.framework"
             BlueprintName = "ForbindExtensions Mac"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FFE14AF31B2EF82F006C5F70"
-            BuildableName = "ForbindExtensions_Mac.framework"
+            BuildableName = "ForbindExtensions.framework"
             BlueprintName = "ForbindExtensions Mac"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
