@@ -371,8 +371,8 @@ public func bind<T, U>(from : Result<T>, to : T -> Promise<U>) -> Promise<Result
 	let promise = Promise<Result<U>>()
 	
 	switch from {
-	case .Ok(let box):
-		let p = to(box.value)
+	case .Ok(let value):
+		let p = to(value)
 		promise.previousPromise = p
 		
 		p.getValueWeak { [weak promise] value in
