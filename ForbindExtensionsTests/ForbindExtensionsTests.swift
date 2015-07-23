@@ -8,29 +8,20 @@
 
 import UIKit
 import XCTest
+import Forbind
+import ForbindExtensions
 
-class ForbindExtensionsTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+class ForbindNSURLSessionExtensionsTests : XCTestCase {
+	func testCancellation() {
+		let session = NSURLSession(configuration: .defaultSessionConfiguration())
+		
+		var result : TaskPromise? = NSURL(string: "http://ufd.dk") => session.dataTask
+		let task = result?.task
+		
+		XCTAssert(task?.state != NSURLSessionTaskState.Canceling)
+		
+		result = nil
+		
+		XCTAssert(task?.state == NSURLSessionTaskState.Canceling)
+	}
 }

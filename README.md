@@ -6,130 +6,52 @@ Note: still in an experimental state. Everything could change. I would love some
 
 # What is it
 
-Forbind is a library to introduce functional chaining of expressions into your Swift code. It contains a lot of powerful components for writing code that is stateless and expressive. It’s key features are:
-
-• A bind operator (=>) to bind expressions together, that can handle errors.
-
-• A combine operator (++) to combine two potentially optional values together.
-
-• A Result type for better error handling.
-
-• A Promise type for better handling of async values.
-
-• Some extensions for Foundation and UIKit which introduces Forbind concepts in common classes.
-
-When you put these features together, you can begin to write your code in a whole new way. No if-lets, no code littered with error handling, no many-times indented code.
-
-The idea is that you can write your code as a series of expressions, which produce a final result. All error handling is left until the end, when you unpack the result. And it works even for async operations. No more if-lets, no more NSErrorPointer checking, no more completion blocks. Your code changes from something like this:
+Bind local or async expressions together functionally, all error handling taken care of for you:
 
 ```swift
-if let data = readFile("file") {
-	if let result = parseJson(data, error: nil) as? NSDictionary {
-		if let thingy = parseData(result) {
-			handleResult(thingy)
-		}
-	}
-}
-```
-
-To something like this:
-
-```swift
-readFile("file") => parseJson => parseData => handleResult
-```
-
-# Show me an example of it
-
-Let’s try to do a simple network request with NSURLConnection. Here’s how it probably will look today:
-
-```swift
-class NetworkRequestExampleOldWay {
-	func handleResponse(response : NSURLResponse?, data : NSData?) -> String? {
-		if let data = data {
-			return NSString(data: data, encoding: NSUTF8StringEncoding) as? String
-		} else {
-			return nil
-		}
-	}
+func getUser(id : String) -> Promise<Result<User>> {
+	let data = NSURL(string: id)
+		=> { NSURLRequest(URL: $0) }
+		=> NSURLConnection.sendRequest(.mainQueue())
+		=> { response, data in data }
 	
-	func performRequest(completion : (String?, NSError?) -> Void) {
-		if let url = NSURL(string: "http://ufd.dk") {
-			let request = NSURLRequest(URL: url)
-			NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { response, data, error in
-				if let error = error {
-					completion(nil, error)
-				} else {
-					if let result = self.handleResponse(response, data: data) {
-						completion(result, nil)
-					} else {
-						completion(nil, nil)
-					}
-				}
-			}
-		}
-	}
+	return data
+		=> NSJSONSerialization.toJSON(options: nil)
+		=> { $0.dictionaryValue }
+		=> User.fromJSON
 }
 ```
 
-There’s some problems with this:
+• Bind operations together with =>
 
-• Need to have all your code nested in an if-let.
+• No error handling inside your logic
 
-• Error and data can have a value at the same time.
+• Transparent async calls
 
-• You might forget handling the error.
+• No if-lets
 
-• Error handling and logic in between each other.
+• Combine inputs with ++
 
-• Error handling at multiple different places.
+For more details, read my [Blog post](http://ufd.dk/blog/Binds-and-promises-with-Forbind).
 
-• Multiple levels of indention.
+## New in 1.1
 
-• Completion call with two nils? Let’s hope that doesn’t cause problems.
+• ResultPromise and OptionalPromise has been replaced with Promise<Result<T>> and Promise<T?>. Still works the same.
 
-• 25 lines.
-
-Here’s how you would do the exact same with Forbind:
+• You can use the bind operator to map over lists of promises!
 
 ```swift
-class NetworkRequestExampleWithForbind {
-	func handleResponse(response : NSURLResponse?, data : NSData?) -> String? {
-		return data => { NSString(data: $0, encoding: NSUTF8StringEncoding) as? String }
-	}
-	
-	func performRequest() -> ResultPromise<String> {
-		let request = NSURL(string: "http://ufd.dk") => { NSURLRequest(URL: $0) }
-		let response = request ++ NSOperationQueue.mainQueue() => NSURLConnection.sendAsynchronousRequest
-		return response => handleResponse
-	}
-}
+let user = User(name: "Ulrik")
+let names = user.loadFriends() => { $0.name } // [Promise<String>]
 ```
 
-Problems solved with this:
+• And you can also filter and reduce with filterp and reducep:
 
-• You define all your logic before you do any error handling.
+```swift
+let someNames = filterp(names) { $0 != "Peter" } // Promise<[String]>
+```
 
-• You are forced to handle all errors.
-
-• Only indentation is when receiving the final result.
-
-• 9 lines!!
-
-There are some conventions that are changed from the usual way of writing code:
-
-• Nested calls becomes chained calls (```func1 => func2``` instead ```func2(func1())```)
-
-• Chain calls with multiple arguments are ```++```’ed together (```arg1 ++ arg2 => func``` instead of ```func(arg1, arg2)```)
-
-• You do error handling in the end. If anything fails, it skips the rest.
-
-# I’m intrigued. How do I learn more?
-
-For more examples, open the Xcode project and run the ForbindDemo iOS app. It has a few practical examples. Or you can just see the sources files for the [animation demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/ChainedAnimationsDemoViewController.swift), the [network request demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/NetworkRequestDemoViewController.swift) and the [print IP demo](https://github.com/ulrikdamm/Forbind/blob/master/ForbindDemo/PrintIPDemoViewController.swift)
-
-The whole library is in the files [bind.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Bind.swift), [combine.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/Combine.swift) and [dataStructures.swift](https://github.com/ulrikdamm/Forbind/blob/master/Forbind/DataStructures.swift). Each file has comments explaining how it works in more detail.
-
-If you want to learn more about the concept behind the bind operator, you can read my [blog post](http://ulrikdamm.logdown.com/posts/247219) about it.
+• The NSJSONSerialization extension now returns a JSONResult, which is either a Dictionary or Array.
 
 # Get started
 
@@ -138,7 +60,7 @@ You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Ju
 ```ruby
 use_frameworks!
 
-pod 'Forbind', '~> 1.0'
+pod 'Forbind', '~> 1.1'
 pod 'ForbindExtensions', :git => 'https://github.com/ulrikdamm/Forbind'
 ```
 

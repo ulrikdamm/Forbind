@@ -19,6 +19,7 @@ public class Promise<T> {
 	}
 	
 	private var _value : PromiseState<T> = .NoValue
+	var previousPromise : AnyObject?
 	
 	public func setValue(value : T) {
 		_value = PromiseState.Value(value)
@@ -37,6 +38,13 @@ public class Promise<T> {
 	private var listeners : [T -> Void] = []
 	
 	public func getValue(callback : T -> Void) {
+		getValueWeak { value in
+			self
+			callback(value)
+		}
+	}
+	
+	public func getValueWeak(callback : T -> Void) {
 		if let value = value {
 			callback(value)
 		} else {

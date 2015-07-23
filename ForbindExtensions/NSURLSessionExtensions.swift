@@ -13,6 +13,20 @@ import Forbind
 // returning Void. Chain it together with something else to make it run serially,
 // but without any closures needed.
 
+public class TaskPromise<T> : Promise<T> {
+	public var task : NSURLSessionTask?
+	
+	public override init(value : T? = nil) {
+		super.init(value: value)
+	}
+	
+	deinit {
+		if value == nil {
+			task?.cancel()
+		}
+	}
+}
+
 extension NSURLSession {
 	public func reset() -> Promise<Void> {
 		let promise = Promise<Void>()
@@ -34,10 +48,10 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func dataTask(request : NSURLRequest) -> (NSURLSessionTask, Promise<Result<(NSData, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSData, NSURLResponse)>>()
+	public func dataTask(request : NSURLRequest) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
 		
-		let task = dataTaskWithRequest(request) { data, response, error in
+		promise.task = dataTaskWithRequest(request) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -46,13 +60,32 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
+		promise.task?.resume()
+		
+		return promise
 	}
 	
-	public func dataTask(url : NSURL) -> (NSURLSessionDataTask, Promise<Result<(NSData, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSData, NSURLResponse)>>()
+	public func dataTask(url : NSURL) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
 		
-		let task = dataTaskWithURL(url) { data, response, error in
+		promise.task = dataTaskWithURL(url) { [weak promise] data, response, error in
+			if let error = error {
+				promise?.setValue(.Error(error))
+			} else {
+				let value = (data!, response!)
+				promise?.setValue(.Ok(value))
+			}
+		}
+		
+		promise.task?.resume()
+		
+		return promise
+	}
+	
+	public func uploadTask(request : NSURLRequest, fromFile fileURL : NSURL) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
+		
+		promise.task = uploadTaskWithRequest(request, fromFile: fileURL) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -61,13 +94,15 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
+		promise.task?.resume()
+		
+		return promise
 	}
 	
-	public func uploadTask(request : NSURLRequest, fromFile fileURL : NSURL) -> (NSURLSessionUploadTask, Promise<Result<(NSData, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSData, NSURLResponse)>>()
+	public func uploadTask(request : NSURLRequest, fromData bodyData: NSData?) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
 		
-		let task = uploadTaskWithRequest(request, fromFile: fileURL) { data, response, error in
+		promise.task = uploadTaskWithRequest(request, fromData: bodyData) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -76,13 +111,15 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
+		promise.task?.resume()
+		
+		return promise
 	}
 	
-	public func uploadTask(request : NSURLRequest, fromData bodyData: NSData?) -> (NSURLSessionUploadTask, Promise<Result<(NSData, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSData, NSURLResponse)>>()
+	public func downloadTask(request : NSURLRequest) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
 		
-		let task = uploadTaskWithRequest(request, fromData: bodyData) { data, response, error in
+		promise.task = downloadTaskWithRequest(request) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -91,13 +128,15 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
+		promise.task?.resume()
+		
+		return promise
 	}
 	
-	public func downloadTask(request : NSURLRequest) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSURL, NSURLResponse)>>()
+	public func downloadTask(URL : NSURL) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
 		
-		let task = downloadTaskWithRequest(request) { data, response, error in
+		promise.task = downloadTaskWithURL(URL) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -106,13 +145,15 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
+		promise.task?.resume()
+		
+		return promise
 	}
 	
-	public func downloadTask(URL : NSURL) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSURL, NSURLResponse)>>()
+	public func downloadTask(resumeData : NSData) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
+		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
 		
-		let task = downloadTaskWithURL(URL) { data, response, error in
+		promise.task = downloadTaskWithResumeData(resumeData) { data, response, error in
 			if let error = error {
 				promise.setValue(.Error(error))
 			} else {
@@ -121,26 +162,8 @@ extension NSURLSession {
 			}
 		}
 		
-		return (task, promise)
-	}
-	
-	public func downloadTask(resumeData : NSData) -> (NSURLSessionDownloadTask, Promise<Result<(NSURL, NSURLResponse)>>) {
-		let promise = Promise<Result<(NSURL, NSURLResponse)>>()
+		promise.task?.resume()
 		
-		let task = downloadTaskWithResumeData(resumeData) { data, response, error in
-			if let error = error {
-				promise.setValue(.Error(error))
-			} else {
-				let value = (data!, response!)
-				promise.setValue(.Ok(value))
-			}
-		}
-		
-		return (task, promise)
-	}
-	
-	public class func startTaskAndGetResult<T>(task : NSURLSessionTask, result : Promise<Result<(T, NSURLResponse)>>) -> Promise<Result<(T, NSURLResponse)>> {
-		task.resume()
-		return result
+		return promise
 	}
 }
