@@ -8,14 +8,14 @@
 
 import Foundation
 
-let bindErrorDomain = "dk.ufd.Forbind"
+public let bindErrorDomain = "dk.ufd.Forbind"
 
-enum bindErrors : Int {
+public enum bindErrors : Int {
 	case CombinedError = 1
 	case NilError = 2
 }
 
-let resultNilError = NSError(domain: bindErrorDomain, code: bindErrors.NilError.rawValue, userInfo: [NSLocalizedDescriptionKey: "Nil result"])
+public let resultNilError = NSError(domain: bindErrorDomain, code: bindErrors.NilError.rawValue, userInfo: [NSLocalizedDescriptionKey: "Nil result"])
 
 public enum Result<T> {
 	case Ok(T)
