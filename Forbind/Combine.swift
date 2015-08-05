@@ -48,6 +48,9 @@ extension NSError {
 		
 		return NSError(domain: bindErrorDomain, code: bindErrors.CombinedError.rawValue, userInfo: userInfo)
 	}
+	
+	public var combineErrorLeft : NSError? { return userInfo[combinedError1Key] as? NSError }
+	public var combineErrorRight : NSError? { return userInfo[combinedError2Key] as? NSError }
 }
 
 private func inverse<T, U>(v : (T, U)) -> (U, T) {
