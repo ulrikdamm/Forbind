@@ -40,6 +40,10 @@ private let combinedError2Key = "dk.ufd.Bind.combineError2"
 
 extension NSError {
 	class func combinedError(error1 : NSError, error2 : NSError) -> NSError {
+		if error1 == error2 {
+			return error1
+		}
+		
 		let userInfo = [
 			NSLocalizedDescriptionKey: "\(error1.localizedDescription), \(error2.localizedDescription)",
 			combinedError1Key: error1,
