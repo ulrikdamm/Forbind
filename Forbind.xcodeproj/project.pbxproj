@@ -85,6 +85,20 @@
 			remoteGlobalIDString = FFE14AF31B2EF82F006C5F70;
 			remoteInfo = "ForbindExtensions Mac";
 		};
+		FFF7279E1B789E410045999F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF0A41DB1AC82A2C009B1757;
+			remoteInfo = "Forbind iOS";
+		};
+		FFF727A01B789E440045999F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFBE76741B2EEA0C00426D40;
+			remoteInfo = "Forbind Mac";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -455,6 +469,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FFF7279F1B789E410045999F /* PBXTargetDependency */,
 			);
 			name = ForbindExtensions;
 			productName = ForbindExtensions;
@@ -529,6 +544,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FFF727A11B789E440045999F /* PBXTargetDependency */,
 			);
 			name = "ForbindExtensions Mac";
 			productName = "ForbindExtensions Mac";
@@ -753,6 +769,16 @@
 			isa = PBXTargetDependency;
 			target = FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */;
 			targetProxy = FFE14B091B2EF82F006C5F70 /* PBXContainerItemProxy */;
+		};
+		FFF7279F1B789E410045999F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF0A41DB1AC82A2C009B1757 /* Forbind iOS */;
+			targetProxy = FFF7279E1B789E410045999F /* PBXContainerItemProxy */;
+		};
+		FFF727A11B789E440045999F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFBE76741B2EEA0C00426D40 /* Forbind Mac */;
+			targetProxy = FFF727A01B789E440045999F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
