@@ -12,22 +12,28 @@ import Forbind
 // Dispatches to promises
 // The idea behind these is that you can insert a dispatchAfter or dispatchAsync
 // into your expression chain, like
-// func1 => dispatchAsync(dispatch_get_main_queue()) => func2
-// Unfortunately, Swift will only compile that for Optionals, doesn't work
-// for Result or Promise. If you find what's wrong, please submit a pull request
+// dispatchAsync(promise, queue: dispatch_get_main_queue()) => func1
 
-public func dispatchAfter<T>(when : dispatch_time_t, queue : dispatch_queue_t)(value : T) -> Promise<T> {
-	let promise = Promise<T>()
-	dispatch_after(when, queue) {
-		promise.setValue(value)
+public func dispatchAfter<T>(promise : Promise<T>, when : dispatch_time_t, queue : dispatch_queue_t) -> Promise<T> {
+	let newpromise = Promise<T>(previousPromise: promise)
+	
+	promise.getValue { value in
+		dispatch_after(when, queue) {
+			newpromise.setValue(value)
+		}
 	}
-	return promise
+	
+	return newpromise
 }
 
-public func dispatchAsync<T>(queue : dispatch_queue_t)(value : T) -> Promise<T> {
-	let promise = Promise<T>()
-	dispatch_async(queue) {
-		promise.setValue(value)
+public func dispatchAsync<T>(promise : Promise<T>, queue : dispatch_queue_t) -> Promise<T> {
+	let newpromise = Promise<T>(previousPromise: promise)
+	
+	promise.getValue { value in
+		dispatch_async(queue) {
+			newpromise.setValue(value)
+		}
 	}
-	return promise
+	
+	return newpromise
 }
