@@ -18,6 +18,10 @@ public class Promise<T> {
 		value => setValue
 	}
 	
+	public init(previousPromise : AnyObject) {
+		self.previousPromise = previousPromise
+	}
+	
 	private var _value : PromiseState<T> = .NoValue
 	var previousPromise : AnyObject?
 	
