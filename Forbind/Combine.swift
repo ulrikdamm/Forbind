@@ -39,7 +39,7 @@ public struct CombinedError : ErrorType {
 	let error1 : ErrorType
 	let error2 : ErrorType
 	
-	init(_ error1 : ErrorType, _ error2 : ErrorType) {
+	public init(_ error1 : ErrorType, _ error2 : ErrorType) {
 		self.error1 = error1
 		self.error2 = error2
 	}

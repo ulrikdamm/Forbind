@@ -8,7 +8,9 @@
 
 import Foundation
 
-public struct NilError : ErrorType {}
+public struct NilError : ErrorType {
+	public init() {}
+}
 
 public enum Result<T> {
 	case Ok(T)
