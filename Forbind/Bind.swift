@@ -164,7 +164,7 @@ public func bind<T, U>(from : Result<T>, to : T -> U?) -> Result<U> {
 		if let v = to(value) {
 			return .Ok(v)
 		} else {
-			return .Error(resultNilError)
+			return .Error(NilError())
 		}
 	case .Error(let error):
 		return .Error(error)
@@ -222,7 +222,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> U?) -> Promise<Resul
 			if let v = to(value) {
 				promise?.setValue(.Ok(v))
 			} else {
-				promise?.setValue(.Error(resultNilError))
+				promise?.setValue(.Error(NilError()))
 			}
 		case .Error(let error):
 			promise?.setValue(.Error(error))
@@ -253,7 +253,7 @@ public func bind<T, U>(from : T?, to : T -> Result<U>) -> Result<U> {
 	if let from = from {
 		return to(from)
 	} else {
-		return .Error(resultNilError)
+		return .Error(NilError())
 	}
 }
 
@@ -300,7 +300,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Result<U>) -> Promise<Resul
 		if let value = value {
 			promise?.setValue(to(value))
 		} else {
-			promise?.setValue(.Error(resultNilError))
+			promise?.setValue(.Error(NilError()))
 		}
 	}
 	
@@ -329,6 +329,102 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Result<U>) -> Promis
 }
 
 public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Result<U>) -> Promise<Result<U>> {
+	return bind(lhs, to: rhs)
+}
+
+
+// Bind to throwing
+
+
+public func bind<T, U>(from : T, to : T throws -> U) -> Result<U> {
+	return Result(from: from, to)
+}
+
+public func =><T, U>(lhs : T, rhs : T throws -> U) -> Result<U> {
+	return bind(lhs, to: rhs)
+}
+
+
+public func bind<T, U>(from : T?, to : T throws -> U) -> Result<U> {
+	if let from = from {
+		return Result(from: from, to)
+	} else {
+		return .Error(NilError())
+	}
+}
+
+public func =><T, U>(lhs : T?, rhs : T throws -> U) -> Result<U> {
+	return bind(lhs, to: rhs)
+}
+
+
+public func bind<T, U>(from : Result<T>, to : T throws -> U) -> Result<U> {
+	switch from {
+	case .Ok(let value):
+		return Result(from: value, to)
+	case .Error(let error):
+		return .Error(error)
+	}
+}
+
+public func =><T, U>(lhs : Result<T>, rhs : T throws -> U) -> Result<U> {
+	return bind(lhs, to: rhs)
+}
+
+
+public func bind<T, U>(from : Promise<T>, to : T throws -> U) -> Promise<Result<U>> {
+	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
+	
+	from.getValueWeak { [weak promise] value in
+		promise?.setValue(Result(from: value, to))
+	}
+	
+	return promise
+}
+
+public func =><T, U>(lhs : Promise<T>, rhs : T throws -> U) -> Promise<Result<U>> {
+	return bind(lhs, to: rhs)
+}
+
+
+public func bind<T, U>(from : Promise<T?>, to : T throws -> U) -> Promise<Result<U>> {
+	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
+	
+	from.getValueWeak { [weak promise] value in
+		if let value = value {
+			promise?.setValue(Result(from: value, to))
+		} else {
+			promise?.setValue(.Error(NilError()))
+		}
+	}
+	
+	return promise
+}
+
+public func =><T, U>(lhs : Promise<T?>, rhs : T throws -> U) -> Promise<Result<U>> {
+	return bind(lhs, to: rhs)
+}
+
+
+public func bind<T, U>(from : Promise<Result<T>>, to : T throws -> U) -> Promise<Result<U>> {
+	let promise = Promise<Result<U>>()
+	promise.previousPromise = from
+	
+	from.getValueWeak { [weak promise] value in
+		switch value {
+		case .Ok(let value):
+			promise?.setValue(Result(from: value, to))
+		case .Error(let error):
+			promise?.setValue(.Error(error))
+		}
+	}
+	
+	return promise
+}
+
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : T throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -544,7 +640,7 @@ public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U?>) -> Prom
 				if let value = value {
 					promise?.setValue(.Ok(value))
 				} else {
-					promise?.setValue(.Error(resultNilError))
+					promise?.setValue(.Error(NilError()))
 				}
 			}
 		case .Error(let error):
@@ -576,7 +672,7 @@ public func bind<T, U>(from : T?, to : T -> Promise<Result<U>>) -> Promise<Resul
 	if let from = from {
 		return to(from)
 	} else {
-		return Promise(value: .Error(resultNilError))
+		return Promise(value: .Error(NilError()))
 	}
 }
 
@@ -627,7 +723,7 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<Result<U>>) -> Prom
 				promise?.setValue(value)
 			}
 		} else {
-			promise?.setValue(.Error(resultNilError))
+			promise?.setValue(.Error(NilError()))
 		}
 	}
 	

@@ -50,13 +50,13 @@ class ForbindBindTests : XCTestCase {
 	}
 	
 	func testBindResultError() {
-		let a = Result<Int>(genericError)
+		let a = Result<Int>(GenericError())
 		
 		let b = (a => increment)
 		
 		switch b {
 		case .Ok(_): XCTAssert(false)
-		case .Error(let error): XCTAssert(error == genericError)
+		case .Error(let error): XCTAssert(error is GenericError)
 		}
 	}
 	
@@ -139,13 +139,13 @@ class ForbindBindTests : XCTestCase {
 		b.getValue { value in
 			switch value {
 			case .Ok(_): XCTAssert(false)
-			case .Error(let error): XCTAssert(error == genericError)
+			case .Error(let error): XCTAssert(error is GenericError)
 			}
 			
 			callbackCalled = true
 		}
 		
-		a.setValue(.Error(genericError))
+		a.setValue(.Error(GenericError()))
 		XCTAssert(callbackCalled)
 	}
 	

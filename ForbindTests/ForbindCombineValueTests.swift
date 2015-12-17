@@ -52,10 +52,10 @@ class ForbindCombineValueTests : XCTestCase {
 	}
 	
 	func testCombineValueResultError() {
-		let a = 1 ++ Result<Int>(genericError)
+		let a = 1 ++ Result<Int>(GenericError())
 		
 		switch a {
-		case .Error(let error): XCTAssert(error == genericError)
+		case .Error(let error): XCTAssert(error is GenericError)
 		case _: XCTAssert(false)
 		}
 	}
@@ -148,14 +148,14 @@ class ForbindCombineValueTests : XCTestCase {
 		
 		a.getValue { value in
 			switch value {
-			case .Error(let error): XCTAssert(error == genericError)
+			case .Error(let error): XCTAssert(error is GenericError)
 			case _: XCTAssert(false)
 			}
 			
 			callbackCalled = true
 		}
 		
-		p.setValue(.Error(genericError))
+		p.setValue(.Error(GenericError()))
 		
 		XCTAssert(callbackCalled)
 	}

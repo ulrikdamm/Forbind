@@ -13,7 +13,7 @@ func increment(value : Int) -> Int {
 	return value + 1
 }
 
-let genericError = NSError(domain: "dk.ufd.ForbindTests", code: 0, userInfo: nil)
+struct GenericError : ErrorType {}
 
 class ForbindTests : XCTestCase {
 	func testCancelOnDeinit() {

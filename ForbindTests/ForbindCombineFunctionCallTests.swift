@@ -40,12 +40,12 @@ class ForbindCombineFunctionCallTests : XCTestCase {
 	}
 	
 	func testCombineFunctionCallResultError() {
-		let r = Result<Int>.Error(genericError)
+		let r = Result<Int>.Error(GenericError())
 		let a = (1 ++ r) => (+)
 		
 		switch a {
 		case .Ok(_): XCTAssert(false)
-		case .Error(let error): XCTAssert(error == genericError)
+		case .Error(let error): XCTAssert(error is GenericError)
 		}
 	}
 	

@@ -69,17 +69,17 @@ public class Promise<T> {
 	}
 }
 
-public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Bool> {
-	return (lhs ++ rhs) => { $0 == $1 }
-}
-
-public func ==<T : Equatable>(lhs : Promise<T?>, rhs : Promise<T?>) -> Promise<Bool?> {
-	return (lhs ++ rhs) => { $0 == $1 }
-}
-
-public func ==<T : Equatable>(lhs : Promise<Result<T>>, rhs : Promise<Result<T>>) -> Promise<Result<Bool>> {
-	return (lhs ++ rhs) => { $0 == $1 }
-}
+//public func ==<T : Equatable>(lhs : Promise<T>, rhs : Promise<T>) -> Promise<Bool> {
+//	return (lhs ++ rhs) => { $0 == $1 }
+//}
+//
+//public func ==<T : Equatable>(lhs : Promise<T?>, rhs : Promise<T?>) -> Promise<Bool?> {
+//	return (lhs ++ rhs) => { $0 == $1 }
+//}
+//
+//public func ==<T : Equatable>(lhs : Promise<Result<T>>, rhs : Promise<Result<T>>) -> Promise<Result<Bool>> {
+//	return (lhs ++ rhs) => { $0 == $1 }
+//}
 
 extension Promise : CustomStringConvertible {
 	public var description : String {

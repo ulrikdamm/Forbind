@@ -35,27 +35,37 @@ import Foundation
 // If you try to bind two Results, and both are in an error state, the result
 // will be an NSError in the dk.ufd.Forbind domain, which contains each error.
 
-private let combinedError1Key = "dk.ufd.Bind.combineError1"
-private let combinedError2Key = "dk.ufd.Bind.combineError2"
-
-extension NSError {
-	class func combinedError(error1 : NSError, error2 : NSError) -> NSError {
-		if error1 == error2 {
-			return error1
-		}
-		
-		let userInfo = [
-			NSLocalizedDescriptionKey: "\(error1.localizedDescription), \(error2.localizedDescription)",
-			combinedError1Key: error1,
-			combinedError2Key: error2
-		]
-		
-		return NSError(domain: bindErrorDomain, code: bindErrors.CombinedError.rawValue, userInfo: userInfo)
-	}
+public struct CombinedError : ErrorType {
+	let error1 : ErrorType
+	let error2 : ErrorType
 	
-	public var combineErrorLeft : NSError? { return userInfo[combinedError1Key] as? NSError }
-	public var combineErrorRight : NSError? { return userInfo[combinedError2Key] as? NSError }
+	init(_ error1 : ErrorType, _ error2 : ErrorType) {
+		self.error1 = error1
+		self.error2 = error2
+	}
 }
+
+//private let combinedError1Key = "dk.ufd.Bind.combineError1"
+//private let combinedError2Key = "dk.ufd.Bind.combineError2"
+//
+//extension NSError {
+//	class func combinedError(error1 : NSError, error2 : NSError) -> NSError {
+//		if error1 == error2 {
+//			return error1
+//		}
+//		
+//		let userInfo = [
+//			NSLocalizedDescriptionKey: "\(error1.localizedDescription), \(error2.localizedDescription)",
+//			combinedError1Key: error1,
+//			combinedError2Key: error2
+//		]
+//		
+//		return NSError(domain: bindErrorDomain, code: bindErrors.CombinedError.rawValue, userInfo: userInfo)
+//	}
+//	
+//	public var combineErrorLeft : NSError? { return userInfo[combinedError1Key] as? NSError }
+//	public var combineErrorRight : NSError? { return userInfo[combinedError2Key] as? NSError }
+//}
 
 private func inverse<T, U>(v : (T, U)) -> (U, T) {
 	return (v.1, v.0)
@@ -143,9 +153,9 @@ public func ++<T, U>(t : T?, u : U?) -> (T, U)? { return combine(t, u: u) }
 
 public func combine<T, U>(t : T?, u : Result<U>) -> Result<(T, U)> {
 	switch (u, t) {
-	case (.Error(let e1), nil): return .Error(.combinedError(e1, error2: resultNilError))
+	case (.Error(let e1), nil): return .Error(CombinedError(e1, NilError()))
 	case (.Error(let e1), _): return .Error(e1)
-	case (_, nil): return .Error(resultNilError)
+	case (_, nil): return .Error(NilError())
 	case (.Ok(let value1), .Some(let value)): return .Ok(value, value1)
 	case _: fatalError("Not gonna happen")
 	}
@@ -211,9 +221,9 @@ public func ++<T, U>(t : Result<T>, u : U) -> Result<(T, U)> { return combine(t,
 
 public func combine<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> {
 	switch (t, u) {
-	case (.Error(let e1), nil): return .Error(.combinedError(e1, error2: resultNilError))
+	case (.Error(let e1), nil): return .Error(CombinedError(e1, NilError()))
 	case (.Error(let e1), _): return .Error(e1)
-	case (_, nil): return .Error(resultNilError)
+	case (_, nil): return .Error(NilError())
 	case (.Ok(let value1), .Some(let value)): return .Ok(value1, value)
 	case _: fatalError("Not gonna happen")
 	}
@@ -224,7 +234,7 @@ public func ++<T, U>(t : Result<T>, u : U?) -> Result<(T, U)> { return combine(t
 
 public func combine<T, U>(t : Result<T>, u : Result<U>) -> Result<(T, U)> {
 	switch (t, u) {
-	case (.Error(let e1), .Error(let e2)): return .Error(.combinedError(e1, error2: e2))
+	case (.Error(let e1), .Error(let e2)): return .Error(CombinedError(e1, e2))
 	case (.Error(let e1), _): return .Error(e1)
 	case (_, .Error(let e2)): return .Error(e2)
 	case (.Ok(let value1), .Ok(let value2)): return .Ok(value1, value2)
@@ -424,7 +434,7 @@ public func combine<T, U>(t : Promise<T?>, u : Result<U>) -> Promise<Result<(T, 
 				let v = (t, value)
 				promise.setValue(.Ok(v))
 			} else {
-				promise.setValue(.Error(resultNilError))
+				promise.setValue(.Error(NilError()))
 			}
 		}
 	}
@@ -480,7 +490,7 @@ public func combine<T, U>(t : Promise<T?>, u : Promise<Result<U>>) -> Promise<Re
 					let v = (t, value)
 					promise.setValue(.Ok(v))
 				} else {
-					promise.setValue(.Error(resultNilError))
+					promise.setValue(.Error(NilError()))
 				}
 			}
 		}
@@ -510,7 +520,7 @@ public func combine<T, U>(t : Promise<Result<T>>, u : U?) -> Promise<Result<(T, 
 	if let u = u {
 		t.getValue { promise.setValue($0 ++ u) }
 	} else {
-		promise.setValue(.Error(resultNilError))
+		promise.setValue(.Error(NilError()))
 	}
 	
 	return promise
