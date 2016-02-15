@@ -55,7 +55,7 @@ let someNames = filterp(names) { $0 != "Peter" } // Promise<[String]>
 
 # Get started
 
-You can add Forbind to your project using [Cocoapods](https://cocoapods.org). Just add it to your Podfile:
+You can add Forbind to your project using [CocoaPods](https://cocoapods.org). Just add it to your Podfile:
 
 ```ruby
 use_frameworks!
@@ -64,7 +64,7 @@ pod 'Forbind', '~> 1.1'
 pod 'ForbindExtensions', :git => 'https://github.com/ulrikdamm/Forbind'
 ```
 
-(You need the ```use_frameworks!``` since that feature of Cocoapods is still in beta. ForbindExtensions are optional)
+(You need the ```use_frameworks!``` since that feature of CocoaPods is still in beta. ForbindExtensions are optional)
 
 Or you can add it using [Carthage](https://github.com/Carthage/Carthage) by adding this to your cartfile:
 
