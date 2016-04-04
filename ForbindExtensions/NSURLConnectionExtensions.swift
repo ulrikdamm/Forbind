@@ -10,12 +10,12 @@ import Foundation
 import Forbind
 
 extension NSURLConnection {
-	public class func sendRequest(queue: NSOperationQueue)(request: NSURLRequest) -> Promise<Result<(NSURLResponse, NSData)>> {
-		return sendRequest(request, queue: queue)
+	public class func sendRequest(queue: NSOperationQueue) -> NSURLRequest -> Promise<Result<(NSURLResponse, NSData)>> {
+		return { sendRequest($0, queue: queue) }
 	}
 	
-	public class func sendURLRequest(queue: NSOperationQueue)(url: NSURL) -> Promise<Result<(NSURLResponse, NSData)>> {
-		return sendRequest(NSURLRequest(URL: url), queue: queue)
+	public class func sendURLRequest(queue: NSOperationQueue) -> NSURL -> Promise<Result<(NSURLResponse, NSData)>> {
+		return { sendRequest(NSURLRequest(URL: $0), queue: queue) }
 	}
 	
 	public class func sendRequest(request: NSURLRequest, queue: NSOperationQueue) -> Promise<Result<(NSURLResponse, NSData)>> {

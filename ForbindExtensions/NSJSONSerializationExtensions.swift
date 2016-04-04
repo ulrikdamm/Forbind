@@ -29,27 +29,21 @@ public enum JSONResult {
 }
 
 extension NSJSONSerialization {
-	public class func toData(options : NSJSONWritingOptions)(obj : AnyObject) -> Result<NSData> {
-		do {
-			return .Ok(try dataWithJSONObject(obj, options: options))
-		} catch let error {
-			return .Error(error as NSError)
-		}
+	public class func toData(options : NSJSONWritingOptions) -> AnyObject throws -> NSData {
+		return { try dataWithJSONObject($0, options: options) }
 	}
 	
-	public class func toJSON(options : NSJSONReadingOptions = [])(data : NSData) -> Result<JSONResult> {
-		do {
+	public class func toJSON(options : NSJSONReadingOptions = []) -> NSData throws -> JSONResult {
+		return { data in
 			let result = try JSONObjectWithData(data, options: options)
 			
 			if let result = result as? NSArray {
-				return .Ok(.Array(result))
+				return .Array(result)
 			} else if let result = result as? NSDictionary {
-				return .Ok(.Dictionary(result))
+				return .Dictionary(result)
 			} else {
 				fatalError("Invalid return value from JSONObjectWithData: \(result)")
 			}
-		} catch let error {
-			return .Error(error as NSError)
 		}
 	}
 }
