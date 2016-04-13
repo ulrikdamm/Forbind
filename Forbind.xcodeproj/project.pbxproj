@@ -25,25 +25,14 @@
 		FF0A422D1AC82E43009B1757 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
 		FF0A42311AC82E43009B1757 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
 		FF14D4C81AC97CBB0077303F /* NSJSONSerializationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */; };
-		FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */; };
-		FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB7F1AC847FD0033992B /* AppDelegate.swift */; };
-		FF19EB851AC847FD0033992B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB831AC847FD0033992B /* Main.storyboard */; };
-		FF19EB871AC847FD0033992B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB861AC847FD0033992B /* Images.xcassets */; };
-		FF19EB8A1AC847FD0033992B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF19EB881AC847FD0033992B /* LaunchScreen.xib */; };
-		FF19EB9E1AC8483D0033992B /* NetworkRequestDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */; };
-		FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */; };
 		FFBC11D71AFEAF4400708832 /* ForbindPromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */; };
 		FFBE767A1B2EEA0C00426D40 /* Forbind Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = FFBE76791B2EEA0C00426D40 /* Forbind Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFBE768C1B2EEA0C00426D40 /* Forbind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; };
-		FFBE768D1B2EEA0C00426D40 /* Forbind.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFBE76751B2EEA0C00426D40 /* Forbind.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFBE76951B2EEA5000426D40 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F61AC82A49009B1757 /* Bind.swift */; };
 		FFBE76961B2EEA5200426D40 /* ListBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF96A1B23A8D700C56952 /* ListBind.swift */; };
 		FFBE76971B2EEA5400426D40 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F71AC82A49009B1757 /* Combine.swift */; };
 		FFBE76981B2EEA5700426D40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A41F81AC82A49009B1757 /* Result.swift */; };
 		FFBE76991B2EEA5900426D40 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEBF9671B23837500C56952 /* Promise.swift */; };
 		FFE14AF91B2EF82F006C5F70 /* ForbindExtensions Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = FFE14AF81B2EF82F006C5F70 /* ForbindExtensions Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; };
-		FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFE14B131B2EF84D006C5F70 /* NSURLConnectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42271AC82E43009B1757 /* NSURLConnectionExtensions.swift */; };
 		FFE14B141B2EF84F006C5F70 /* NSURLSessionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */; };
 		FFE14B151B2EF851006C5F70 /* dispatchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */; };
@@ -70,20 +59,6 @@
 			remoteGlobalIDString = FF0A420D1AC82E37009B1757;
 			remoteInfo = ForbindExtensions;
 		};
-		FFBE768A1B2EEA0C00426D40 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FFBE76741B2EEA0C00426D40;
-			remoteInfo = "Forbind Mac";
-		};
-		FFE14B091B2EF82F006C5F70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FFE14AF31B2EF82F006C5F70;
-			remoteInfo = "ForbindExtensions Mac";
-		};
 		FFF7279E1B789E410045999F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FF0A41D11AC82A1E009B1757 /* Project object */;
@@ -99,21 +74,6 @@
 			remoteInfo = "Forbind Mac";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FFBE76931B2EEA0C00426D40 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FFE14B0C1B2EF82F006C5F70 /* ForbindExtensions.framework in Embed Frameworks */,
-				FFBE768D1B2EEA0C00426D40 /* Forbind.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FF0A41DC1AC82A2C009B1757 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,15 +97,6 @@
 		FF0A42281AC82E43009B1757 /* NSURLSessionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionExtensions.swift; sourceTree = "<group>"; };
 		FF0A422A1AC82E43009B1757 /* dispatchExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dispatchExtensions.swift; sourceTree = "<group>"; };
 		FF14D4C71AC97CBB0077303F /* NSJSONSerializationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSJSONSerializationExtensions.swift; sourceTree = "<group>"; };
-		FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintIPDemoViewController.swift; sourceTree = "<group>"; };
-		FF19EB7B1AC847FD0033992B /* ForbindDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForbindDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF19EB7E1AC847FD0033992B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF19EB7F1AC847FD0033992B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FF19EB841AC847FD0033992B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FF19EB861AC847FD0033992B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		FF19EB891AC847FD0033992B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestDemoViewController.swift; sourceTree = "<group>"; };
-		FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainedAnimationsDemoViewController.swift; sourceTree = "<group>"; };
 		FFBC11D61AFEAF4400708832 /* ForbindPromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForbindPromiseTests.swift; sourceTree = "<group>"; };
 		FFBC22A11B223D3800EF900B /* PlayAround.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PlayAround.playground; sourceTree = "<group>"; };
 		FFBE76751B2EEA0C00426D40 /* Forbind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forbind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,15 +140,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FF19EB781AC847FD0033992B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FFE14B0B1B2EF82F006C5F70 /* ForbindExtensions.framework in Frameworks */,
-				FFBE768C1B2EEA0C00426D40 /* Forbind.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FFBE76711B2EEA0C00426D40 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,7 +166,6 @@
 				FF0A41EB1AC82A2C009B1757 /* ForbindTests */,
 				FF0A420F1AC82E37009B1757 /* ForbindExtensions */,
 				FF0A421C1AC82E38009B1757 /* ForbindExtensionsTests */,
-				FF19EB7C1AC847FD0033992B /* ForbindDemo */,
 				FFBE76761B2EEA0C00426D40 /* Forbind Mac */,
 				FFE14AF51B2EF82F006C5F70 /* ForbindExtensions Mac */,
 				FF0A41DD1AC82A2C009B1757 /* Products */,
@@ -238,7 +179,6 @@
 				FF0A41E71AC82A2C009B1757 /* ForbindTests.xctest */,
 				FF0A420E1AC82E37009B1757 /* ForbindExtensions.framework */,
 				FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */,
-				FF19EB7B1AC847FD0033992B /* ForbindDemo.app */,
 				FFBE76751B2EEA0C00426D40 /* Forbind.framework */,
 				FFE14AF41B2EF82F006C5F70 /* ForbindExtensions.framework */,
 			);
@@ -323,37 +263,6 @@
 				FF0A421E1AC82E38009B1757 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FF19EB7C1AC847FD0033992B /* ForbindDemo */ = {
-			isa = PBXGroup;
-			children = (
-				FF19EB7F1AC847FD0033992B /* AppDelegate.swift */,
-				FF19EB9D1AC8483D0033992B /* NetworkRequestDemoViewController.swift */,
-				FF19EB9F1AC852980033992B /* ChainedAnimationsDemoViewController.swift */,
-				FF14D4C91AC97E7E0077303F /* PrintIPDemoViewController.swift */,
-				FF19EBA21AC855400033992B /* Resources */,
-				FF19EB7D1AC847FD0033992B /* Supporting Files */,
-			);
-			path = ForbindDemo;
-			sourceTree = "<group>";
-		};
-		FF19EB7D1AC847FD0033992B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FF19EB7E1AC847FD0033992B /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FF19EBA21AC855400033992B /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				FF19EB831AC847FD0033992B /* Main.storyboard */,
-				FF19EB861AC847FD0033992B /* Images.xcassets */,
-				FF19EB881AC847FD0033992B /* LaunchScreen.xib */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		FFBE76761B2EEA0C00426D40 /* Forbind Mac */ = {
@@ -491,26 +400,6 @@
 			productReference = FF0A42181AC82E38009B1757 /* ForbindExtensionsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FF19EB7A1AC847FD0033992B /* ForbindDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FF19EB9B1AC847FD0033992B /* Build configuration list for PBXNativeTarget "ForbindDemo" */;
-			buildPhases = (
-				FF19EB771AC847FD0033992B /* Sources */,
-				FF19EB781AC847FD0033992B /* Frameworks */,
-				FF19EB791AC847FD0033992B /* Resources */,
-				FFBE76931B2EEA0C00426D40 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FFBE768B1B2EEA0C00426D40 /* PBXTargetDependency */,
-				FFE14B0A1B2EF82F006C5F70 /* PBXTargetDependency */,
-			);
-			name = ForbindDemo;
-			productName = ForbindDemo;
-			productReference = FF19EB7B1AC847FD0033992B /* ForbindDemo.app */;
-			productType = "com.apple.product-type.application";
-		};
 		FFBE76741B2EEA0C00426D40 /* Forbind Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFBE76921B2EEA0C00426D40 /* Build configuration list for PBXNativeTarget "Forbind Mac" */;
@@ -569,9 +458,6 @@
 					FF0A42171AC82E38009B1757 = {
 						CreatedOnToolsVersion = 6.3;
 					};
-					FF19EB7A1AC847FD0033992B = {
-						CreatedOnToolsVersion = 6.3;
-					};
 					FFBE76741B2EEA0C00426D40 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -599,7 +485,6 @@
 				FF0A420D1AC82E37009B1757 /* ForbindExtensions */,
 				FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */,
 				FF0A42171AC82E38009B1757 /* ForbindExtensionsTests */,
-				FF19EB7A1AC847FD0033992B /* ForbindDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -630,16 +515,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FF19EB791AC847FD0033992B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FF19EB851AC847FD0033992B /* Main.storyboard in Resources */,
-				FF19EB8A1AC847FD0033992B /* LaunchScreen.xib in Resources */,
-				FF19EB871AC847FD0033992B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,17 +584,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FF19EB771AC847FD0033992B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FF14D4CA1AC97E7E0077303F /* PrintIPDemoViewController.swift in Sources */,
-				FF19EB9E1AC8483D0033992B /* NetworkRequestDemoViewController.swift in Sources */,
-				FF19EBA01AC852980033992B /* ChainedAnimationsDemoViewController.swift in Sources */,
-				FF19EB801AC847FD0033992B /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FFBE76701B2EEA0C00426D40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,16 +620,6 @@
 			target = FF0A420D1AC82E37009B1757 /* ForbindExtensions */;
 			targetProxy = FF0A421A1AC82E38009B1757 /* PBXContainerItemProxy */;
 		};
-		FFBE768B1B2EEA0C00426D40 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FFBE76741B2EEA0C00426D40 /* Forbind Mac */;
-			targetProxy = FFBE768A1B2EEA0C00426D40 /* PBXContainerItemProxy */;
-		};
-		FFE14B0A1B2EF82F006C5F70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FFE14AF31B2EF82F006C5F70 /* ForbindExtensions Mac */;
-			targetProxy = FFE14B091B2EF82F006C5F70 /* PBXContainerItemProxy */;
-		};
 		FFF7279F1B789E410045999F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FF0A41DB1AC82A2C009B1757 /* Forbind iOS */;
@@ -777,25 +631,6 @@
 			targetProxy = FFF727A01B789E440045999F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FF19EB831AC847FD0033992B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF19EB841AC847FD0033992B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FF19EB881AC847FD0033992B /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF19EB891AC847FD0033992B /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FF0A41D51AC82A1E009B1757 /* Debug */ = {
@@ -1234,99 +1069,6 @@
 			};
 			name = Release;
 		};
-		FF19EB971AC847FD0033992B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ForbindDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FF19EB981AC847FD0033992B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = ForbindDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		FFBE768E1B2EEA0C00426D40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1591,15 +1333,6 @@
 			buildConfigurations = (
 				FF0A42251AC82E38009B1757 /* Debug */,
 				FF0A42261AC82E38009B1757 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FF19EB9B1AC847FD0033992B /* Build configuration list for PBXNativeTarget "ForbindDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FF19EB971AC847FD0033992B /* Debug */,
-				FF19EB981AC847FD0033992B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
