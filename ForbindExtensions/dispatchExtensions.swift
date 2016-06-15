@@ -14,11 +14,11 @@ import Forbind
 // into your expression chain, like
 // dispatchAsync(promise, queue: dispatch_get_main_queue()) => func1
 
-public func dispatchAfter<T>(promise : Promise<T>, when : dispatch_time_t, queue : dispatch_queue_t) -> Promise<T> {
+public func dispatchAfter<T>(_ promise : Promise<T>, when : DispatchTime, queue : DispatchQueue) -> Promise<T> {
 	let newpromise = Promise<T>(previousPromise: promise)
 	
 	promise.getValue { value in
-		dispatch_after(when, queue) {
+		queue.after(when: when) {
 			newpromise.setValue(value)
 		}
 	}
@@ -26,11 +26,11 @@ public func dispatchAfter<T>(promise : Promise<T>, when : dispatch_time_t, queue
 	return newpromise
 }
 
-public func dispatchAsync<T>(promise : Promise<T>, queue : dispatch_queue_t) -> Promise<T> {
+public func dispatchAsync<T>(_ promise : Promise<T>, queue : DispatchQueue) -> Promise<T> {
 	let newpromise = Promise<T>(previousPromise: promise)
 	
 	promise.getValue { value in
-		dispatch_async(queue) {
+		queue.async {
 			newpromise.setValue(value)
 		}
 	}

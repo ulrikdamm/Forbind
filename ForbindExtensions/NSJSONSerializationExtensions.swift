@@ -10,37 +10,37 @@ import Foundation
 import Forbind
 
 public enum JSONResult {
-	case Array(NSArray)
-	case Dictionary(NSDictionary)
+	case array(NSArray)
+	case dictionary(NSDictionary)
 	
 	public var arrayValue : NSArray? {
 		switch self {
-		case .Array(let a): return a
+		case .array(let a): return a
 		case _: return nil
 		}
 	}
 	
 	public var dictionaryValue : NSDictionary? {
 		switch self {
-		case .Dictionary(let d): return d
+		case .dictionary(let d): return d
 		case _: return nil
 		}
 	}
 }
 
-extension NSJSONSerialization {
-	public class func toData(options : NSJSONWritingOptions) -> AnyObject throws -> NSData {
-		return { try dataWithJSONObject($0, options: options) }
+extension JSONSerialization {
+	public class func toData(_ options : JSONSerialization.WritingOptions) -> (AnyObject) throws -> Data {
+		return { try data(withJSONObject: $0, options: options) }
 	}
 	
-	public class func toJSON(options : NSJSONReadingOptions = []) -> NSData throws -> JSONResult {
+	public class func toJSON(_ options : JSONSerialization.ReadingOptions = []) -> (Data) throws -> JSONResult {
 		return { data in
-			let result = try JSONObjectWithData(data, options: options)
+			let result = try jsonObject(with: data, options: options)
 			
 			if let result = result as? NSArray {
-				return .Array(result)
+				return .array(result)
 			} else if let result = result as? NSDictionary {
-				return .Dictionary(result)
+				return .dictionary(result)
 			} else {
 				fatalError("Invalid return value from JSONObjectWithData: \(result)")
 			}

@@ -8,48 +8,48 @@
 
 import Foundation
 
-public struct NilError : ErrorType {
+public struct NilError : ErrorProtocol {
 	public init() {}
 }
 
 public enum Result<T> {
-	case Ok(T)
-	case Error(ErrorType)
+	case ok(T)
+	case error(ErrorProtocol)
 	
 	public init(_ value : T) {
-		self = .Ok(value)
+		self = .ok(value)
 	}
 	
-	public init(_ error : ErrorType) {
-		self = .Error(error)
+	public init(_ error : ErrorProtocol) {
+		self = .error(error)
 	}
 	
-	init<U>(from : U, _ transform : U throws -> T) {
+	init<U>(from : U, _ transform : (U) throws -> T) {
 		do {
-			self = .Ok(try transform(from))
+			self = .ok(try transform(from))
 		} catch let error {
-			self = .Error(error)
+			self = .error(error)
 		}
 	}
 	
-	public var errorValue : ErrorType? {
+	public var errorValue : ErrorProtocol? {
 		switch self {
-		case .Error(let e): return e
+		case .error(let e): return e
 		case _: return nil
 		}
 	}
 	
 	public var okValue : T? {
 		switch self {
-		case .Ok(let value): return value
+		case .ok(let value): return value
 		case _: return nil
 		}
 	}
 	
 	public func value() throws -> T {
 		switch self {
-		case .Error(let e): throw e
-		case .Ok(let value): return value
+		case .error(let e): throw e
+		case .ok(let value): return value
 		}
 	}
 }
@@ -69,8 +69,8 @@ public enum Result<T> {
 extension Result : CustomStringConvertible {
 	public var description : String {
 		switch self {
-		case .Ok(let value): return "Result.Ok(\(value))"
-		case .Error(let error): return "Result.Error(\(error))"
+		case .ok(let value): return "Result.Ok(\(value))"
+		case .error(let error): return "Result.Error(\(error))"
 		}
 	}
 }

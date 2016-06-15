@@ -40,16 +40,16 @@ associativity left
 
 // Basic binds
 
-public func bind<T, U>(from : T, to : T -> U) -> U {
+public func bind<T, U>(_ from : T, to : (T) -> U) -> U {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> U) -> U {
+public func =><T, U>(lhs : T, rhs : (T) -> U) -> U {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> U) -> U? {
+public func bind<T, U>(_ from : T?, to : (T) -> U) -> U? {
 	if let from = from {
 		return to(from)
 	} else {
@@ -57,26 +57,26 @@ public func bind<T, U>(from : T?, to : T -> U) -> U? {
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> U) -> U? {
+public func =><T, U>(lhs : T?, rhs : (T) -> U) -> U? {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> U) -> Result<U> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> U) -> Result<U> {
 	switch from {
-	case .Ok(let value):
-		return .Ok(to(value))
-	case .Error(let error):
-		return .Error(error)
+	case .ok(let value):
+		return .ok(to(value))
+	case .error(let error):
+		return .error(error)
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> U) -> Result<U> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> U) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> U) -> Promise<U> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> U) -> Promise<U> {
 	let promise = Promise<U>()
 	promise.previousPromise = from
 	
@@ -87,12 +87,12 @@ public func bind<T, U>(from : Promise<T>, to : T -> U) -> Promise<U> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> U) -> Promise<U> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> U) -> Promise<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> U) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -107,28 +107,28 @@ public func bind<T, U>(from : Promise<T?>, to : T -> U) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> U) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> U) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
-			promise?.setValue(.Ok(to(value)))
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .ok(let value):
+			promise?.setValue(.ok(to(value)))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -136,16 +136,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U) -> Promise<Result<U
 // Bind to Optional
 
 
-public func bind<T, U>(from : T, to : T -> U?) -> U? {
+public func bind<T, U>(_ from : T, to : (T) -> U?) -> U? {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> U?) -> U? {
+public func =><T, U>(lhs : T, rhs : (T) -> U?) -> U? {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> U?) -> U? {
+public func bind<T, U>(_ from : T?, to : (T) -> U?) -> U? {
 	if let from = from {
 		return to(from)
 	} else {
@@ -153,30 +153,30 @@ public func bind<T, U>(from : T?, to : T -> U?) -> U? {
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> U?) -> U? {
+public func =><T, U>(lhs : T?, rhs : (T) -> U?) -> U? {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> U?) -> Result<U> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> U?) -> Result<U> {
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		if let v = to(value) {
-			return .Ok(v)
+			return .ok(v)
 		} else {
-			return .Error(NilError())
+			return .error(NilError())
 		}
-	case .Error(let error):
-		return .Error(error)
+	case .error(let error):
+		return .error(error)
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> U?) -> Result<U> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> U?) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> U?) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -187,12 +187,12 @@ public func bind<T, U>(from : Promise<T>, to : T -> U?) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> U?) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> U?) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> U?) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -207,32 +207,32 @@ public func bind<T, U>(from : Promise<T?>, to : T -> U?) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> U?) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> U?) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> U?) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U?) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			if let v = to(value) {
-				promise?.setValue(.Ok(v))
+				promise?.setValue(.ok(v))
 			} else {
-				promise?.setValue(.Error(NilError()))
+				promise?.setValue(.error(NilError()))
 			}
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U?) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> U?) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -240,43 +240,43 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> U?) -> Promise<Result<
 // Bind to Result
 
 
-public func bind<T, U>(from : T, to : T -> Result<U>) -> Result<U> {
+public func bind<T, U>(_ from : T, to : (T) -> Result<U>) -> Result<U> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> Result<U>) -> Result<U> {
+public func =><T, U>(lhs : T, rhs : (T) -> Result<U>) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> Result<U>) -> Result<U> {
+public func bind<T, U>(_ from : T?, to : (T) -> Result<U>) -> Result<U> {
 	if let from = from {
 		return to(from)
 	} else {
-		return .Error(NilError())
+		return .error(NilError())
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> Result<U>) -> Result<U> {
+public func =><T, U>(lhs : T?, rhs : (T) -> Result<U>) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> Result<U>) -> Result<U> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> Result<U>) -> Result<U> {
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		return to(value)
-	case .Error(let error):
-		return .Error(error)
+	case .error(let error):
+		return .error(error)
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> Result<U>) -> Result<U> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> Result<U>) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -287,12 +287,12 @@ public func bind<T, U>(from : Promise<T>, to : T -> Result<U>) -> Promise<Result
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -300,35 +300,35 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Result<U>) -> Promise<Resul
 		if let value = value {
 			promise?.setValue(to(value))
 		} else {
-			promise?.setValue(.Error(NilError()))
+			promise?.setValue(.error(NilError()))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			promise?.setValue(to(value))
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -336,43 +336,43 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Result<U>) -> Promise<
 // Bind to throwing
 
 
-public func bind<T, U>(from : T, to : T throws -> U) -> Result<U> {
+public func bind<T, U>(_ from : T, to : (T) throws -> U) -> Result<U> {
 	return Result(from: from, to)
 }
 
-public func =><T, U>(lhs : T, rhs : T throws -> U) -> Result<U> {
+public func =><T, U>(lhs : T, rhs : (T) throws -> U) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T throws -> U) -> Result<U> {
+public func bind<T, U>(_ from : T?, to : (T) throws -> U) -> Result<U> {
 	if let from = from {
 		return Result(from: from, to)
 	} else {
-		return .Error(NilError())
+		return .error(NilError())
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T throws -> U) -> Result<U> {
+public func =><T, U>(lhs : T?, rhs : (T) throws -> U) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T throws -> U) -> Result<U> {
+public func bind<T, U>(_ from : Result<T>, to : (T) throws -> U) -> Result<U> {
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		return Result(from: value, to)
-	case .Error(let error):
-		return .Error(error)
+	case .error(let error):
+		return .error(error)
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T throws -> U) -> Result<U> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) throws -> U) -> Result<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -383,12 +383,12 @@ public func bind<T, U>(from : Promise<T>, to : T throws -> U) -> Promise<Result<
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -396,35 +396,35 @@ public func bind<T, U>(from : Promise<T?>, to : T throws -> U) -> Promise<Result
 		if let value = value {
 			promise?.setValue(Result(from: value, to))
 		} else {
-			promise?.setValue(.Error(NilError()))
+			promise?.setValue(.error(NilError()))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			promise?.setValue(Result(from: value, to))
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -432,16 +432,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T throws -> U) -> Promise<R
 // Bind to Promise
 
 
-public func bind<T, U>(from : T, to : T -> Promise<U>) -> Promise<U> {
+public func bind<T, U>(_ from : T, to : (T) -> Promise<U>) -> Promise<U> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> Promise<U>) -> Promise<U> {
+public func =><T, U>(lhs : T, rhs : (T) -> Promise<U>) -> Promise<U> {
 	return rhs(lhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> Promise<U>) -> Promise<U?> {
+public func bind<T, U>(_ from : T?, to : (T) -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	
 	if let from = from {
@@ -458,35 +458,35 @@ public func bind<T, U>(from : T?, to : T -> Promise<U>) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> Promise<U>) -> Promise<U?> {
+public func =><T, U>(lhs : T?, rhs : (T) -> Promise<U>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> Promise<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		let p = to(value)
 		promise.previousPromise = p
 		
 		p.getValueWeak { [weak promise] value in
-			promise?.setValue(.Ok(value))
+			promise?.setValue(.ok(value))
 		}
-	case .Error(let error):
-		promise.setValue(.Error(error))
+	case .error(let error):
+		promise.setValue(.error(error))
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> Promise<U>) -> Promise<U> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U>) -> Promise<U> {
 	let promise = Promise<U>()
 	promise.previousPromise = from
 	
@@ -499,22 +499,22 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<U>) -> Promise<U> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U>) -> Promise<U> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<U>) -> Promise<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Some(let v):
+		case .some(let v):
 			to(v).getValue { [weak promise] value in
 				promise?.setValue(value)
 			}
-		case .None:
+		case .none:
 			promise?.setValue(nil)
 		}
 	}
@@ -522,30 +522,30 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U>) -> Promise<U?> 
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<U>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			to(value).getValue { [weak promise] value in
-				promise?.setValue(.Ok(value))
+				promise?.setValue(.ok(value))
 			}
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -553,16 +553,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U>) -> Promise
 // Bind to OptionalPromise
 
 
-public func bind<T, U>(from : T, to : T -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : T, to : (T) -> Promise<U?>) -> Promise<U?> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : T, rhs : (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : T?, to : (T) -> Promise<U?>) -> Promise<U?> {
 	if let from = from {
 		return to(from)
 	} else {
@@ -570,26 +570,26 @@ public func bind<T, U>(from : T?, to : T -> Promise<U?>) -> Promise<U?> {
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : T?, rhs : (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U?>) -> Promise<U?> {
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		return to(value)
-	case .Error(_):
+	case .error(_):
 		return Promise(value: nil)
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -602,12 +602,12 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<U?>) -> Promise<U?> 
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -624,34 +624,34 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<U?>) -> Promise<U?>
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<U?>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U?>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			to(value).getValue { [weak promise] value in
 				if let value = value {
-					promise?.setValue(.Ok(value))
+					promise?.setValue(.ok(value))
 				} else {
-					promise?.setValue(.Error(NilError()))
+					promise?.setValue(.error(NilError()))
 				}
 			}
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U?>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U?>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -659,43 +659,43 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<U?>) -> Promis
 // Bind to ResultPromise
 
 
-public func bind<T, U>(from : T, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : T, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : T, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : T?, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : T?, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	if let from = from {
 		return to(from)
 	} else {
-		return Promise(value: .Error(NilError()))
+		return Promise(value: .error(NilError()))
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : T?, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Result<T>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	switch from {
-	case .Ok(let value):
+	case .ok(let value):
 		return to(value)
-	case .Error(let error):
-		return Promise(value: .Error(error))
+	case .error(let error):
+		return Promise(value: .error(error))
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -708,12 +708,12 @@ public func bind<T, U>(from : Promise<T>, to : T -> Promise<Result<U>>) -> Promi
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<T?>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -723,36 +723,36 @@ public func bind<T, U>(from : Promise<T?>, to : T -> Promise<Result<U>>) -> Prom
 				promise?.setValue(value)
 			}
 		} else {
-			promise?.setValue(.Error(NilError()))
+			promise?.setValue(.error(NilError()))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(from : Promise<Result<T>>, to : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
 	from.getValueWeak { [weak promise] value in
 		switch value {
-		case .Ok(let value):
+		case .ok(let value):
 			to(value).getValue { [weak promise] value in
 				promise?.setValue(value)
 			}
-		case .Error(let error):
-			promise?.setValue(.Error(error))
+		case .error(let error):
+			promise?.setValue(.error(error))
 		}
 	}
 	
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : T -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }

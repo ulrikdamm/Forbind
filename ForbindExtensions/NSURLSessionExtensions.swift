@@ -14,7 +14,7 @@ import Forbind
 // but without any closures needed.
 
 public class TaskPromise<T> : Promise<T> {
-	public var task : NSURLSessionTask?
+	public var task : URLSessionTask?
 	
 	public override init(value : T? = nil) {
 		super.init(value: value)
@@ -27,36 +27,36 @@ public class TaskPromise<T> : Promise<T> {
 	}
 }
 
-extension NSURLSession {
+extension URLSession {
 	public func reset() -> Promise<Void> {
 		let promise = Promise<Void>()
-		resetWithCompletionHandler { promise.setValue(Void()) }
+		self.reset { promise.setValue(Void()) }
 		return promise
 	}
 	
 	public func flush() -> Promise<Void> {
 		let promise = Promise<Void>()
-		flushWithCompletionHandler { promise.setValue(Void()) }
+		self.flush { promise.setValue(Void()) }
 		return promise
 	}
 	
-	public func getTasks() -> Promise<([NSURLSessionDataTask], [NSURLSessionUploadTask], [NSURLSessionDownloadTask])> {
-		let promise = Promise<([NSURLSessionDataTask], [NSURLSessionUploadTask], [NSURLSessionDownloadTask])>()
+	public func getTasks() -> Promise<([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask])> {
+		let promise = Promise<([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask])>()
 		getTasksWithCompletionHandler {
-			promise.setValue($0 as [NSURLSessionDataTask], $1 as [NSURLSessionUploadTask], $2 as [NSURLSessionDownloadTask])
+			promise.setValue($0 as [URLSessionDataTask], $1 as [URLSessionUploadTask], $2 as [URLSessionDownloadTask])
 		}
 		return promise
 	}
 	
-	public func dataTask(request : NSURLRequest) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
+	public func dataTask(_ request : URLRequest) -> TaskPromise<Result<(Data, URLResponse)>> {
+		let promise = TaskPromise<Result<(Data, URLResponse)>>()
 		
-		promise.task = dataTaskWithRequest(request) { data, response, error in
+		promise.task = self.dataTask(with: request) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		
@@ -65,15 +65,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func dataTask(url : NSURL) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
+	public func dataTask(_ url : URL) -> TaskPromise<Result<(Data, URLResponse)>> {
+		let promise = TaskPromise<Result<(Data, URLResponse)>>()
 		
-		promise.task = dataTaskWithURL(url) { [weak promise] data, response, error in
+		promise.task = self.dataTask(with: url) { [weak promise] data, response, error in
 			if let error = error {
-				promise?.setValue(.Error(error))
+				promise?.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise?.setValue(.Ok(value))
+				promise?.setValue(.ok(value))
 			}
 		}
 		
@@ -82,15 +82,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func uploadTask(request : NSURLRequest, fromFile fileURL : NSURL) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
+	public func uploadTask(_ request : URLRequest, fromFile fileURL : URL) -> TaskPromise<Result<(Data, URLResponse)>> {
+		let promise = TaskPromise<Result<(Data, URLResponse)>>()
 		
-		promise.task = uploadTaskWithRequest(request, fromFile: fileURL) { data, response, error in
+		promise.task = self.uploadTask(with: request, fromFile: fileURL) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		
@@ -99,15 +99,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func uploadTask(request : NSURLRequest, fromData bodyData: NSData?) -> TaskPromise<Result<(NSData, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSData, NSURLResponse)>>()
+	public func uploadTask(_ request : URLRequest, fromData bodyData: Data?) -> TaskPromise<Result<(Data, URLResponse)>> {
+		let promise = TaskPromise<Result<(Data, URLResponse)>>()
 		
-		promise.task = uploadTaskWithRequest(request, fromData: bodyData) { data, response, error in
+		promise.task = self.uploadTask(with: request, from: bodyData) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		
@@ -116,15 +116,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func downloadTask(request : NSURLRequest) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
+	public func downloadTask(_ request : URLRequest) -> TaskPromise<Result<(URL, URLResponse)>> {
+		let promise = TaskPromise<Result<(URL, URLResponse)>>()
 		
-		promise.task = downloadTaskWithRequest(request) { data, response, error in
+		promise.task = self.downloadTask(with: request) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		
@@ -133,15 +133,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func downloadTask(URL : NSURL) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
+	public func downloadTask(_ URL : Foundation.URL) -> TaskPromise<Result<(Foundation.URL, URLResponse)>> {
+		let promise = TaskPromise<Result<(Foundation.URL, URLResponse)>>()
 		
-		promise.task = downloadTaskWithURL(URL) { data, response, error in
+		promise.task = self.downloadTask(with: URL) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		
@@ -150,15 +150,15 @@ extension NSURLSession {
 		return promise
 	}
 	
-	public func downloadTask(resumeData : NSData) -> TaskPromise<Result<(NSURL, NSURLResponse)>> {
-		let promise = TaskPromise<Result<(NSURL, NSURLResponse)>>()
+	public func downloadTask(_ resumeData : Data) -> TaskPromise<Result<(URL, URLResponse)>> {
+		let promise = TaskPromise<Result<(URL, URLResponse)>>()
 		
-		promise.task = downloadTaskWithResumeData(resumeData) { data, response, error in
+		promise.task = self.downloadTask(withResumeData: resumeData) { data, response, error in
 			if let error = error {
-				promise.setValue(.Error(error))
+				promise.setValue(.error(error))
 			} else {
 				let value = (data!, response!)
-				promise.setValue(.Ok(value))
+				promise.setValue(.ok(value))
 			}
 		}
 		

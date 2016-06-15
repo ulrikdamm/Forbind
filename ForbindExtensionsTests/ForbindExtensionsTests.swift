@@ -13,16 +13,16 @@ import ForbindExtensions
 
 class ForbindNSURLSessionExtensionsTests : XCTestCase {
 	func testCancellation() {
-		let session = NSURLSession(configuration: .defaultSessionConfiguration())
+		let session = URLSession(configuration: .default())
 		
-		var result : TaskPromise? = NSURL(string: "http://ufd.dk") => session.dataTask
+		var result : TaskPromise? = URL(string: "http://ufd.dk") => session.dataTask
 		let task = result?.task
 		
-		XCTAssert(task?.state != NSURLSessionTaskState.Canceling)
+		XCTAssert(task?.state != URLSessionTask.State.canceling)
 		
 		result = nil
 		
-		XCTAssert(task?.state == NSURLSessionTaskState.Canceling)
+		XCTAssert(task?.state == URLSessionTask.State.canceling)
 	}
 }
 
@@ -30,21 +30,21 @@ class ForbindDispatchTests : XCTestCase {
 	func testDispatch() {
 		let promise = Promise<String>()
 		
-		let promise2 = dispatchAsync(promise, queue: dispatch_get_main_queue())
+		let promise2 = dispatchAsync(promise, queue: DispatchQueue.main)
 		
 		var finished = false
 		
 		promise2.getValue { value in
 			XCTAssert(value == "Test!")
-			XCTAssert(NSThread.currentThread().isMainThread)
+			XCTAssert(Thread.current().isMainThread)
 			finished = true
 		}
 		
-		dispatch_async(dispatch_get_global_queue(0, 0)) {
+		DispatchQueue.global().async {
 			promise.setValue("Test!")
 		}
 		
-		NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(1))
+		RunLoop.main().run(until: Date().addingTimeInterval(1))
 		XCTAssert(finished)
 	}
 }

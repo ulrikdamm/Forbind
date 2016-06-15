@@ -567,15 +567,18 @@
 					};
 					FF0A41DB1AC82A2C009B1757 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
 					};
 					FF0A41E61AC82A2C009B1757 = {
 						CreatedOnToolsVersion = 6.3;
 					};
 					FF0A420D1AC82E37009B1757 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
 					};
 					FF0A42171AC82E38009B1757 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
 					};
 					FFBE76741B2EEA0C00426D40 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1082,6 +1085,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1134,6 +1138,7 @@
 				PRODUCT_NAME = Forbind;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1293,6 +1298,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1345,6 +1351,7 @@
 				PRODUCT_NAME = ForbindExtensions;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1401,6 +1408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1446,6 +1454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.ufd.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1680,6 +1689,7 @@
 				8163CF051CCF99DF00988F5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8163CF161CCF9A4200988F5F /* Build configuration list for PBXNativeTarget "ForbindExtensions tvOS" */ = {
 			isa = XCConfigurationList;
@@ -1688,6 +1698,7 @@
 				8163CF181CCF9A4200988F5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FF0A41D41AC82A1E009B1757 /* Build configuration list for PBXProject "Forbind" */ = {
 			isa = XCConfigurationList;

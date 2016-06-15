@@ -10,23 +10,23 @@ import Foundation
 import Forbind
 
 extension NSURLConnection {
-	public class func sendRequest(queue: NSOperationQueue) -> NSURLRequest -> Promise<Result<(NSURLResponse, NSData)>> {
+	public class func sendRequest(_ queue: OperationQueue) -> (URLRequest) -> Promise<Result<(URLResponse, Data)>> {
 		return { sendRequest($0, queue: queue) }
 	}
 	
-	public class func sendURLRequest(queue: NSOperationQueue) -> NSURL -> Promise<Result<(NSURLResponse, NSData)>> {
-		return { sendRequest(NSURLRequest(URL: $0), queue: queue) }
+	public class func sendURLRequest(_ queue: OperationQueue) -> (URL) -> Promise<Result<(URLResponse, Data)>> {
+		return { sendRequest(URLRequest(url: $0), queue: queue) }
 	}
 	
-	public class func sendRequest(request: NSURLRequest, queue: NSOperationQueue) -> Promise<Result<(NSURLResponse, NSData)>> {
-		let promise = Promise<Result<(NSURLResponse, NSData)>>()
+	public class func sendRequest(_ request: URLRequest, queue: OperationQueue) -> Promise<Result<(URLResponse, Data)>> {
+		let promise = Promise<Result<(URLResponse, Data)>>()
 		
 		sendAsynchronousRequest(request, queue: queue, completionHandler: { response, data, error in
-			dispatch_async(dispatch_get_main_queue()) {
+			DispatchQueue.main.async {
 				if let error = error {
-					promise.setValue(.Error(error))
+					promise.setValue(.error(error))
 				} else {
-					promise.setValue(.Ok(response!, data!))
+					promise.setValue(.ok(response!, data!))
 				}
 			}
 		})

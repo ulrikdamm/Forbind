@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8163CEFE1CCF99DF00988F5F"
-               BuildableName = "Forbind tvOS.framework"
+               BuildableName = "Forbind.framework"
                BlueprintName = "Forbind tvOS"
                ReferencedContainer = "container:Forbind.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8163CEFE1CCF99DF00988F5F"
-            BuildableName = "Forbind tvOS.framework"
+            BuildableName = "Forbind.framework"
             BlueprintName = "Forbind tvOS"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8163CEFE1CCF99DF00988F5F"
-            BuildableName = "Forbind tvOS.framework"
+            BuildableName = "Forbind.framework"
             BlueprintName = "Forbind tvOS"
             ReferencedContainer = "container:Forbind.xcodeproj">
          </BuildableReference>
