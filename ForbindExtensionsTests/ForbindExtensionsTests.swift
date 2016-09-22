@@ -13,7 +13,7 @@ import ForbindExtensions
 
 class ForbindNSURLSessionExtensionsTests : XCTestCase {
 	func testCancellation() {
-		let session = URLSession(configuration: .default())
+		let session = URLSession(configuration: .default)
 		
 		var result : TaskPromise? = URL(string: "http://ufd.dk") => session.dataTask
 		let task = result?.task
@@ -36,7 +36,7 @@ class ForbindDispatchTests : XCTestCase {
 		
 		promise2.getValue { value in
 			XCTAssert(value == "Test!")
-			XCTAssert(Thread.current().isMainThread)
+			XCTAssert(Thread.current.isMainThread)
 			finished = true
 		}
 		
@@ -44,7 +44,7 @@ class ForbindDispatchTests : XCTestCase {
 			promise.setValue("Test!")
 		}
 		
-		RunLoop.main().run(until: Date().addingTimeInterval(1))
+		RunLoop.main.run(until: Date().addingTimeInterval(1))
 		XCTAssert(finished)
 	}
 }

@@ -13,8 +13,8 @@ import Forbind
 // returning Void. Chain it together with something else to make it run serially,
 // but without any closures needed.
 
-public class TaskPromise<T> : Promise<T> {
-	public var task : URLSessionTask?
+open class TaskPromise<T> : Promise<T> {
+	open var task : URLSessionTask?
 	
 	public override init(value : T? = nil) {
 		super.init(value: value)

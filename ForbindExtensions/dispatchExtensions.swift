@@ -18,7 +18,7 @@ public func dispatchAfter<T>(_ promise : Promise<T>, when : DispatchTime, queue 
 	let newpromise = Promise<T>(previousPromise: promise)
 	
 	promise.getValue { value in
-		queue.after(when: when) {
+		queue.asyncAfter(deadline: when) {
 			newpromise.setValue(value)
 		}
 	}
