@@ -35,11 +35,11 @@ import Foundation
 // If you try to bind two Results, and both are in an error state, the result
 // will be an NSError in the dk.ufd.Forbind domain, which contains each error.
 
-public struct CombinedError : ErrorProtocol {
-	let error1 : ErrorProtocol
-	let error2 : ErrorProtocol
+public struct CombinedError : Error {
+	let error1 : Error
+	let error2 : Error
 	
-	public init(_ error1 : ErrorProtocol, _ error2 : ErrorProtocol) {
+	public init(_ error1 : Error, _ error2 : Error) {
 		self.error1 = error1
 		self.error2 = error2
 	}
@@ -71,9 +71,7 @@ private func inverse<T, U>(_ v : (T, U)) -> (U, T) {
 	return (v.1, v.0)
 }
 
-infix operator ++ {
-associativity left
-}
+infix operator ++ : AssignmentPrecedence
 
 
 /// Combine for T

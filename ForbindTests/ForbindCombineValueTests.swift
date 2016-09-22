@@ -27,7 +27,7 @@ class ForbindCombineValueTests : XCTestCase {
 		let a = 1 ++ (1 as Int?)
 		
 		switch a {
-		case .Some(1, 1): XCTAssert(true)
+		case .some(1, 1): XCTAssert(true)
 		case _: XCTAssert(false)
 		}
 	}
@@ -42,7 +42,7 @@ class ForbindCombineValueTests : XCTestCase {
 		let a = 1 ++ Result<Int>(1)
 		
 		switch a {
-		case .Ok(let value):
+		case .ok(let value):
 			switch value {
 			case (1, 1): XCTAssert(true)
 			case _: XCTAssert(false)
@@ -55,7 +55,7 @@ class ForbindCombineValueTests : XCTestCase {
 		let a = 1 ++ Result<Int>(GenericError())
 		
 		switch a {
-		case .Error(let error): XCTAssert(error is GenericError)
+		case .error(let error): XCTAssert(error is GenericError)
 		case _: XCTAssert(false)
 		}
 	}
@@ -88,7 +88,7 @@ class ForbindCombineValueTests : XCTestCase {
 		
 		a.getValue { value in
 			switch value {
-			case .Some(1, 1): XCTAssert(true)
+			case .some(1, 1): XCTAssert(true)
 			case _: XCTAssert(false)
 			}
 			
@@ -124,7 +124,7 @@ class ForbindCombineValueTests : XCTestCase {
 		
 		a.getValue { value in
 			switch value {
-			case .Ok(let value):
+			case .ok(let value):
 				switch value {
 				case (1, 1): XCTAssert(true)
 				case _: XCTAssert(false)
@@ -135,7 +135,7 @@ class ForbindCombineValueTests : XCTestCase {
 			callbackCalled = true
 		}
 		
-		p.setValue(.Ok(1))
+		p.setValue(.ok(1))
 		
 		XCTAssert(callbackCalled)
 	}
@@ -148,14 +148,14 @@ class ForbindCombineValueTests : XCTestCase {
 		
 		a.getValue { value in
 			switch value {
-			case .Error(let error): XCTAssert(error is GenericError)
+			case .error(let error): XCTAssert(error is GenericError)
 			case _: XCTAssert(false)
 			}
 			
 			callbackCalled = true
 		}
 		
-		p.setValue(.Error(GenericError()))
+		p.setValue(.error(GenericError()))
 		
 		XCTAssert(callbackCalled)
 	}

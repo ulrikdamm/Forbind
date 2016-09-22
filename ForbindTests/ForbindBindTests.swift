@@ -44,8 +44,8 @@ class ForbindBindTests : XCTestCase {
 		let b = (a => increment)
 		
 		switch b {
-		case .Ok(let value): XCTAssert(value == 2)
-		case .Error(_): XCTAssert(false)
+		case .ok(let value): XCTAssert(value == 2)
+		case .error(_): XCTAssert(false)
 		}
 	}
 	
@@ -55,8 +55,8 @@ class ForbindBindTests : XCTestCase {
 		let b = (a => increment)
 		
 		switch b {
-		case .Ok(_): XCTAssert(false)
-		case .Error(let error): XCTAssert(error is GenericError)
+		case .ok(_): XCTAssert(false)
+		case .error(let error): XCTAssert(error is GenericError)
 		}
 	}
 	
@@ -118,14 +118,14 @@ class ForbindBindTests : XCTestCase {
 		
 		b.getValue { value in
 			switch value {
-			case .Ok(let value): XCTAssert(value == 2)
-			case .Error(_): XCTAssert(false)
+			case .ok(let value): XCTAssert(value == 2)
+			case .error(_): XCTAssert(false)
 			}
 			
 			callbackCalled = true
 		}
 		
-		a.setValue(.Ok(1))
+		a.setValue(.ok(1))
 		XCTAssert(callbackCalled)
 	}
 	
@@ -138,14 +138,14 @@ class ForbindBindTests : XCTestCase {
 		
 		b.getValue { value in
 			switch value {
-			case .Ok(_): XCTAssert(false)
-			case .Error(let error): XCTAssert(error is GenericError)
+			case .ok(_): XCTAssert(false)
+			case .error(let error): XCTAssert(error is GenericError)
 			}
 			
 			callbackCalled = true
 		}
 		
-		a.setValue(.Error(GenericError()))
+		a.setValue(.error(GenericError()))
 		XCTAssert(callbackCalled)
 	}
 	

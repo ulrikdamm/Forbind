@@ -8,19 +8,19 @@
 
 import Foundation
 
-public struct NilError : ErrorProtocol {
+public struct NilError : Error {
 	public init() {}
 }
 
 public enum Result<T> {
 	case ok(T)
-	case error(ErrorProtocol)
+	case error(Error)
 	
 	public init(_ value : T) {
 		self = .ok(value)
 	}
 	
-	public init(_ error : ErrorProtocol) {
+	public init(_ error : Error) {
 		self = .error(error)
 	}
 	
@@ -32,7 +32,7 @@ public enum Result<T> {
 		}
 	}
 	
-	public var errorValue : ErrorProtocol? {
+	public var errorValue : Error? {
 		switch self {
 		case .error(let e): return e
 		case _: return nil

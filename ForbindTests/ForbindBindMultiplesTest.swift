@@ -13,8 +13,8 @@ import XCTest
 /// something fails.
 class ForbindBindMultiplesTest : XCTestCase {
 	func testBindSecondCalled() {
-		let inc : Int -> Int = { $0 + 1 }
-		let stringify : Int -> String = { "\($0)" }
+		let inc : (Int) -> Int = { $0 + 1 }
+		let stringify : (Int) -> String = { "\($0)" }
 		
 		let result = (1 => inc => stringify)
 		
@@ -25,8 +25,8 @@ class ForbindBindMultiplesTest : XCTestCase {
 		var function1Called = false
 		var function2Called = false
 		
-		let nul : Int -> Int? = { _ in function1Called = true; return nil }
-		let stringify : Int -> String = { function2Called = true; return "\($0)" }
+		let nul : (Int) -> Int? = { _ in function1Called = true; return nil }
+		let stringify : (Int) -> String = { function2Called = true; return "\($0)" }
 		
 		let result = (1 => nul => stringify)
 		

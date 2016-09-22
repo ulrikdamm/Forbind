@@ -30,22 +30,22 @@ class ForbindCombineFunctionCallTests : XCTestCase {
 	}
 	
 	func testCombineFunctionCallResultOk() {
-		let r = Result<Int>.Ok(1)
+		let r = Result<Int>.ok(1)
 		let a = (1 ++ r) => (+)
 		
 		switch a {
-		case .Ok(let value): XCTAssert(value == 2)
-		case .Error(_): XCTAssert(false)
+		case .ok(let value): XCTAssert(value == 2)
+		case .error(_): XCTAssert(false)
 		}
 	}
 	
 	func testCombineFunctionCallResultError() {
-		let r = Result<Int>.Error(GenericError())
+		let r = Result<Int>.error(GenericError())
 		let a = (1 ++ r) => (+)
 		
 		switch a {
-		case .Ok(_): XCTAssert(false)
-		case .Error(let error): XCTAssert(error is GenericError)
+		case .ok(_): XCTAssert(false)
+		case .error(let error): XCTAssert(error is GenericError)
 		}
 	}
 	

@@ -13,7 +13,7 @@ func increment(value : Int) -> Int {
 	return value + 1
 }
 
-struct GenericError : ErrorType {}
+struct GenericError : Error {}
 
 class ForbindTests : XCTestCase {
 	func testCancelOnDeinit() {

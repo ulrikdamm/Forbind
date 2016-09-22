@@ -34,9 +34,7 @@ import Foundation
 // T, T?, Result<T>, Promise<T>, Promise<T?>, Promise<Result<T>>
 
 
-infix operator => {
-associativity left
-}
+infix operator => : AdditionPrecedence
 
 // Basic binds
 
@@ -76,7 +74,7 @@ public func =><T, U>(lhs : Result<T>, rhs : (T) -> U) -> Result<U> {
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> U) -> Promise<U> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> U) -> Promise<U> {
 	let promise = Promise<U>()
 	promise.previousPromise = from
 	
@@ -87,12 +85,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> U) -> Promise<U> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> U) -> Promise<U> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> U) -> Promise<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> U) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -107,12 +105,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> U) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> U) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -128,7 +126,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U) -> Promise<Re
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -176,7 +174,7 @@ public func =><T, U>(lhs : Result<T>, rhs : (T) -> U?) -> Result<U> {
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> U?) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -187,12 +185,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> U?) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> U?) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> U?) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U?) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> U?) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -207,12 +205,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> U?) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> U?) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> U?) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U?) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> U?) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -232,7 +230,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> U?) -> Promise<R
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> U?) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> U?) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -276,7 +274,7 @@ public func =><T, U>(lhs : Result<T>, rhs : (T) -> Result<U>) -> Result<U> {
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -287,12 +285,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> Result<U>) -> Promise<Re
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -307,12 +305,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Result<U>) -> Promise<R
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Result<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -328,7 +326,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Result<U>) -> Pr
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Result<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> Result<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -372,7 +370,7 @@ public func =><T, U>(lhs : Result<T>, rhs : (T) throws -> U) -> Result<U> {
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -383,12 +381,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) throws -> U) -> Promise<Res
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -403,12 +401,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) throws -> U) -> Promise<Re
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) throws -> U) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -424,7 +422,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) throws -> U) -> Pro
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) throws -> U) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) throws -> U) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -432,16 +430,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) throws -> U) -> Promise
 // Bind to Promise
 
 
-public func bind<T, U>(_ from : T, to : (T) -> Promise<U>) -> Promise<U> {
+public func bind<T, U>(_ from : T, to : @escaping (T) -> Promise<U>) -> Promise<U> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : (T) -> Promise<U>) -> Promise<U> {
+public func =><T, U>(lhs : T, rhs : @escaping (T) -> Promise<U>) -> Promise<U> {
 	return rhs(lhs)
 }
 
 
-public func bind<T, U>(_ from : T?, to : (T) -> Promise<U>) -> Promise<U?> {
+public func bind<T, U>(_ from : T?, to : @escaping (T) -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	
 	if let from = from {
@@ -458,12 +456,12 @@ public func bind<T, U>(_ from : T?, to : (T) -> Promise<U>) -> Promise<U?> {
 	return promise
 }
 
-public func =><T, U>(lhs : T?, rhs : (T) -> Promise<U>) -> Promise<U?> {
+public func =><T, U>(lhs : T?, rhs : @escaping (T) -> Promise<U>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Result<T>, to : @escaping (T) -> Promise<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	
 	switch from {
@@ -481,12 +479,12 @@ public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U>) -> Promise<Re
 	return promise
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Result<T>, rhs : @escaping (T) -> Promise<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U>) -> Promise<U> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> Promise<U>) -> Promise<U> {
 	let promise = Promise<U>()
 	promise.previousPromise = from
 	
@@ -499,12 +497,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U>) -> Promise<U
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<U>) -> Promise<U> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> Promise<U>) -> Promise<U> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> Promise<U>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -522,12 +520,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U>) -> Promise<
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<U>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> Promise<U>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> Promise<U>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -545,7 +543,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U>) -> P
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> Promise<U>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -553,16 +551,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U>) -> Promi
 // Bind to OptionalPromise
 
 
-public func bind<T, U>(_ from : T, to : (T) -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : T, to : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : (T) -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : T, rhs : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : T?, to : (T) -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : T?, to : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	if let from = from {
 		return to(from)
 	} else {
@@ -570,12 +568,12 @@ public func bind<T, U>(_ from : T?, to : (T) -> Promise<U?>) -> Promise<U?> {
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : (T) -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : T?, rhs : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Result<T>, to : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	switch from {
 	case .ok(let value):
 		return to(value)
@@ -584,12 +582,12 @@ public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<U?>) -> Promise<U
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Result<T>, rhs : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -602,12 +600,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<U?>) -> Promise<
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U?>) -> Promise<U?> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	let promise = Promise<U?>()
 	promise.previousPromise = from
 	
@@ -624,12 +622,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<U?>) -> Promise
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<U?>) -> Promise<U?> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> Promise<U?>) -> Promise<U?> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U?>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> Promise<U?>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -651,7 +649,7 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<U?>) -> 
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U?>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> Promise<U?>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
@@ -659,16 +657,16 @@ public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<U?>) -> Prom
 // Bind to ResultPromise
 
 
-public func bind<T, U>(_ from : T, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : T, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return to(from)
 }
 
-public func =><T, U>(lhs : T, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : T, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : T?, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : T?, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	if let from = from {
 		return to(from)
 	} else {
@@ -676,12 +674,12 @@ public func bind<T, U>(_ from : T?, to : (T) -> Promise<Result<U>>) -> Promise<R
 	}
 }
 
-public func =><T, U>(lhs : T?, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : T?, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Result<T>, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	switch from {
 	case .ok(let value):
 		return to(value)
@@ -690,12 +688,12 @@ public func bind<T, U>(_ from : Result<T>, to : (T) -> Promise<Result<U>>) -> Pr
 	}
 }
 
-public func =><T, U>(lhs : Result<T>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Result<T>, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T>, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -708,12 +706,12 @@ public func bind<T, U>(_ from : Promise<T>, to : (T) -> Promise<Result<U>>) -> P
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T>, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<T?>, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -730,12 +728,12 @@ public func bind<T, U>(_ from : Promise<T?>, to : (T) -> Promise<Result<U>>) -> 
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<T?>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<T?>, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }
 
 
-public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func bind<T, U>(_ from : Promise<Result<T>>, to : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	let promise = Promise<Result<U>>()
 	promise.previousPromise = from
 	
@@ -753,6 +751,6 @@ public func bind<T, U>(_ from : Promise<Result<T>>, to : (T) -> Promise<Result<U
 	return promise
 }
 
-public func =><T, U>(lhs : Promise<Result<T>>, rhs : (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
+public func =><T, U>(lhs : Promise<Result<T>>, rhs : @escaping (T) -> Promise<Result<U>>) -> Promise<Result<U>> {
 	return bind(lhs, to: rhs)
 }

@@ -13,7 +13,7 @@ private enum PromiseState<T> {
 	case value(T)
 }
 
-public class Promise<T> {
+open class Promise<T> {
 	public init(value : T? = nil) {
 		value => setValue
 	}
@@ -22,15 +22,15 @@ public class Promise<T> {
 		self.previousPromise = previousPromise
 	}
 	
-	private var _value : PromiseState<T> = .noValue
+	fileprivate var _value : PromiseState<T> = .noValue
 	var previousPromise : AnyObject?
 	
-	public func setValue(_ value : T) {
+	open func setValue(_ value : T) {
 		_value = PromiseState.value(value)
 		notifyListeners()
 	}
 	
-	public var value : T? {
+	open var value : T? {
 		get {
 			switch _value {
 			case .noValue: return nil
@@ -39,16 +39,16 @@ public class Promise<T> {
 		}
 	}
 	
-	private var listeners : [(T) -> Void] = []
+	fileprivate var listeners : [(T) -> Void] = []
 	
-	public func getValue(_ callback : (T) -> Void) {
+	open func getValue(_ callback : @escaping (T) -> Void) {
 		getValueWeak { value in
-			self
+			let _ = self
 			callback(value)
 		}
 	}
 	
-	public func getValueWeak(_ callback : (T) -> Void) {
+	open func getValueWeak(_ callback : @escaping (T) -> Void) {
 		if let value = value {
 			callback(value)
 		} else {
@@ -56,7 +56,7 @@ public class Promise<T> {
 		}
 	}
 	
-	private func notifyListeners() {
+	fileprivate func notifyListeners() {
 		switch _value {
 		case .noValue: break
 		case .value(let value):
@@ -91,10 +91,10 @@ extension Promise : CustomStringConvertible {
 	}
 }
 
-public func filterp<T>(_ source : [Promise<T>], includeElement : (T) -> Bool) -> Promise<[T]> {
-	return reducep(source, initial: []) { all, this in includeElement(this) ? all + [this] : all }
-}
-
-public func reducep<T, U>(_ source : [Promise<T>], initial : U, combine : (U, T) -> U) -> Promise<U> {
-	return source.reduce(Promise(value: initial)) { $0 ++ $1 => combine }
-}
+//public func filterp<T>(_ source : [Promise<T>], includeElement : (T) -> Bool) -> Promise<[T]> {
+//	return reducep(source, initial: []) { all, this in includeElement(this) ? all + [this] : all }
+//}
+//
+//public func reducep<T, U>(_ source : [Promise<T>], initial : U, combine : (U, T) -> U) -> Promise<U> {
+//	return source.reduce(Promise(value: initial)) { $0 ++ $1 => combine }
+//}
