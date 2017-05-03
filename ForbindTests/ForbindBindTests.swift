@@ -151,7 +151,7 @@ class ForbindBindTests : XCTestCase {
 	
 	func testBindOptionalToOptional() {
 		let promise = Promise<Int?>(value: 1)
-		let result = promise => { (v : Int?) in "\(v)" }
+		let result = promise => { (v : Int?) in "\(String(describing: v))" }
 		
 		var gotValue = false
 		
